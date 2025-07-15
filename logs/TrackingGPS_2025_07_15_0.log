@@ -4680,3 +4680,173 @@ org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property o
 2025-07-15T16:22:31.649+07:00  INFO 18476 --- [ntu-booking-movie] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-07-15T16:22:31.652+07:00  INFO 18476 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-07-15T16:22:31.654+07:00  INFO 18476 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-07-15T21:01:52.694+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : Starting NtuBookingMovieApplication using Java 17.0.7 with PID 56852 (/Users/nguyenvietduc/Desktop/ntu-booking-movie/target/classes started by nguyenvietduc in /Users/nguyenvietduc/Desktop/ntu-booking-movie)
+2025-07-15T21:01:52.704+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-07-15T21:01:52.756+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-07-15T21:01:52.756+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-07-15T21:01:53.373+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-15T21:01:53.388+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JPA repository interfaces.
+2025-07-15T21:01:53.742+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-15T21:01:53.752+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-15T21:01:53.752+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-15T21:01:53.780+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-15T21:01:53.781+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1024 ms
+2025-07-15T21:01:53.877+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-15T21:01:53.915+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-15T21:01:53.936+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-15T21:01:54.121+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-15T21:01:54.141+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-07-15T21:01:54.206+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4c472f1b
+2025-07-15T21:01:54.206+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-07-15T21:01:54.228+07:00  WARN 56852 --- [ntu-booking-movie] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-15T21:01:54.240+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.10
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-15T21:01:54.841+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-15T21:01:54.910+07:00  WARN 56852 --- [ntu-booking-movie] [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2025-07-15T21:01:54.910+07:00  WARN 56852 --- [ntu-booking-movie] [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : constraint "ukf8n0snsbpclkvbk3qyfr51qev" of relation "mt_province" does not exist, skipping
+2025-07-15T21:01:54.912+07:00  WARN 56852 --- [ntu-booking-movie] [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2025-07-15T21:01:54.912+07:00  WARN 56852 --- [ntu-booking-movie] [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : constraint "uknpn1wf1yu1g5rjohbek375pp1" of relation "tbl_user" does not exist, skipping
+2025-07-15T21:01:54.919+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-15T21:01:55.012+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-07-15T21:01:55.431+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-15T21:01:55.461+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-07-15T21:01:55.471+07:00  INFO 56852 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : Started NtuBookingMovieApplication in 3.31 seconds (process running for 5.345)
+2025-07-15T21:02:15.859+07:00  INFO 56852 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-15T21:02:15.860+07:00  INFO 56852 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-15T21:02:15.861+07:00  INFO 56852 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-07-15T21:18:38.068+07:00  INFO 56852 --- [ntu-booking-movie] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-15T21:18:38.072+07:00  INFO 56852 --- [ntu-booking-movie] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-07-15T21:18:38.079+07:00  INFO 56852 --- [ntu-booking-movie] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-15T21:18:38.082+07:00  INFO 56852 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-07-15T21:18:38.084+07:00  INFO 56852 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-07-15T21:40:21.066+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : Starting NtuBookingMovieApplication using Java 17.0.7 with PID 58333 (/Users/nguyenvietduc/Desktop/ntu-booking-movie/target/classes started by nguyenvietduc in /Users/nguyenvietduc/Desktop/ntu-booking-movie)
+2025-07-15T21:40:21.075+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-07-15T21:40:21.109+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-07-15T21:40:21.109+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-07-15T21:40:21.681+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-15T21:40:21.696+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 JPA repository interfaces.
+2025-07-15T21:40:22.044+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-15T21:40:22.054+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-15T21:40:22.054+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-15T21:40:22.081+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-15T21:40:22.082+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 972 ms
+2025-07-15T21:40:22.181+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-15T21:40:22.218+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-15T21:40:22.244+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-15T21:40:22.420+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-15T21:40:22.439+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-07-15T21:40:22.504+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6ac2c34
+2025-07-15T21:40:22.505+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-07-15T21:40:22.527+07:00  WARN 58333 --- [ntu-booking-movie] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-15T21:40:22.539+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.10
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-15T21:40:23.137+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-15T21:40:23.356+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-15T21:40:23.487+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-07-15T21:40:23.881+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-15T21:40:23.915+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-07-15T21:40:23.926+07:00  INFO 58333 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : Started NtuBookingMovieApplication in 3.325 seconds (process running for 4.494)
+2025-07-15T21:40:58.108+07:00  INFO 58333 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-15T21:40:58.109+07:00  INFO 58333 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-15T21:40:58.112+07:00  INFO 58333 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2025-07-15T21:51:45.826+07:00  WARN 58333 --- [ntu-booking-movie] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m47s455ms).
+2025-07-15T21:57:22.431+07:00  INFO 58333 --- [ntu-booking-movie] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-15T21:57:22.435+07:00  INFO 58333 --- [ntu-booking-movie] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-07-15T21:57:22.443+07:00  INFO 58333 --- [ntu-booking-movie] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-15T21:57:22.449+07:00  INFO 58333 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-07-15T21:57:22.451+07:00  INFO 58333 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-07-15T21:57:25.857+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : Starting NtuBookingMovieApplication using Java 17.0.7 with PID 58925 (/Users/nguyenvietduc/Desktop/ntu-booking-movie/target/classes started by nguyenvietduc in /Users/nguyenvietduc/Desktop/ntu-booking-movie)
+2025-07-15T21:57:25.864+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-07-15T21:57:25.898+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-07-15T21:57:25.898+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-07-15T21:57:26.458+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-15T21:57:26.473+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JPA repository interfaces.
+2025-07-15T21:57:26.813+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-15T21:57:26.822+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-15T21:57:26.822+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-15T21:57:26.850+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-15T21:57:26.850+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 952 ms
+2025-07-15T21:57:26.947+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-15T21:57:26.979+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-15T21:57:26.998+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-15T21:57:27.165+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-15T21:57:27.187+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-07-15T21:57:27.252+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@25f69d26
+2025-07-15T21:57:27.253+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-07-15T21:57:27.273+07:00  WARN 58925 --- [ntu-booking-movie] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-15T21:57:27.285+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.10
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-15T21:57:27.859+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-15T21:57:27.977+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-15T21:57:28.077+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-07-15T21:57:28.468+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-15T21:57:28.507+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-07-15T21:57:28.518+07:00  INFO 58925 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : Started NtuBookingMovieApplication in 3.042 seconds (process running for 4.114)
+2025-07-15T21:57:35.268+07:00  INFO 58925 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-15T21:57:35.269+07:00  INFO 58925 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-15T21:57:35.270+07:00  INFO 58925 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-07-15T21:58:30.147+07:00  INFO 58925 --- [ntu-booking-movie] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-15T21:58:30.155+07:00  INFO 58925 --- [ntu-booking-movie] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-07-15T21:58:30.160+07:00  INFO 58925 --- [ntu-booking-movie] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-15T21:58:30.161+07:00  INFO 58925 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-07-15T21:58:30.162+07:00  INFO 58925 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-07-15T21:58:32.869+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : Starting NtuBookingMovieApplication using Java 17.0.7 with PID 58979 (/Users/nguyenvietduc/Desktop/ntu-booking-movie/target/classes started by nguyenvietduc in /Users/nguyenvietduc/Desktop/ntu-booking-movie)
+2025-07-15T21:58:32.876+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-07-15T21:58:32.906+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-07-15T21:58:32.906+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-07-15T21:58:33.412+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-15T21:58:33.427+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JPA repository interfaces.
+2025-07-15T21:58:33.762+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-15T21:58:33.771+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-15T21:58:33.772+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-15T21:58:33.800+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-15T21:58:33.801+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 893 ms
+2025-07-15T21:58:33.898+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-15T21:58:33.931+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-15T21:58:33.950+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-15T21:58:34.135+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-15T21:58:34.157+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-07-15T21:58:34.218+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@43977b5c
+2025-07-15T21:58:34.219+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-07-15T21:58:34.239+07:00  WARN 58979 --- [ntu-booking-movie] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-15T21:58:34.251+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.10
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-15T21:58:34.826+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-15T21:58:34.939+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-15T21:58:35.042+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-07-15T21:58:35.409+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-15T21:58:35.438+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-07-15T21:58:35.447+07:00  INFO 58979 --- [ntu-booking-movie] [restartedMain] com.ntu.NtuBookingMovieApplication       : Started NtuBookingMovieApplication in 3.006 seconds (process running for 4.344)
+2025-07-15T22:01:27.611+07:00  INFO 58979 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-15T22:01:27.611+07:00  INFO 58979 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-15T22:01:27.612+07:00  INFO 58979 --- [ntu-booking-movie] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-07-15T22:11:25.745+07:00  WARN 58979 --- [ntu-booking-movie] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m21s335ms).
+2025-07-15T22:17:07.751+07:00  INFO 58979 --- [ntu-booking-movie] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-15T22:17:07.762+07:00  INFO 58979 --- [ntu-booking-movie] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-07-15T22:17:07.769+07:00  INFO 58979 --- [ntu-booking-movie] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-15T22:17:07.773+07:00  INFO 58979 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-07-15T22:17:07.774+07:00  INFO 58979 --- [ntu-booking-movie] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
