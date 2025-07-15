@@ -10,10 +10,9 @@ import lombok.Setter;
 @Setter
 public class LoginRequest {
 
-    @NotNull(message = "{validation.email.require}")
-    @Email(message = "{validation.email.format}")
-    private String email;
+    private String username;
 
-    @NotEmpty(message = "{validation.password.empty}")
     private String password;
+
+    private String captcha;
 }

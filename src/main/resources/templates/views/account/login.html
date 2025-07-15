@@ -47,13 +47,18 @@
                 aria-labelledby="signin-tab">
             <form th:object="${loginRequest}" method="POST">
                 <div class="mb-3">
+                    <div>
+                        <p class="text-danger" th:text="${messageError}"></p>
+                    </div>
+
                     <label for="email" class="form-label">Email</label>
                     <input
                             type="email"
+                            name="username"
                             class="form-control"
                             id="email"
                             placeholder="Email"
-                            th:field="*{email}"
+                            th:field="*{username}"
                             required/>
                 </div>
                 <div class="mb-3">
@@ -61,6 +66,7 @@
                     <input
                             type="password"
                             class="form-control"
+                            name="password"
                             id="password"
                             th:placeholder="#{text.password}"
                             th:field="*{password}"
@@ -70,21 +76,21 @@
                 <a href="#" class="forgot-password" th:text="#{text.forgot_password}">Quên mật khẩu?</a>
 
                 <div class="captcha-container">
-                    <div class="captcha-img" id="captchaText">28133</div>
+                    <!--/*@thymesVar id="captcha" type=""*/-->
+                    <canvas id="captchaCanvas" width="200" height="50"></canvas>
                     <button
                             type="button"
                             class="btn btn-link captcha-refresh"
                             title="Làm mới mã"
-                            onclick="refreshCaptcha()"
-                    >
+                            onclick="refreshCaptcha()">
                         &#x21bb;
                     </button>
                     <input
                             type="text"
                             class="form-control"
                             id="captchaInput"
-                            placeholder="Mã xác thực"
-                            style="max-width: 150px;"
+                            th:placeholder="#{text.captcha}"
+                            th:field="*{captcha}"
                             required
                     />
                 </div>
@@ -111,12 +117,42 @@
     </div>
 </div>
 
-<script>
-    function refreshCaptcha() {
-        const captchaEl = document.getElementById('captchaText');
-        const newCaptcha = Math.floor(10000 + Math.random() * 90000);
-        captchaEl.textContent = newCaptcha;
+<script th:inline="javascript">
+    // Lấy chuỗi captcha từ backend qua thymeleaf
+    const captchaText = /*[[${captcha}]]*/ 'XXXX';
+
+    function drawCaptcha(text) {
+        const canvas = document.getElementById('captchaCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.font = '30px Arial';
+        ctx.fillStyle = '#000';
+
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+
+        ctx.fillText(text, 10, 35);
+
+        for (let i = 0; i < 5; i++) {
+            ctx.beginPath();
+            ctx.moveTo(Math.random()*canvas.width, Math.random()*canvas.height);
+            ctx.lineTo(Math.random()*canvas.width, Math.random()*canvas.height);
+            ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+            ctx.stroke();
+        }
     }
+
+    drawCaptcha(captchaText);
+
+    function refreshCaptcha() {
+        fetch('/api/v1/captcha')
+            .then(response => response.json())
+            .then(response => {
+                drawCaptcha(response.data);
+            });
+    }
+
 </script>
 </body>
 </html>

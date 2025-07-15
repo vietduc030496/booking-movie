@@ -2,16 +2,15 @@ package com.ntu.api.view.account;
 
 import com.ntu.api.view.BaseViewController;
 import com.ntu.domain.authentication.dto.request.LoginRequest;
+import com.ntu.infrastructure.util.CaptchaUtil;
+import com.ntu.infrastructure.util.I18n;
+import jakarta.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Locale;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static com.ntu.infrastructure.constant.UrlConstant.ACCOUNT_VIEW_URL;
 
@@ -20,18 +19,27 @@ import static com.ntu.infrastructure.constant.UrlConstant.ACCOUNT_VIEW_URL;
 public class AuthenticationController extends BaseViewController {
 
     @GetMapping("/login")
-    public String getLoginPage(Model model) {
-        model.addAttribute("loginRequest", new LoginRequest());
+    public String getLoginPage(@RequestParam(name = "captchaError", required = false) String captchaError,
+                               @RequestParam(name = "error", required = false) String error,
+                               @RequestParam(name = "username", required = false) String username,
+                               HttpSession session, Model model) {
+
+        String captchaCode = CaptchaUtil.generateCaptcha();
+        session.setAttribute(CaptchaUtil.CAPTCHA_KEY, captchaCode);
+        model.addAttribute(CaptchaUtil.CAPTCHA_KEY, captchaCode);
+
+        LoginRequest loginRequest = new LoginRequest();
+
+        if (StringUtils.isNoneEmpty(captchaError)) {
+            loginRequest.setUsername(username);
+            model.addAttribute("messageError", I18n.getMessage("captcha.error"));
+        } else if (StringUtils.isNoneEmpty(error)) {
+            loginRequest.setUsername(username);
+            model.addAttribute("messageError", I18n.getMessage("invalid-user.error"));
+        }
+
+        model.addAttribute("loginRequest", loginRequest);
         return "account/login";
     }
 
-    @PostMapping("/login")
-    public String login(@Validated @ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("loginRequest", loginRequest);
-            return "account/login";
-        }
-        model.addAttribute("loginRequest", new LoginRequest());
-        return "account/login";
-    }
 }

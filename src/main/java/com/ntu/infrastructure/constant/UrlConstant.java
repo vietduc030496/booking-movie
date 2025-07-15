@@ -1,8 +1,11 @@
 package com.ntu.infrastructure.constant;
 
 public class UrlConstant {
+    private UrlConstant() {}
 
-    public static final String API_VERSION = "/v1";
+    public static final String API_VERSION = "/api/v1";
+
+    public static final String CAPTCHA_URL = API_VERSION + "/captcha";
 
     public static final String VIEWS_URL = "/views";
 
