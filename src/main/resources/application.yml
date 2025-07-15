@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: ntu-booking-movie
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/booking-movie}
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+  thymeleaf:
+    prefix: classpath:/templates/views/
+    suffix: .html
+    mode: HTML
+    cache: false
+    encoding: UTF-8
+    enabled: true
+
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:db/init/data.sql
+
