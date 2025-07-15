@@ -11,6 +11,16 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    open-in-view: false
+
   thymeleaf:
     prefix: classpath:/templates/views/
     suffix: .html

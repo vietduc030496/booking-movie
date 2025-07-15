@@ -18,6 +18,6 @@ public class Ward {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="province_code")
-    private Province province;
+    @JoinColumn(name ="province_code", referencedColumnName = "province_code")
+    private Province provinceCode;
 }

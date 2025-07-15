@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="#{title.login}">Title</title>
+    <th:block th:replace="~{fragments/general.html :: head-resources}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/account/login.css}">
+</head>
+<body>
+<div th:replace="~{fragments/general.html :: pre-header}"></div>
+<div class="login-container">
+    <ul class="nav nav-tabs mb-3" id="loginTab" role="tablist">
+        <li class="nav-item w-50 text-center" role="presentation">
+            <button
+                    class="nav-link active w-100"
+                    id="signin-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#signin"
+                    type="button"
+                    role="tab"
+                    aria-controls="signin"
+                    aria-selected="true"
+                    th:text="#{btn.signin}">
+                ĐĂNG NHẬP
+            </button>
+        </li>
+        <li class="nav-item w-50 text-center" role="presentation">
+            <button
+                    class="nav-link w-100"
+                    id="signup-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#signup"
+                    type="button"
+                    role="tab"
+                    aria-controls="signup"
+                    aria-selected="false"
+                    th:text="#{btn.signup}">
+                ĐĂNG KÝ
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="loginTabContent">
+        <div
+                class="tab-pane fade show active"
+                id="signin"
+                role="tabpanel"
+                aria-labelledby="signin-tab">
+            <form>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Email"
+                            required/>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label" th:text="#{text.password}" >Mật khẩu</label>
+                    <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            th:placeholder="#{text.password}"
+                            required
+                    />
+                </div>
+                <a href="#" class="forgot-password" th:text="#{text.forgot_password}">Quên mật khẩu?</a>
+
+                <div class="captcha-container">
+                    <div class="captcha-img" id="captchaText">28133</div>
+                    <button
+                            type="button"
+                            class="btn btn-link captcha-refresh"
+                            title="Làm mới mã"
+                            onclick="refreshCaptcha()"
+                    >
+                        &#x21bb;
+                    </button>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="captchaInput"
+                            placeholder="Mã xác thực"
+                            style="max-width: 150px;"
+                            required
+                    />
+                </div>
+
+                <button type="submit" class="btn btn-login-account mb-3" th:text="#{btn.submit_login_account}">
+                    ĐĂNG NHẬP BẰNG TÀI KHOẢN
+                </button>
+
+                <button type="button" class="btn btn-login-facebook" th:text="#{btn.submit_login_fb}">
+                    ĐĂNG NHẬP BẰNG FACEBOOK
+                </button>
+            </form>
+        </div>
+
+        <div
+                class="tab-pane fade"
+                id="signup"
+                role="tabpanel"
+                aria-labelledby="signup-tab"
+        >
+            <!-- Nội dung đăng ký có thể thêm ở đây -->
+            <p>Chưa có nội dung đăng ký.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function refreshCaptcha() {
+        const captchaEl = document.getElementById('captchaText');
+        const newCaptcha = Math.floor(10000 + Math.random() * 90000);
+        captchaEl.textContent = newCaptcha;
+    }
+</script>
+</body>
+</html>
