@@ -11,5 +11,7 @@ public class UrlConstant {
 
     public static final String ACCOUNT_VIEW_URL = VIEWS_URL + "/account";
 
+    public static final String ERROR_URL = VIEWS_URL + "/error";
+
 
 }

@@ -10,8 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.ntu.infrastructure.constant.UrlConstant.ACCOUNT_VIEW_URL;
-import static com.ntu.infrastructure.constant.UrlConstant.API_VERSION;
+import static com.ntu.infrastructure.constant.UrlConstant.*;
 
 @Configuration
 public class SecurityConfig {
@@ -27,7 +26,8 @@ public class SecurityConfig {
             "/",
             "/home/**",
             ACCOUNT_VIEW_URL + "/login/**",
-            API_VERSION + "/**"
+            API_VERSION + "/**",
+            ERROR_URL + "/**"
     };
 
     @Bean

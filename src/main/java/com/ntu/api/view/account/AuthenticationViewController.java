@@ -16,7 +16,7 @@ import static com.ntu.infrastructure.constant.UrlConstant.ACCOUNT_VIEW_URL;
 
 @Controller
 @RequestMapping(ACCOUNT_VIEW_URL)
-public class AuthenticationController extends BaseViewController {
+public class AuthenticationViewController extends BaseViewController {
 
     @GetMapping("/login")
     public String getLoginPage(@RequestParam(name = "captchaError", required = false) String captchaError,
