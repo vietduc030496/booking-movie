@@ -45,7 +45,7 @@
                 id="signin"
                 role="tabpanel"
                 aria-labelledby="signin-tab">
-            <form>
+            <form th:object="${loginRequest}" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input
@@ -53,6 +53,7 @@
                             class="form-control"
                             id="email"
                             placeholder="Email"
+                            th:field="*{email}"
                             required/>
                 </div>
                 <div class="mb-3">
@@ -62,6 +63,7 @@
                             class="form-control"
                             id="password"
                             th:placeholder="#{text.password}"
+                            th:field="*{password}"
                             required
                     />
                 </div>

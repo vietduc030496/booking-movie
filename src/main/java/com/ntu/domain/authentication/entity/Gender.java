@@ -1,4 +1,4 @@
-package com.ntu.domain.authentication;
+package com.ntu.domain.authentication.entity;
 
 import lombok.Getter;
 

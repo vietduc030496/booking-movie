@@ -73,6 +73,12 @@
     font-weight: 600;
     color: white;
 }
+.btn-login-facebook:hover {
+    background-color: #1569b5;
+    color: black;
+}
+
+
 .forgot-password {
     font-size: 14px;
     display: inline-block;

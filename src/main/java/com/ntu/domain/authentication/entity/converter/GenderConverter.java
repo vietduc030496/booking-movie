@@ -1,6 +1,6 @@
-package com.ntu.domain.authentication.converter;
+package com.ntu.domain.authentication.entity.converter;
 
-import com.ntu.domain.authentication.Gender;
+import com.ntu.domain.authentication.entity.Gender;
 import jakarta.persistence.AttributeConverter;
 
 public class GenderConverter implements AttributeConverter<Gender, Integer> {

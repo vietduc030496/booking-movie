@@ -1,6 +1,6 @@
-package com.ntu.domain.authentication;
+package com.ntu.domain.authentication.entity;
 
-import com.ntu.domain.authentication.converter.GenderConverter;
+import com.ntu.domain.authentication.entity.converter.GenderConverter;
 import com.ntu.domain.base.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
