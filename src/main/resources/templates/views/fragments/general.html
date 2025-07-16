@@ -16,7 +16,7 @@
                 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 <a href="#" th:text="#{register}">Đăng ký</a>
                 <div class="dropdown ms-3">
-                    <a class="btn btn-sm dropdown-toggle p-0 border-0 bg-transparent" href="#" role="button"
+                    <a class="btn btn-sm dropdown-toggle p-0 text-decoration-none" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         <img th:if="${#locale.language == 'vi'}" th:src="@{/images/vietnam.png}" alt="Tiếng Việt" class="flag-icon" style="width: 24px;">
                         <img th:if="${#locale.language != 'vi'}" th:src="@{/images/united-kingdom.png}" alt="English" class="flag-icon" style="width: 24px;">
@@ -41,12 +41,12 @@
     <div th:fragment="header" class="header">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-1">
                     <a class="site-logo" href="/home">
                         <img alt="" style="height: 55px;" th:src="@{/images/logo.png}">
                     </a>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-11">
                     <div class="header-navigation pull-right font-transform-inherit">
                         <ul>
                             <li>
