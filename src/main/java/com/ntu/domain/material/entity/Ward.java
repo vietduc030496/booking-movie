@@ -1,4 +1,4 @@
-package com.ntu.domain.material;
+package com.ntu.domain.material.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

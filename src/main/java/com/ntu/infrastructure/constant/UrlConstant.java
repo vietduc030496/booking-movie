@@ -13,5 +13,7 @@ public class UrlConstant {
 
     public static final String ERROR_URL = VIEWS_URL + "/error";
 
+    public static final String MOVIE_VIEW_URL = VIEWS_URL + "/movies";
+
 
 }
