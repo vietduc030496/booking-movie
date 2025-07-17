@@ -57,6 +57,10 @@ public class SecurityConfig {
                         .failureUrl(ACCOUNT_VIEW_URL + "/login?error=true")
                 )
                 .addFilterBefore(new CaptchaValidationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exceptions -> exceptions
+                        .accessDeniedHandler((request, response, accessDeniedException) ->
+                        request.getRequestDispatcher(ERROR_URL + "/403").forward(request, response))
+                )
                 .build();
     }
 
