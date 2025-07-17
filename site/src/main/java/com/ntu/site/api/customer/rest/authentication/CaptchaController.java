@@ -1,6 +1,6 @@
 package com.ntu.site.api.customer.rest.authentication;
 
-import com.ntu.moviecore.infrastructure.util.CaptchaUtil;
+import com.ntu.common.util.CaptchaUtil;
 import com.ntu.site.application.dto.response.SingleDataResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;

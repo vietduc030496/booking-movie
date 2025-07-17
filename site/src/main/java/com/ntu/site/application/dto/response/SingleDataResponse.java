@@ -1,11 +1,15 @@
 package com.ntu.site.application.dto.response;
 
-import com.ntu.moviecore.infrastructure.util.I18n;
+import com.ntu.common.util.I18n;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 import static com.ntu.common.constant.MessagesConstant.SUCCESS_MSG;
 
 
+@Getter
+@Setter
 public class SingleDataResponse<T> extends BaseResponse {
     private T data;
 
@@ -18,11 +22,4 @@ public class SingleDataResponse<T> extends BaseResponse {
         return response;
     }
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 }

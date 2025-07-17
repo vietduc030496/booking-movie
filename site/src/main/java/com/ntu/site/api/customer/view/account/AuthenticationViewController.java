@@ -1,8 +1,8 @@
 package com.ntu.site.api.customer.view.account;
 
+import com.ntu.common.util.CaptchaUtil;
+import com.ntu.common.util.I18n;
 import com.ntu.moviecore.domain.authentication.dto.request.LoginRequest;
-import com.ntu.moviecore.infrastructure.util.CaptchaUtil;
-import com.ntu.moviecore.infrastructure.util.I18n;
 import com.ntu.site.api.customer.view.BaseViewController;
 import jakarta.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;

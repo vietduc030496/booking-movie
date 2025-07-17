@@ -1,4 +1,4 @@
-package com.ntu.moviecore.infrastructure.util;
+package com.ntu.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
@@ -14,11 +14,10 @@ public class I18n {
 
     /**
      * @param inject MessageSource
-     * @see com.ntu.infrastructure.config.ApplicationConfig
      */
     public static void init(MessageSource inject) {
         I18n.messageSource = inject;
-        defaultLocale = Locale.KOREAN;
+        defaultLocale = Locale.ENGLISH;
     }
 
     public static String getMessageEn(String code) {

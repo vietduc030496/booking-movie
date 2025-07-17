@@ -1,13 +1,16 @@
 package com.ntu.site.application.dto.response;
 
-import com.ntu.moviecore.infrastructure.util.I18n;
+import com.ntu.common.util.I18n;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 import java.util.Collection;
 
 import static com.ntu.common.constant.MessagesConstant.SUCCESS_MSG;
 
-
+@Getter
+@Setter
 public class CollectionDataResponse<T> extends BaseResponse {
     private PageInfo pageInfo;
     private Collection<T> list;
@@ -22,19 +25,4 @@ public class CollectionDataResponse<T> extends BaseResponse {
         return response;
     }
 
-    public PageInfo getPageInfo() {
-        return pageInfo;
-    }
-
-    public void setPageInfo(PageInfo pageInfo) {
-        this.pageInfo = pageInfo;
-    }
-
-    public Collection<T> getList() {
-        return list;
-    }
-
-    public void setList(Collection<T> list) {
-        this.list = list;
-    }
 }

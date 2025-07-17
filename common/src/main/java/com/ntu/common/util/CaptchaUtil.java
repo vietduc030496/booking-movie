@@ -1,4 +1,4 @@
-package com.ntu.moviecore.infrastructure.util;
+package com.ntu.common.util;
 
 import java.util.Random;
 

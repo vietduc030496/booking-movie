@@ -1,6 +1,6 @@
 package com.ntu.site.infrastucture.config.filter;
 
-import com.ntu.moviecore.infrastructure.util.CaptchaUtil;
+import com.ntu.common.util.CaptchaUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
