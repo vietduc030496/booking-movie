@@ -1,6 +1,6 @@
-package com.ntu.customerservice.infrastructure.security.filter;
+package com.ntu.site.infrastucture.config.filter;
 
-import com.ntu.infrastructure.util.CaptchaUtil;
+import com.ntu.moviecore.infrastructure.util.CaptchaUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,7 +10,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-import static com.ntu.infrastructure.constant.UrlConstant.ACCOUNT_VIEW_URL;
+import static com.ntu.common.constant.UrlConstant.ACCOUNT_VIEW_URL;
+
 
 @Component
 public class CaptchaValidationFilter extends OncePerRequestFilter {

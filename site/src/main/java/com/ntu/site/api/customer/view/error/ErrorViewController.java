@@ -4,7 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.ntu.infrastructure.constant.UrlConstant.ERROR_URL;
+import static com.ntu.common.constant.UrlConstant.ERROR_URL;
+
 
 @Controller
 @RequestMapping(ERROR_URL)

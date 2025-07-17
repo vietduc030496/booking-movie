@@ -1,9 +1,9 @@
 package com.ntu.site.api.customer.view.account;
 
-import com.ntu.api.view.BaseViewController;
-import com.ntu.domain.authentication.dto.request.LoginRequest;
-import com.ntu.infrastructure.util.CaptchaUtil;
-import com.ntu.infrastructure.util.I18n;
+import com.ntu.moviecore.domain.authentication.dto.request.LoginRequest;
+import com.ntu.moviecore.infrastructure.util.CaptchaUtil;
+import com.ntu.moviecore.infrastructure.util.I18n;
+import com.ntu.site.api.customer.view.BaseViewController;
 import jakarta.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static com.ntu.infrastructure.constant.UrlConstant.ACCOUNT_VIEW_URL;
+import static com.ntu.common.constant.UrlConstant.ACCOUNT_VIEW_URL;
+
 
 @Controller
 @RequestMapping(ACCOUNT_VIEW_URL)

@@ -1,6 +1,6 @@
-package com.ntu.customerservice.infrastructure.security;
+package com.ntu.site.infrastucture.config.security;
 
-import com.ntu.infrastructure.config.security.filter.CaptchaValidationFilter;
+import com.ntu.site.infrastucture.config.filter.CaptchaValidationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,7 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.ntu.infrastructure.constant.UrlConstant.*;
+import static com.ntu.common.constant.UrlConstant.*;
+
 
 @Configuration
 public class SecurityConfig {

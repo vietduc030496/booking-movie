@@ -1,4 +1,4 @@
-package com.ntu.customerservice.infrastructure.security.filter;
+package com.ntu.site.infrastucture.config.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
