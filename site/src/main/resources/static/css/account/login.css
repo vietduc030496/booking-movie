@@ -1,0 +1,93 @@
+
+.login-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+}
+.nav-tabs .nav-link {
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+    border: 1px solid #ddd;
+}
+.nav-tabs .nav-link.active {
+    background-color: #005495;
+    color: white;
+    border-color: #005495 #005495 #fff;
+}
+.form-label {
+    font-weight: 600;
+}
+.form-control::placeholder {
+    font-size: 14px;
+}
+.captcha-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.captcha-img {
+    border: 1px solid #ddd;
+    width: 140px;
+    height: 40px;
+    text-align: center;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 18px;
+    color: green;
+    user-select: none;
+    padding-top: 7px;
+    background: repeating-linear-gradient(
+            to right,
+            transparent,
+            transparent 5px,
+            #ccc 5px,
+            #ccc 6px
+    );
+    position: relative;
+}
+.captcha-refresh {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #007bff;
+}
+.btn-login-account {
+    background: linear-gradient(90deg, #ff5200, #ff7c69);
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 15px;
+}
+.btn-login-facebook {
+    background-color: #1569b5;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-weight: 600;
+    color: white;
+}
+.btn-login-facebook:hover {
+    background-color: #1569b5;
+    color: black;
+}
+
+
+.forgot-password {
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+}
+.forgot-password:hover {
+    text-decoration: underline;
+}
