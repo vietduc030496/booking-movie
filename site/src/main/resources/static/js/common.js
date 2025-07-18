@@ -13,6 +13,12 @@ document.querySelectorAll('.play-button').forEach(el => {
 });
 
 function viewTrailer(movieTitle, videoUrl) {
+    if (!videoUrl || videoUrl.trim() === "") {
+        let msgError = document.getElementById('trailer-notfound').innerText;
+        alert(msgError);
+        return;
+    }
+
     document.getElementById('trailerModalLabel').textContent ='TRAILER - ' + movieTitle;
     const iframe = document.getElementById('trailerIframe');
     iframe.src = videoUrl + "?autoplay=1";

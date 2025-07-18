@@ -1,5 +1,6 @@
 package com.ntu.customerservice.service.movie;
 
+import com.ntu.common.util.DateUtil;
 import com.ntu.moviecore.domain.movie.dto.MovieResponse;
 import com.ntu.moviecore.domain.movie.repository.MovieRepository;
 import lombok.AllArgsConstructor;
@@ -54,7 +55,11 @@ public class MovieService {
     public List<MovieResponse> getMovieByRangeDate(LocalDateTime dateFrom, LocalDateTime dateTo) {
         return movieRepository.findMoviesByShowtimeBetween(dateFrom, dateTo)
                 .stream()
-                .map(movie -> modelMapper.map(movie, MovieResponse.class))
+                .map(movie -> {
+                    MovieResponse resp = modelMapper.map(movie, MovieResponse.class);
+                    resp.setReleaseDate(DateUtil.localDateToString(movie.getReleaseDate()));
+                    return resp;
+                })
                 .toList();
     }
 
