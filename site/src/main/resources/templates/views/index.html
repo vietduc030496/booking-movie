@@ -38,7 +38,7 @@
                                             <a href="javascript:void(0);"
                                                th:attr="data-title=${movie.title},
                                                         data-trailer=${movie.trailerUrl}"
-                                               class="fancybox-fast-view play-button">
+                                               class="play-button">
                                                 <i class="fa fa-play-circle"></i>
                                             </a>
                                         </div>
@@ -69,9 +69,9 @@
                                         </ul>
                                     </div>
                                     <div class="text-center" style="min-height: 80px;">
-                                        <a style="display: block;" href="#showtimes-pop-up"
+                                        <a style="display: block;border: none" href="#showtimes-pop-up"
                                            onclick="viewsShowtimes('dfd9306f-fbc8-4807-a8c6-5e6c3f7ad71c', '7f616c75-8be5-420e-bfc7-737cc1c1e0a9', 'Dan Ca Go', 'Beta Thai Nguyen')"
-                                           class="btn btn-2 btn-mua-ve2 fancybox-fast-view">
+                                           class="btn btn-2 btn-mua-ve2">
                                             <span><i class="fa fa-ticket mr3" style="font-size:40px"></i></span>
                                             <span style="color: white" th:text="#{text.booking}"></span>
                                         </a>
