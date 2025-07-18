@@ -27,19 +27,30 @@
                         <tr th:each="movie : ${movieShowToday}">
                             <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 px-4">
                                 <div class="product-item no-padding">
-                                    <div class="pi-img-wrapper">
-                                        <img class="img-fluid border-radius-20" alt=""
+                                    <div class="pi-img-wrapper position-relative">
+                                        <img class="poster-img img-responsive border-radius-20" alt=""
                                              th:src="${movie.posterUrl}">
                                         <span style="position: absolute;top: 10px;left: 10px;">
                                             <img th:src="@{/images/age-rating/p.png}" class="img-responsive">
                                         </span>
+                                        <!-- Overlay -->
+                                        <div class="overlay">
+                                            <a href="javascript:void(0);"
+                                               th:attr="data-title=${movie.title}, data-trailer=${movie.trailerUrl}"
+                                               class="fancybox-fast-view play-button">
+                                                <i class="fa fa-play-circle"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="product-item no-padding">
                                     <div class="film-info film-xs-info">
-                                        <h3 class="text-center text-sm-left text-xs-left bold margin-top-5 font-sm-18 font-xs-14"
-                                            style="max-height: 30px; min-height: 30px;">
-                                            <a href="/film-detail.htm?gf=7f616c75-8be5-420e-bfc7-737cc1c1e0a9">Dan Ca Go</a>
+                                        <h3 class="text-sm-left text-xs-left bold mt-2 font-sm-18 font-xs-14"
+                                            style="max-height: 35px; min-height: 35px;">
+                                            <a href="/film-detail.htm?gf=7f616c75-8be5-420e-bfc7-737cc1c1e0a9"
+                                               th:text="${#strings.abbreviate(movie.title, 25)}"
+                                                class="text-decoration-none">
+                                            </a>
                                         </h3>
                                         <ul class="list-unstyled font-lg font-family-san font-sm-15 font-xs-14">
                                             <li style="max-height: 50px;">
@@ -52,66 +63,36 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="text-center padding-bottom-30" style="min-height: 85px;">
-                                        <a style="display: block;" href="#showtimes-pop-up" onclick="viewsShowtimes('dfd9306f-fbc8-4807-a8c6-5e6c3f7ad71c', '7f616c75-8be5-420e-bfc7-737cc1c1e0a9', 'Dan Ca Go', 'Beta Thai Nguyen')" class="btn btn-2 btn-mua-ve2 fancybox-fast-view"><span><i class="fa fa-ticket mr3"></i></span>
-                                            BOOKING</a>
+                                    <div class="text-center" style="min-height: 80px;">
+                                        <a style="display: block;" href="#showtimes-pop-up"
+                                           onclick="viewsShowtimes('dfd9306f-fbc8-4807-a8c6-5e6c3f7ad71c', '7f616c75-8be5-420e-bfc7-737cc1c1e0a9', 'Dan Ca Go', 'Beta Thai Nguyen')"
+                                           class="btn btn-2 btn-mua-ve2 fancybox-fast-view">
+                                            <span><i class="fa fa-ticket mr3" style="font-size:40px"></i></span>
+                                            <span style="color: white" th:text="#{text.booking}"></span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </tr>
-
-<!--                        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 px-4">-->
-<!--                            <div class="product-item no-padding">-->
-<!--                                <div class="pi-img-wrapper">-->
-<!--                                    <img class="img-fluid border-radius-20" alt=""-->
-<!--                                         src="https://files.betacorp.vn/media%2fimages%2f2025%2f06%2f24%2f21532672%2D43ac%2D41a2%2Daa25%2De06e0cdabcc2%2D114903%2D240625%2D97.jpg">-->
-<!--                                    <span style="position: absolute;top: 10px;left: 10px;"><img th:src="@{/images/age-rating/p.png}" class="img-responsive"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="product-item no-padding">-->
-<!--                                <div class="film-info film-xs-info">-->
-<!--                                    <h3 class="text-center text-sm-left text-xs-left bold margin-top-5 font-sm-18 font-xs-14" style="max-height: 30px; min-height: 30px;"><a href="/film-detail.htm?gf=7f616c75-8be5-420e-bfc7-737cc1c1e0a9">Dan Ca Go</a>-->
-<!--                                    </h3>-->
-<!--                                    <ul class="list-unstyled font-lg font-family-san font-sm-15 font-xs-14">-->
-<!--                                        <li style="max-height: 50px;"><span class="bold">-->
-<!--                                                Genre:</span> Romance, Psychology</li>-->
-<!--                                        <li><span class="bold">-->
-<!--                                                Running Time:</span> 30-->
-<!--                                            minutes-->
-<!--                                        </li>-->
-<!--                                    </ul>-->
-<!--                                </div>-->
-<!--                                <div class="text-center padding-bottom-30" style="min-height: 85px;">-->
-<!--                                    <a style="display: block;" href="#showtimes-pop-up" onclick="viewsShowtimes('dfd9306f-fbc8-4807-a8c6-5e6c3f7ad71c', '7f616c75-8be5-420e-bfc7-737cc1c1e0a9', 'Dan Ca Go', 'Beta Thai Nguyen')" class="btn btn-2 btn-mua-ve2 fancybox-fast-view"><span><i class="fa fa-ticket mr3"></i></span>-->
-<!--                                        BOOKING</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 px-4">-->
-<!--                            <div class="product-item no-padding">-->
-<!--                                <div class="pi-img-wrapper">-->
-<!--                                    <img class="img-fluid border-radius-20" alt=""-->
-<!--                                         src="https://files.betacorp.vn/media%2fimages%2f2025%2f06%2f24%2f21532672%2D43ac%2D41a2%2Daa25%2De06e0cdabcc2%2D114903%2D240625%2D97.jpg">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 px-4">-->
-<!--                            <div class="product-item no-padding">-->
-<!--                                <div class="pi-img-wrapper">-->
-<!--                                    <img class="img-fluid border-radius-20" alt=""-->
-<!--                                         src="https://files.betacorp.vn/media%2fimages%2f2025%2f06%2f24%2f21532672%2D43ac%2D41a2%2Daa25%2De06e0cdabcc2%2D114903%2D240625%2D97.jpg">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 px-4">-->
-<!--                            <div class="product-item no-padding">-->
-<!--                                <div class="pi-img-wrapper">-->
-<!--                                    <img class="img-fluid border-radius-20" alt=""-->
-<!--                                         src="https://files.betacorp.vn/media%2fimages%2f2025%2f06%2f24%2f21532672%2D43ac%2D41a2%2Daa25%2De06e0cdabcc2%2D114903%2D240625%2D97.jpg">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal để hiển thị trailer -->
+<div class="modal fade" id="trailerModal" tabindex="-1" aria-labelledby="trailerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered"> <!-- THÊM modal-dialog-centered -->
+        <div class="modal-content border-radius-20">
+            <div class="modal-header">
+                <h5 class="modal-title" id="trailerModalLabel">Movie Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="stopTrailer()"></button>
+            </div>
+            <div class="modal-body py-5">
+                <div class="ratio ratio-16x9">
+                    <iframe id="trailerIframe" width="100%" height="100%" src=""
+                            allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
