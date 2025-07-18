@@ -15,4 +15,9 @@ public class ErrorViewController {
     public String get404Page() {
         return "error/404";
     }
+
+    @GetMapping("/500")
+    public String get500Page() {
+        return "error/500";
+    }
 }

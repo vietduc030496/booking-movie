@@ -4,6 +4,7 @@ function changeLanguage(lang) {
     window.location.href = url.toString();
 }
 
+// Play movie's trailer
 document.querySelectorAll('.play-button').forEach(el => {
     el.addEventListener('click', function() {
         const title = this.getAttribute('data-title');
@@ -26,10 +27,12 @@ function viewTrailer(movieTitle, videoUrl) {
     modal.show();
 }
 
-function stopTrailer() {
+// Pause video trailer before close modal
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById('trailerModal');
     const iframe = document.getElementById('trailerIframe');
-    iframe.src = ""; // dừng video khi đóng modal
-    iframe.addEventListener('hidden.bs.modal', function () {
-        document.getElementById('trailerFrame').src = '';
+
+    modal.addEventListener('hidden.bs.modal', function () {
+        iframe.src = '';
     });
-}
+});
