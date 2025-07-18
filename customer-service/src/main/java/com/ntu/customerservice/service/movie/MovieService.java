@@ -1,6 +1,7 @@
 package com.ntu.customerservice.service.movie;
 
 import com.ntu.common.util.DateUtil;
+import com.ntu.moviecore.domain.elasticsearch.repository.MovieElasticSearchRepository;
 import com.ntu.moviecore.domain.movie.dto.MovieResponse;
 import com.ntu.moviecore.domain.movie.repository.MovieRepository;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,8 @@ import java.util.List;
 public class MovieService {
 
     private final MovieRepository movieRepository;
+
+//    private final MovieElasticSearchRepository movieEsRepository;
 
     private final ModelMapper modelMapper;
 

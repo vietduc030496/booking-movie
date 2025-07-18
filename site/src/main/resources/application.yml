@@ -7,6 +7,25 @@ spring:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      minimum-idle: 5
+      maximum-pool-size: 10
+      pool-name: HikariPool
+      connection-test-query: SELECT 1
+      data-source-properties:
+        cache-prep-stmts: true
+        prep-stmt-cache-size: 256
+        prep-stmt-cache-sql-limit: 2048
+        use-server-prep-stmts: true
+
+  elasticsearch:
+    uris: http://localhost:9200
+    username: elastic  # nếu có authentication
+    password: password # nếu có authentication
+    connection-timeout: 1s
+    socket-timeout: 30s
 
   jackson:
     property-naming-strategy: SNAKE_CASE
@@ -33,4 +52,8 @@ spring:
     init:
       mode: always
       data-locations: classpath:db/init/data.sql
+
+logging:
+  level:
+    com.zaxxer.hikari: DEBUG
 
