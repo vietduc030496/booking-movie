@@ -1,9 +1,11 @@
 package com.ntu.customerservice.service.movie;
 
 import com.ntu.common.util.DateUtil;
-import com.ntu.moviecore.domain.elasticsearch.repository.MovieElasticSearchRepository;
 import com.ntu.moviecore.domain.movie.dto.MovieResponse;
+import com.ntu.moviecore.domain.movie.dto.MovieShowtimeResponse;
+import com.ntu.moviecore.domain.movie.entity.Showtime;
 import com.ntu.moviecore.domain.movie.repository.MovieRepository;
+import com.ntu.moviecore.domain.movie.repository.ShowtimeRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -19,9 +22,40 @@ public class MovieService {
 
     private final MovieRepository movieRepository;
 
+    private final ShowtimeRepository showtimeRepository;
+
 //    private final MovieElasticSearchRepository movieEsRepository;
 
     private final ModelMapper modelMapper;
+
+    public List<MovieShowtimeResponse> getScheduledMovies() {
+        LocalDate now = LocalDate.now();
+        LocalDateTime startOfDay = now.atStartOfDay();
+        LocalDateTime endOfDay = now.plusDays(7).atTime(LocalTime.MAX);
+
+        List<Showtime> moviesShowtime = showtimeRepository.findMoviesShowtimeByRange(startOfDay, endOfDay);
+
+        Map<String, MovieShowtimeResponse> dateShowtimeToMovies = new HashMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM - 'T'EE", new Locale("vi"));
+        for (Showtime showtime : moviesShowtime) {
+            String dateTime = DateUtil.localDateTimeToString(showtime.getStartTime(), formatter);
+            MovieResponse movie = modelMapper.map(showtime.getMovie(), MovieResponse.class);
+            MovieShowtimeResponse exit = dateShowtimeToMovies.get(dateTime);
+            if (exit != null) {
+                exit.getMovies().add(movie);
+            } else {
+                List<MovieResponse> movies = new ArrayList<>();
+                movies.add(movie);
+                MovieShowtimeResponse showtimeResponse = new MovieShowtimeResponse();
+                showtimeResponse.setDateShowing(dateTime);
+                showtimeResponse.setShowtimeId(showtime.getId());
+                showtimeResponse.setMovies(movies);
+                dateShowtimeToMovies.put(dateTime, showtimeResponse);
+            }
+        }
+
+        return dateShowtimeToMovies.values().stream().toList();
+    }
 
     /**
      * Retrieves the list of movies that are showing today.
@@ -30,8 +64,9 @@ public class MovieService {
      * @return a list of movies showing today
      */
     public List<MovieResponse> getMovieShowToday() {
-        LocalDateTime startOfDay = LocalDate.now().atStartOfDay(); // 00:00 today
-        LocalDateTime endOfDay = LocalDate.now().atTime(LocalTime.MAX); // 23:59:59.999 today
+        LocalDate now = LocalDate.now();
+        LocalDateTime startOfDay = now.atStartOfDay(); // 00:00 today
+        LocalDateTime endOfDay = now.atTime(LocalTime.MAX); // 23:59:59.999 today
         return getMovieByRangeDate(startOfDay, endOfDay);
     }
 

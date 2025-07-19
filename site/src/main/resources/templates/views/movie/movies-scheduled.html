@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="#{title.movie_scheduled}"></title>
+    <th:block th:replace="~{fragments/general.html :: head-resources}"></th:block>
+</head>
+<body>
+<div th:replace="~{fragments/general.html :: pre-header}"></div>
+<div th:replace="~{fragments/general.html :: header}"></div>
+<div class="body-content">
+    <div class="container">
+        <!-- TAB -->
+        <div class="tab-style-1 margin-bottom-35">
+            <ul class="nav nav-tabs dayofweek" style="margin-bottom: 10px; margin-left: 1%; margin-right: 1%;">
+
+                <li class="active">
+                    <a href="#200" name="firtTimeInSchedule" onclick="tabClick('200')" data-toggle="tab" class="dayofweek active" id="200" aria-expanded="true"><span class="font-38 font-s-35">19</span>/07 - T7</a>
+                </li>
+
+                <li class="">
+                    <a href="#201" onclick="tabClick('201')" data-toggle="tab" class="dayofweek active" id="201" aria-expanded="false"><span class="font-38 font-s-35">20</span>/07 - CN</a>
+                </li>
+
+                <li>
+                    <a href="#202" onclick="tabClick('202')" data-toggle="tab" class="dayofweek" id="202"><span class="font-38 font-s-35">21</span>/07 - T2</a>
+                </li>
+
+                <li class="">
+                    <a href="#203" onclick="tabClick('203')" data-toggle="tab" class="dayofweek active" id="203" aria-expanded="false"><span class="font-38 font-s-35">22</span>/07 - T3</a>
+                </li>
+
+                <li>
+                    <a href="#204" onclick="tabClick('204')" data-toggle="tab" class="dayofweek" id="204"><span class="font-38 font-s-35">23</span>/07 - T4</a>
+                </li>
+
+                <li>
+                    <a href="#205" onclick="tabClick('205')" data-toggle="tab" class="dayofweek" id="205"><span class="font-38 font-s-35">24</span>/07 - T5</a>
+                </li>
+
+                <li>
+                    <a href="#206" onclick="tabClick('206')" data-toggle="tab" class="dayofweek" id="206"><span class="font-38 font-s-35">25</span>/07 - T6</a>
+                </li>
+
+                <li style="width: 10%;">
+                    <a href="#207" onclick="tabClick('207')" data-toggle="tab" class="dayofweek font-small" id="207"><span class="font-30 font-s-35">26</span>/07 - T7</a>
+                </li>
+
+                <li style="width: 10%;">
+                    <a href="#208" onclick="tabClick('208')" data-toggle="tab" class="dayofweek font-small" id="208"><span class="font-30 font-s-35">27</span>/07 - CN</a>
+                </li>
+
+                <li style="width: 10%;">
+                    <a href="#209" onclick="tabClick('209')" data-toggle="tab" class="dayofweek font-small" id="209"><span class="font-30 font-s-35">28</span>/07 - T2</a>
+                </li>
+
+                <li style="width: 10%;">
+                    <a href="#210" onclick="tabClick('210')" data-toggle="tab" class="dayofweek font-small" id="210"><span class="font-30 font-s-35">29</span>/07 - T3</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Modal show movie trailer -->
+<div class="modal fade" id="trailerModal" tabindex="-1" aria-labelledby="trailerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-radius-20">
+            <div class="modal-header">
+                <h5 class="modal-title" id="trailerModalLabel">Movie Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-5">
+                <div class="ratio ratio-16x9">
+                    <iframe id="trailerIframe" width="100%" height="100%" src=""
+                            allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<span style="display: none" id="trailer-notfound" th:text="#{trailer.notfound}"></span>
+</body>
+</html>

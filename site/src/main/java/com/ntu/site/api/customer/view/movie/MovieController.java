@@ -2,6 +2,7 @@ package com.ntu.site.api.customer.view.movie;
 
 import com.ntu.customerservice.service.movie.MovieService;
 import com.ntu.moviecore.domain.movie.dto.MovieResponse;
+import com.ntu.moviecore.domain.movie.dto.MovieShowtimeResponse;
 import com.ntu.site.api.customer.view.BaseViewController;
 import com.ntu.site.application.dto.response.CollectionDataResponse;
 import lombok.AllArgsConstructor;
@@ -22,8 +23,15 @@ public class MovieController extends BaseViewController {
 
     private final MovieService movieService;
 
-    @GetMapping
+    @GetMapping("/movies-scheduled")
     public String getMovieScheduled(Model model) {
+        List<MovieShowtimeResponse> scheduledMovies = movieService.getScheduledMovies();
+        model.addAttribute("scheduledMovies", scheduledMovies);
+        return "movie/movies-scheduled";
+    }
+
+    @GetMapping
+    public String getMovies(Model model) {
         List<MovieResponse> movieShowToday = movieService.getMovieShowToday();
         model.addAttribute("movieShowToday", movieShowToday);
 

@@ -197,8 +197,24 @@ body {
     color: #333333;
 }
 
+.nav-tabs > li.active > a.dayofweek, .nav-tabs > li.active > a.dayofweek:hover, .nav-tabs > li.active > a.dayofweek:focus {
+    background: transparent;
+    font-size: large;
+    color: #03599d;
+}
+
+.nav-tabs > li > a.dayofweek, .nav-tabs > li > a.dayofweek:hover, .nav-tabs > li > a.dayofweek:focus {
+    padding: 0px;
+    margin: 0px 0px;
+    text-align: center;
+}
+
 .font-30 {
     font-size: 30px;
+}
+
+.font-38 {
+    font-size: 38px;
 }
 
 .tab-content {
