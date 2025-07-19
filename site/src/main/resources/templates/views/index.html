@@ -10,17 +10,19 @@
 <!-- Slider quảng cáo -->
 <div id="adsCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://files.betacorp.vn/media/images/2025/07/11/spm-mirinda-spm-1702x621-171356-110725-88.png" class="d-block w-100" alt="Quảng cáo 1">
+<!--        <div class="carousel-item active">-->
+<!--            <img src="https://files.betacorp.vn/media/images/2025/07/11/spm-mirinda-spm-1702x621-171356-110725-88.png" class="d-block w-100" alt="Quảng cáo 1">-->
+<!--        </div>-->
+<!--        <div class="carousel-item">-->
+<!--            <img src="https://files.betacorp.vn/media/images/2025/07/18/1702x621-4-112105-180725-86.png" class="d-block w-100" alt="Quảng cáo 2">-->
+<!--        </div>-->
+<!--        <div class="carousel-item">-->
+<!--            <img src="https://files.betacorp.vn/media/images/2025/07/17/1702x621-104211-170725-94.png" class="d-block w-100" alt="Quảng cáo 3">-->
+<!--        </div>-->
+        <div th:each="banner, iterStat : ${banners}"
+             th:class="'carousel-item' + (iterStat.index == 0 ? ' active' : '')">
+            <img th:src="${banner.imageUrl}" class="d-block w-100" alt="Quảng cáo" />
         </div>
-        <div class="carousel-item">
-            <img src="https://files.betacorp.vn/media/images/2025/07/18/1702x621-4-112105-180725-86.png" class="d-block w-100" alt="Quảng cáo 2">
-        </div>
-        <div class="carousel-item">
-            <img src="https://files.betacorp.vn/media/images/2025/07/17/1702x621-104211-170725-94.png" class="d-block w-100" alt="Quảng cáo 3">
-        </div>
-    </div>
-
     <!-- Điều hướng nếu cần -->
     <button class="carousel-control-prev" type="button" data-bs-target="#adsCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

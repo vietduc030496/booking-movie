@@ -11,6 +11,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import static com.ntu.common.constant.UrlConstant.ERROR_URL;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Slf4j
@@ -31,6 +32,18 @@ public class GlobalViewControllerAdvice {
     }
 
     /**
+     * Handle Exception (500 Not Found)
+     */
+    @ExceptionHandler(value = {Exception.class})
+    public Object handleException(Exception ex, HttpServletRequest request) {
+        String path = request.getRequestURI();
+        String message = "Error at: " + path;
+        log.error(message);
+
+        return getErrorModelAndView(INTERNAL_SERVER_ERROR);
+    }
+
+    /**
      * Create ModelAndView for error pages
      */
     private ModelAndView getErrorModelAndView(HttpStatus status) {
@@ -38,8 +51,8 @@ public class GlobalViewControllerAdvice {
 
         // Set view name based on status code
         switch (status) {
-            case NOT_FOUND -> mav.setViewName(ERROR_URL + "/404");
             case BAD_REQUEST -> mav.setViewName(ERROR_URL + "/400");
+            case NOT_FOUND -> mav.setViewName(ERROR_URL + "/404");
             default -> mav.setViewName(ERROR_URL + "/500");
         }
 
