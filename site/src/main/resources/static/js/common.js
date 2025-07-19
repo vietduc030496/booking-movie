@@ -36,3 +36,19 @@ document.addEventListener("DOMContentLoaded", function () {
         iframe.src = '';
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const triggerTabList = document.querySelectorAll('[data-bs-toggle="tab"]');
+
+    triggerTabList.forEach(function (triggerEl) {
+        triggerEl.addEventListener('shown.bs.tab', function (event) {
+            // Loại bỏ tab-active khỏi tất cả <li>
+            document.querySelectorAll('.tab-films li').forEach(function (li) {
+                li.classList.remove('tab-active');
+            });
+
+            // Thêm tab-active cho <li> hiện tại
+            event.target.closest('li').classList.add('tab-active');
+        });
+    });
+});

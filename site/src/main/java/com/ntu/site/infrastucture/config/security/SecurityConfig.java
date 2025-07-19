@@ -29,7 +29,8 @@ public class SecurityConfig {
             "/home/**",
             ACCOUNT_VIEW_URL + "/login/**",
             API_VERSION + "/**",
-            ERROR_URL + "/**"
+            ERROR_URL + "/**",
+            MOVIE_VIEW_URL
     };
 
     @Bean

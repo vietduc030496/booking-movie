@@ -24,6 +24,9 @@ public class HomepageController extends BaseViewController{
     public String home(Model model) {
         List<MovieResponse> movieShowToday = movieService.getMovieShowToday();
         model.addAttribute("movieShowToday", movieShowToday);
+
+        List<MovieResponse> movieComingSoon = movieService.getMovieComingSoon();
+        model.addAttribute("movieComingSoon", movieComingSoon);
         return "index";
     }
 

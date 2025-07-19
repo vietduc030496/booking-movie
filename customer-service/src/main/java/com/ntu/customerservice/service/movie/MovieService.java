@@ -48,6 +48,13 @@ public class MovieService {
         return getMovieByRangeDate(startOfDay, endOfDay);
     }
 
+    public List<MovieResponse> getMovieScheduled() {
+        LocalDate now = LocalDate.now();
+        LocalDateTime startOfDay = now.atStartOfDay();
+        LocalDateTime endOfDay = now.plusDays(7).atTime(LocalTime.MAX);
+        return getMovieByRangeDate(startOfDay, endOfDay);
+    }
+
     /**
      * Retrieves a list of movies that have showtimes within the specified date and time range.
      *
