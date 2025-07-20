@@ -52,3 +52,44 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// Hiện submenu khi rê chuột vào
+document.querySelectorAll('.dropdown-submenu').forEach(function (element) {
+    element.addEventListener('mouseenter', function () {
+        const submenu = element.querySelector('.dropdown-menu');
+        if (submenu) submenu.style.display = 'block';
+    });
+    element.addEventListener('mouseleave', function () {
+        const submenu = element.querySelector('.dropdown-menu');
+        if (submenu) submenu.style.display = 'none';
+    });
+});
+
+// Toggle dropdown cấp 1 khi click vào .dropdown-toggle
+document.querySelectorAll('.dropdown-toggle').forEach(function (toggle) {
+    toggle.addEventListener('click', function (e) {
+        e.preventDefault(); // ngăn điều hướng
+        const parent = toggle.parentElement;
+        const menu = parent.querySelector('.dropdown-menu');
+
+        // Đóng các menu khác nếu đang mở
+        document.querySelectorAll('.dropdown-menu').forEach(function (m) {
+            if (m !== menu) m.style.display = 'none';
+        });
+
+        // Toggle menu hiện tại
+        if (menu) {
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    });
+});
+
+// Tắt dropdown khi click ra ngoài
+document.addEventListener('click', function (e) {
+    const isClickInside = e.target.closest('.dropdown');
+    if (!isClickInside) {
+        document.querySelectorAll('.dropdown-menu').forEach(function (menu) {
+            menu.style.display = 'none';
+        });
+    }
+});
