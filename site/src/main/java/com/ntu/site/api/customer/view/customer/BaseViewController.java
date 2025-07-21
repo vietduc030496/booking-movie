@@ -1,4 +1,4 @@
-package com.ntu.site.api.customer.view;
+package com.ntu.site.api.customer.view.customer;
 
 public abstract class BaseViewController {
 

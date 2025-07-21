@@ -1,4 +1,4 @@
-package com.ntu.site.api.customer.view.error;
+package com.ntu.site.api.customer.view.customer.error;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

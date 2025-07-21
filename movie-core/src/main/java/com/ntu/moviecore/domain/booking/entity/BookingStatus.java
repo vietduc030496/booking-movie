@@ -1,8 +1,8 @@
 package com.ntu.moviecore.domain.booking.entity;
 
 public enum BookingStatus {
-    HELD,
-    BOOKED,
+    PENDING,
     EXPIRED,
+    CONFIRMED,
     CANCELLED
 }

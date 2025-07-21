@@ -37,6 +37,8 @@ public class Booking extends BaseEntity {
     )
     private List<Seat> seats;
 
+    private int totalPrice;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private BookingStatus status; // HELD, BOOKED, EXPIRED, CANCELLED

@@ -1,12 +1,10 @@
-package com.ntu.site.api.customer.view.movie;
+package com.ntu.site.api.customer.view.customer;
 
 import com.ntu.customerservice.service.movie.MovieService;
 import com.ntu.moviecore.domain.movie.dto.MovieResponse;
 import com.ntu.moviecore.domain.movie.dto.MovieShowtimeResponse;
-import com.ntu.site.api.customer.view.BaseViewController;
-import com.ntu.site.application.dto.response.CollectionDataResponse;
+import com.ntu.site.api.customer.view.customer.BaseViewController;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,9 +1,9 @@
-package com.ntu.site.api.customer.view.account;
+package com.ntu.site.api.customer.view.customer.account;
 
 import com.ntu.common.util.CaptchaUtil;
 import com.ntu.common.util.I18n;
 import com.ntu.moviecore.domain.authentication.dto.request.LoginRequest;
-import com.ntu.site.api.customer.view.BaseViewController;
+import com.ntu.site.api.customer.view.customer.BaseViewController;
 import jakarta.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;

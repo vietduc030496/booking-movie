@@ -51,9 +51,9 @@ public class GlobalViewControllerAdvice {
 
         // Set view name based on status code
         switch (status) {
-            case BAD_REQUEST -> mav.setViewName(ERROR_URL + "/400");
-            case NOT_FOUND -> mav.setViewName(ERROR_URL + "/404");
-            default -> mav.setViewName(ERROR_URL + "/500");
+            case BAD_REQUEST -> mav.setViewName("/error/400");
+            case NOT_FOUND -> mav.setViewName("/error/404");
+            default -> mav.setViewName("/error/500");
         }
 
         return mav;

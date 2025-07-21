@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Movie Booking</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+</head>
+<body>
+<div class="admin-container">
+    <aside class="sidebar">
+        <h2>🎬 Admin Panel</h2>
+        <nav>
+            <ul>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-film"></i> Movies</a></li>
+                <li><a href="#"><i class="fas fa-ticket-alt"></i> Showtimes</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Users</a></li>
+                <li><a href="#"><i class="fas fa-money-bill"></i> Payments</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <h1>Dashboard</h1>
+        </header>
+
+        <section class="stats">
+            <div class="card">
+                <h3>Total Users</h3>
+                <p>1,205</p>
+            </div>
+            <div class="card">
+                <h3>Total Bookings</h3>
+                <p>3,458</p>
+            </div>
+            <div class="card">
+                <h3>Revenue</h3>
+                <p>$45,000</p>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <h2>Latest Bookings</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>User</th>
+                    <th>Movie</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>BK001</td>
+                    <td>John Doe</td>
+                    <td>Avengers: Endgame</td>
+                    <td>2025-07-21</td>
+                    <td>Confirmed</td>
+                </tr>
+                <tr>
+                    <td>BK002</td>
+                    <td>Jane Smith</td>
+                    <td>Inception</td>
+                    <td>2025-07-20</td>
+                    <td>Pending</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
+</body>
+</html>

@@ -46,7 +46,8 @@ public class SecurityConfig {
                                 .requestMatchers(AUTH_WHITELIST)
                                 .permitAll()
                                 .anyRequest()
-                                .authenticated()
+//                                .authenticated()
+                                .permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage(ACCOUNT_VIEW_URL + "/login")

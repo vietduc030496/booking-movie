@@ -1,4 +1,4 @@
-package com.ntu.site.api.customer.view;
+package com.ntu.site.api.customer.view.customer;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

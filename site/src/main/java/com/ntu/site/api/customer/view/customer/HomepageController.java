@@ -1,4 +1,4 @@
-package com.ntu.site.api.customer.view;
+package com.ntu.site.api.customer.view.customer;
 
 import com.ntu.customerservice.service.movie.MovieService;
 import com.ntu.customerservice.service.setting.BannerService;
