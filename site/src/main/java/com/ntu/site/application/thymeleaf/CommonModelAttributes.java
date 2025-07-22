@@ -14,7 +14,7 @@ public class CommonModelAttributes {
 
     private final TheaterService theaterService;
 
-    @ModelAttribute("theaters")
+    @ModelAttribute("provinces")
     public List<ProvinceResponse> branchList() {
         return theaterService.getTheaters();
     }

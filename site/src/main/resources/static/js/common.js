@@ -93,3 +93,69 @@ document.addEventListener('click', function (e) {
         });
     }
 });
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const selectedTheaterId = getCookie('selectedTheaterId');
+    if (!selectedTheaterId) {
+        // Nếu chưa chọn, show modal
+        const modal = new bootstrap.Modal(document.getElementById('selectTheaterModal'));
+        modal.show();
+
+        document.getElementById('confirmTheaterBtn').addEventListener('click', function () {
+            const selectedId = document.getElementById('theaterSelect').value;
+            if (selectedId) {
+                document.cookie = "selectedTheaterId=" + selectedId + "; path=/"; // Lưu cookie session
+                modal.hide();
+                location.reload();
+            }
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof provinces === 'undefined') {
+        console.error('Chưa có dữ liệu provinces!');
+        return;
+    }
+
+    const provinceSelect = document.getElementById('provinceSelect');
+    const theaterSelect = document.getElementById('theaterSelect');
+    const confirmBtn = document.getElementById('confirmTheaterBtn');
+
+    const provinceMap = new Map();
+    provinces.forEach(p => provinceMap.set(p.provinceCode, p.theaters));
+
+    provinceSelect.addEventListener('change', function () {
+        const selectedProvinceId = this.value;
+
+        // Delete old options
+        theaterSelect.innerHTML = '<option value="" disabled selected>-- Chọn rạp --</option>';
+
+        if (selectedProvinceId && provinceMap.has(selectedProvinceId)) {
+            const theaters = provinceMap.get(selectedProvinceId);
+
+            theaters.forEach(t => {
+                const option = document.createElement('option');
+                option.value = t.theaterId;
+                option.textContent = t.theaterName;
+                theaterSelect.appendChild(option);
+            });
+
+            theaterSelect.disabled = false;
+            confirmBtn.disabled = true; // chờ chọn rạp
+        } else {
+            theaterSelect.disabled = true;
+            confirmBtn.disabled = true;
+        }
+    });
+
+    theaterSelect.addEventListener('change', function () {
+        confirmBtn.disabled = !this.value;
+    });
+});
