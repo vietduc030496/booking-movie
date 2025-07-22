@@ -12,6 +12,6 @@ public class AdminViewController {
 
     @GetMapping
     public String getAdminPage() {
-        return "admin/index.html";
+        return "admin/index";
     }
 }
