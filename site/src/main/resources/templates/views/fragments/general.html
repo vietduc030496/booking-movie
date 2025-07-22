@@ -63,136 +63,19 @@
                                             </a>
                                             <ul class="dropdown-menu">
 
-                                                <li class="dropdown-submenu">
-                                                    <a>Hà Nội <i class="fa fa-angle-right"></i></a>
+                                                <li th:each="province, iterStat : ${theaters}" class="dropdown-submenu">
+                                                    <a><span th:text="${province.provinceName}"></span>
+                                                        <i class="fa fa-angle-right"></i>
+                                                    </a>
 
                                                     <ul class="dropdown-menu top-0" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('1f0b7d55-9dd6-4c46-bd4d-3b50024d14ec', 'Beta Thanh Xuân');">Beta Thanh Xuân</a></li>
-
-                                                        <li><a onclick="ChooseCinema('86fa4c35-8d26-4f60-9cf2-fbaaba0ee25d', 'Beta Mỹ Đình');">Beta Mỹ Đình</a></li>
-
-                                                        <li><a onclick="ChooseCinema('8bdac2c9-2cc7-464b-8cff-4bc41403b74f', 'Beta Đan Phượng');">Beta Đan Phượng</a></li>
-
-                                                        <li><a onclick="ChooseCinema('94d6c0ca-125b-43d0-8f65-9f0880b90beb', 'Beta Giải Phóng');">Beta Giải Phóng</a></li>
-
-                                                        <li><a onclick="ChooseCinema('ea1c1507-9560-49ff-b5e7-3fc94d5dd409', 'Beta Xuân Thủy');">Beta Xuân Thủy</a></li>
-
-                                                        <li><a onclick="ChooseCinema('381f745f-c110-4d0c-9117-3a79f36ba9c4', 'Beta Tây Sơn');">Beta Tây Sơn</a></li>
+                                                        <li th:each="theater, iterStat : ${province.theaters}">
+                                                            <a onclick="ChooseCinema('1f0b7d55-9dd6-4c46-bd4d-3b50024d14ec', 'Beta Thanh Xuân');">
+                                                                <span th:text="${theater.theaterName}"></span>
+                                                            </a>
+                                                        </li>
 
                                                     </ul>
-
-                                                </li>
-
-                                                <li class="dropdown-submenu">
-                                                    <a>TP. Hồ Chí Minh <i class="fa fa-angle-right"></i></a>
-
-                                                    <ul class="dropdown-menu top-0" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('0fdbe392-734d-402b-9399-d22bd37b6cee', 'Beta Quang Trung');">Beta Quang Trung</a></li>
-
-                                                        <li><a onclick="ChooseCinema('a4ed71b7-2af3-46d4-acff-b7778fb2c91d', 'Beta Empire Bình Dương');">Beta Empire Bình Dương</a></li>
-
-                                                        <li><a onclick="ChooseCinema('98b7a985-235f-4488-a795-4a9b9577a70a', 'Beta Ung Văn Khiêm');">Beta Ung Văn Khiêm</a></li>
-
-                                                        <li><a onclick="ChooseCinema('3aa17be3-387c-4271-a313-2e5bb069b509', 'Beta Hồ Tràm');">Beta Hồ Tràm</a></li>
-
-                                                        <li><a onclick="ChooseCinema('65966bb8-ec4a-4ef6-bd0d-429deb2b563e', 'Beta Tân Uyên');">Beta Tân Uyên</a></li>
-
-                                                        <li><a onclick="ChooseCinema('8f2c1f5f-d274-4081-9c87-441e13dab3ee', 'Beta Trần Quang Khải');">Beta Trần Quang Khải</a></li>
-
-                                                    </ul>
-
-                                                </li>
-
-                                                <li class="dropdown-submenu">
-                                                    <a>An Giang <i class="fa fa-angle-right"></i></a>
-
-                                                    <ul class="dropdown-menu top-0" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('6e476e92-a262-4792-8120-daeb4433c025', 'Beta TRMall Phú Quốc');">Beta TRMall Phú Quốc</a></li>
-
-                                                    </ul>
-
-                                                </li>
-
-                                                <li class="dropdown-submenu">
-                                                    <a>Đồng Nai <i class="fa fa-angle-right"></i></a>
-
-                                                    <ul class="dropdown-menu" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('6af5c313-0e3e-4e72-86d6-2e4ed45e7e35', 'Beta Biên Hòa');">Beta Biên Hòa</a></li>
-
-                                                        <li><a onclick="ChooseCinema('d1678477-49ce-4417-bc39-a080cad0e9e8', 'Beta Long Khánh');">Beta Long Khánh</a></li>
-
-                                                    </ul>
-
-                                                </li>
-
-                                                <li class="dropdown-submenu">
-                                                    <a>Khánh Hòa <i class="fa fa-angle-right"></i></a>
-
-                                                    <ul class="dropdown-menu" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('b0e45ea2-443f-404f-9412-b97a6001f157', 'Beta Nha Trang');">Beta Nha Trang</a></li>
-
-                                                    </ul>
-
-                                                </li>
-
-                                                <li class="dropdown-submenu">
-                                                    <a>Thái Nguyên <i class="fa fa-angle-right"></i></a>
-
-                                                    <ul class="dropdown-menu" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('dfd9306f-fbc8-4807-a8c6-5e6c3f7ad71c', 'Beta Thái Nguyên');">Beta Thái Nguyên</a></li>
-
-                                                    </ul>
-
-                                                </li>
-
-                                                <li class="dropdown-submenu">
-                                                    <a>Thanh Hóa <i class="fa fa-angle-right"></i></a>
-
-                                                    <ul class="dropdown-menu" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('7d4980ac-eb8f-4bcb-97eb-77cbcd75dba2', 'Beta Thanh Hóa');">Beta Thanh Hóa</a></li>
-
-                                                    </ul>
-
-                                                </li>
-
-                                                <li class="dropdown-submenu">
-                                                    <a>Bắc Ninh <i class="fa fa-angle-right"></i></a>
-
-                                                    <ul class="dropdown-menu" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('ed75f9eb-4f2c-4448-aef8-7804178df564', 'Beta Bắc Giang');">Beta Bắc Giang</a></li>
-
-                                                    </ul>
-
-                                                </li>
-
-                                                <li class="dropdown-submenu">
-                                                    <a>Lào Cai <i class="fa fa-angle-right"></i></a>
-
-                                                    <ul class="dropdown-menu" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('dac58b9b-f8f7-4f75-8586-2b43fb8824c0', 'Beta Lào Cai');">Beta Lào Cai</a></li>
-
-                                                    </ul>
-
-                                                </li>
-
-                                                <li class="dropdown-submenu">
-                                                    <a>Phú Thọ <i class="fa fa-angle-right"></i></a>
-
-                                                    <ul class="dropdown-menu" role="menu">
-
-                                                        <li><a onclick="ChooseCinema('6bffc6ab-b2ac-408c-a92e-b7b3a0832075', 'Beta Vĩnh Yên');">Beta Vĩnh Yên</a></li>
-
-                                                    </ul>
-
                                                 </li>
 
                                             </ul>

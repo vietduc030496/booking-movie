@@ -2,9 +2,12 @@ package com.ntu.site.api.customer.view.customer;
 
 import com.ntu.customerservice.service.movie.MovieService;
 import com.ntu.customerservice.service.setting.BannerService;
+import com.ntu.customerservice.service.theater.TheaterService;
 import com.ntu.moviecore.domain.movie.dto.MovieResponse;
 import com.ntu.moviecore.domain.setting.dto.BannerResponse;
+import com.ntu.moviecore.domain.theater.dto.ProvinceResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpCookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,8 @@ public class HomepageController extends BaseViewController{
     private final BannerService bannerService;
 
     private final MovieService movieService;
+
+    private final TheaterService theaterService;
 
     @GetMapping(value = {"", "/"})
     public String defaultPage() {

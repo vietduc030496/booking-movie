@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -42,5 +43,7 @@ public class Booking extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private BookingStatus status; // HELD, BOOKED, EXPIRED, CANCELLED
+
+    private LocalDateTime expireTime;
 
 }
