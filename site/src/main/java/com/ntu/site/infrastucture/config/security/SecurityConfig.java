@@ -27,6 +27,7 @@ public class SecurityConfig {
             "/swagger-ui/**",
             "/",
             "/home/**",
+            "/test/**",
             ACCOUNT_VIEW_URL + "/login/**",
             API_VERSION + "/**",
             ERROR_URL + "/**",
