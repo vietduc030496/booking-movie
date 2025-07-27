@@ -1,11 +1,13 @@
 package com.ntu.customerservice.service.movie;
 
+import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.common.util.DateUtil;
 import com.ntu.moviecore.domain.movie.dto.MovieResponse;
 import com.ntu.moviecore.domain.movie.dto.MovieShowtimeResponse;
 import com.ntu.moviecore.domain.movie.entity.Showtime;
 import com.ntu.moviecore.domain.movie.repository.MovieRepository;
 import com.ntu.moviecore.domain.movie.repository.ShowtimeRepository;
+import com.ntu.moviecore.domain.theater.entity.Theater;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

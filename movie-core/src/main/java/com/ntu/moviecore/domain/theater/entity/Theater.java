@@ -25,4 +25,6 @@ public class Theater extends BaseEntity {
 
     private String phone;
 
+    @Column(name = "is_default", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean isDefault;
 }

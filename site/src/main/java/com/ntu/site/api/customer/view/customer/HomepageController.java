@@ -33,7 +33,7 @@ public class HomepageController extends BaseViewController{
     }
 
     @GetMapping("/home")
-    public String home(@CookieValue(name = "selectedTheaterId") Long theaterId, Model model) {
+    public String home(@CookieValue(name = "selectedTheaterId", required = false) Long theaterId, Model model) {
         List<BannerResponse> banners = bannerService.getBanners(DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE);
         model.addAttribute("banners", banners);
 

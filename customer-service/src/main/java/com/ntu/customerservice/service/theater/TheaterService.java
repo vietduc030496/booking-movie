@@ -1,5 +1,6 @@
 package com.ntu.customerservice.service.theater;
 
+import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.moviecore.domain.theater.dto.ProvinceResponse;
 import com.ntu.moviecore.domain.theater.dto.TheaterDb;
 import com.ntu.moviecore.domain.theater.dto.TheaterResponse;
@@ -22,6 +23,10 @@ public class TheaterService {
     private final ModelMapper modelMapper;
 
     public List<ProvinceResponse> getTheaters() {
+        if (CaffeineCacheUtil.containsKey("provinces")) {
+            return (List<ProvinceResponse>) CaffeineCacheUtil.get("provinces");
+        }
+
         List<TheaterDb> theaters = theaterRepository.getTheaters();
 
         Map<String, ProvinceResponse> provinceMap = new HashMap<>();

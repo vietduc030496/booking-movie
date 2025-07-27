@@ -29,7 +29,8 @@ public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
             JOIN tbl_theater tt ON tr.theater_id = tt.id 
             WHERE tm.id = :movieId 
             AND tt.id = :theaterId 
-            AND ts.start_time BETWEEN :start AND :end """, nativeQuery = true)
+            AND ts.start_time BETWEEN :start AND :end 
+            ORDER BY ts.start_time """, nativeQuery = true)
     List<ShowtimeTheaterDbResponse> findShowtimeByMovieIdAndTheaterId(@Param("movieId")long movieId,
                                                                       @Param("theaterId") long theaterId,
                                                                       @Param("start") LocalDateTime start,

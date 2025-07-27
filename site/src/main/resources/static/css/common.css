@@ -478,5 +478,14 @@ body {
 .dropdown-submenu:hover, .dropdown-menu li:hover {
     background-color: #337ab7;
     color: #fff !important;;
+}
 
+.btn.default {
+    color: #333333;
+    background-color: #E5E5E5;
+}
+
+.btn.default:hover {
+    color: #333333;
+    background-color: lightgray;
 }

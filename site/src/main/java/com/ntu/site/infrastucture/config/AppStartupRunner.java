@@ -1,0 +1,40 @@
+package com.ntu.site.infrastucture.config;
+
+import com.ntu.common.util.CaffeineCacheUtil;
+import com.ntu.customerservice.service.setting.BannerService;
+import com.ntu.customerservice.service.theater.TheaterService;
+import com.ntu.moviecore.domain.setting.dto.BannerResponse;
+import com.ntu.moviecore.domain.theater.dto.ProvinceResponse;
+import com.ntu.moviecore.domain.theater.entity.Theater;
+import lombok.AllArgsConstructor;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+@AllArgsConstructor
+public class AppStartupRunner implements ApplicationRunner {
+
+    private final TheaterService theaterService;
+
+    private final BannerService bannerService;
+
+    @Override
+    public void run(ApplicationArguments args) {
+        try {
+            List<ProvinceResponse> theaters = theaterService.getTheaters();
+            if (!theaters.isEmpty()) {
+                CaffeineCacheUtil.put("provinces", theaters);
+            }
+
+            List<BannerResponse> banners = bannerService.getBanners(1, 10);
+            if (!banners.isEmpty()) {
+                CaffeineCacheUtil.put("banners", banners);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

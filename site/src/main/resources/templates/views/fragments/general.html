@@ -64,7 +64,7 @@
                                                href="javascript:;"
                                                aria-expanded="false">
                                                 <span class="me-1"
-                                                      th:text="${not #lists.isEmpty(provinces) and not #lists.isEmpty(provinces[0].theaters) ? provinces[0].theaters[0].theaterName : ''}">
+                                                      th:text="${not #lists.isEmpty(provinces) and not #lists.isEmpty(provinces[0].theaters) ? provinces[0].theaters[0].theaterName : ''}"> //TODO
                                                 </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
@@ -151,7 +151,7 @@
     </div>
 
     <div th:fragment="showtime-modal" class="modal fade" id="showtimeModal" tabindex="-1" aria-labelledby="showtimeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content border-radius-20">
                 <div class="modal-header">
                     <h5 class="modal-title" id="showtimeModalLabel">Movie Title</h5>
@@ -177,20 +177,21 @@
                         </li>
                     </ul>
 
-                    <!-- Tabs content -->
-                    <div class="tab-content mt-3">
-                        <div class="tab-pane fade"
-                             th:each="item, iterStat : ${showtimeByDay}"
-                             th:id="'tab-content-'+${iterStat.index}"
-                             th:classappend="${iterStat.index == 0} ? 'show active'"
-                             role="tabpanel"
-                             th:aria-labelledby="'tab-'+${iterStat.index}">
+                    <div class="tab-content">
+                        <div th:each="day, iterStat : ${showtimeByDay}"
+                             th:id="'tab-' + ${iterStat.index}"
+                             th:class="'tab-pane fade' + (${iterStat.index == 0} ? ' active show' : '')">
 
-                            <!-- Danh sách showtimes -->
-                            <ul>
-                                <li th:each="showtime : ${item.showtimes}"
-                                    th:text="${showtime.startHour}">Giờ chiếu</li>
-                            </ul>
+                            <div class="row">
+                                <div th:each="showtime : ${day.showtimes}">
+                                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 text-center">
+                                        <a style="width:100%"
+                                           onclick="bookingSeat('Beta Thái Nguyên', '50236ae1-260a-485b-8b5f-c5ef88d0f08f', '6551c29e-6387-4236-b5e2-971df4125946', '09:00', '28/07/2025', 'Thám Tử Lừng Danh Conan: Dư Ảnh Của Độc Nhãn', 'normal', '', 'False','');"
+                                           class="btn default"
+                                           th:text="${showtime.startHour}"></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

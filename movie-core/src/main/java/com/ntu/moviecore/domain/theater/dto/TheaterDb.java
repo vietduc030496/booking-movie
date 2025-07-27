@@ -13,4 +13,6 @@ public interface TheaterDb {
     long getTheaterId();
 
     String getTheaterName();
+
+    boolean getIsDefault();
 }

@@ -23,14 +23,14 @@ public class MovieController extends BaseViewController {
     private final MovieService movieService;
 
     @GetMapping("/movies-scheduled")
-    public String getMovieScheduled(@CookieValue(name = "selectedTheaterId") Long theaterId, Model model) {
+    public String getMovieScheduled(@CookieValue(name = "selectedTheaterId", required = false) Long theaterId, Model model) {
         List<MovieShowtimeResponse> scheduledMovies = movieService.getScheduledMovies(theaterId);
         model.addAttribute("scheduledMovies", scheduledMovies);
         return "movie/movies-scheduled";
     }
 
     @GetMapping
-    public String getMovies(@CookieValue(name = "selectedTheaterId") Long theaterId, Model model) {
+    public String getMovies(@CookieValue(name = "selectedTheaterId", required = false) Long theaterId, Model model) {
         List<MovieResponse> movieShowToday = movieService.getMovieShowToday(theaterId);
         model.addAttribute("movieShowToday", movieShowToday);
 

@@ -1,5 +1,6 @@
 package com.ntu.customerservice.service.setting;
 
+import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.moviecore.domain.setting.dto.BannerResponse;
 import com.ntu.moviecore.domain.setting.repository.BannerRepository;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,10 @@ public class BannerService {
     private final ModelMapper modelMapper;
 
     public List<BannerResponse> getBanners(int page, int size) {
+        if (CaffeineCacheUtil.containsKey("banners")) {
+            return (List<BannerResponse>) CaffeineCacheUtil.get("banners");
+        }
+
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         return bannerRepository.getBanners(pageRequest)
                                 .stream()

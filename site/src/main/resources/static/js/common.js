@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const selectedId = document.getElementById('theaterSelect').value;
             if (selectedId) {
                 document.cookie = "selectedTheaterId=" + selectedId + "; path=/";
-                document.cookie = "selectedTheaterName=" + selectedId + "; path=/";
+                document.cookie = "selectedTheaterName=" + selectedId + "; path=/"; //TODO
                 modal.hide();
                 location.reload();
             }
@@ -130,7 +130,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmBtn = document.getElementById('confirmTheaterBtn');
 
     const provinceMap = new Map();
-    provinces.forEach(p => provinceMap.set(p.provinceCode, p.theaters));
+    provinces.forEach(p => {
+        provinceMap.set(p.provinceCode, p.theaters);
+
+        for (const theater of p.theaters) {
+            if (theater.default) {
+                document.cookie = "selectedTheaterId=" + theater.theaterId + "; path=/";
+                document.cookie = "selectedTheaterName=" + theater.theaterName + "; path=/";
+            }
+        }
+    });
 
     provinceSelect.addEventListener('change', function () {
         const selectedProvinceId = this.value;
