@@ -85,7 +85,8 @@ body {
 .flag-icon {
     width: auto;
     height: auto;
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .header {

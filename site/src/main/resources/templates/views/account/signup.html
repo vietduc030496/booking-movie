@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title th:text="#{title.login}">Title</title>
+  <th:block th:replace="~{fragments/general.html :: head-resources}"></th:block>
+  <link rel="stylesheet" th:href="@{/css/account/login.css}">
+</head>
+<body>
+<div th:replace="~{fragments/general.html :: pre-header}"></div>
+<div th:replace="~{fragments/general.html :: header}"></div>
+
+<div class="login-container">
+  <button
+          class="nav-link w-100"
+          id="signup-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#signup"
+          type="button"
+          role="tab"
+          aria-controls="signup"
+          aria-selected="false"
+          th:text="#{btn.signup}">
+    ĐĂNG KÝ
+  </button>
+
+  <div class="tab-content" id="loginTabContent">
+    <div
+            class="tab-pane fade"
+            id="signup"
+            role="tabpanel"
+            aria-labelledby="signup-tab">
+      <!-- Nội dung đăng ký có thể thêm ở đây -->
+      <p>Chưa có nội dung đăng ký.</p>
+    </div>
+  </div>
+</div>
+
+<script th:inline="javascript">
+
+</script>
+</body>
+</html>

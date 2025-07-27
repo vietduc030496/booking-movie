@@ -43,4 +43,8 @@ public class AuthenticationViewController extends BaseViewController {
         return "account/login";
     }
 
+    @GetMapping("/signup")
+    public String getSignupPage(Model model) {
+        return "account/signup";
+    }
 }

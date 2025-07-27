@@ -18,15 +18,15 @@
     <div th:fragment="pre-header" class="top-bar d-flex justify-content-end align-items-center">
         <div class="container d-flex justify-content-end align-items-center">
             <div class="ms-auto d-flex align-items-center">
-                <a th:href="@{'/views/account/login'(lang=${#locale.language})}" th:text="#{login}">Đăng nhập</a>
+                <a th:href="@{'/views/account/login'}" th:text="#{login}"></a>
                 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                <a href="#" th:text="#{register}">Đăng ký</a>
+                <a th:href="@{'/views/account/signup'}" th:text="#{register}"></a>
                 <div class="dropdown ms-3">
-                    <a class="btn btn-sm dropdown-toggle p-0 text-decoration-none" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-sm dropdown-toggle p-0 text-decoration-none" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                         <img th:if="${#locale.language == 'vi'}" th:src="@{/images/vietnam.png}" alt="Tiếng Việt" class="flag-icon" style="width: 24px;">
                         <img th:if="${#locale.language != 'vi'}" th:src="@{/images/united-kingdom.png}" alt="English" class="flag-icon" style="width: 24px;">
-                    </a>
+                    </button>
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item" style="color:black" href="javascript:void(0)" onclick="changeLanguage('vi')">
