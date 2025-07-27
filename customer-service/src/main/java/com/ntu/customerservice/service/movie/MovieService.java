@@ -28,17 +28,16 @@ public class MovieService {
 
     private final ModelMapper modelMapper;
 
-    public List<MovieShowtimeResponse> getScheduledMovies() {
+    public List<MovieShowtimeResponse> getScheduledMovies(Long theaterId) {
         LocalDate now = LocalDate.now();
         LocalDateTime startOfDay = now.atStartOfDay();
         LocalDateTime endOfDay = now.plusDays(7).atTime(LocalTime.MAX);
 
-        List<Showtime> moviesShowtime = showtimeRepository.findMoviesShowtimeByRange(startOfDay, endOfDay);
+        List<Showtime> moviesShowtime = showtimeRepository.findMoviesShowtimeByRange(theaterId, startOfDay, endOfDay);
 
         Map<String, MovieShowtimeResponse> dateShowtimeToMovies = new HashMap<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM - 'T'EE", new Locale("vi"));
         for (Showtime showtime : moviesShowtime) {
-            String dateTime = DateUtil.localDateTimeToString(showtime.getStartTime(), formatter);
+            String dateTime = DateUtil.formatVNFull(showtime.getStartTime());
             MovieResponse movie = modelMapper.map(showtime.getMovie(), MovieResponse.class);
             MovieShowtimeResponse exit = dateShowtimeToMovies.get(dateTime);
             if (exit != null) {
@@ -63,11 +62,11 @@ public class MovieService {
      *
      * @return a list of movies showing today
      */
-    public List<MovieResponse> getMovieShowToday() {
+    public List<MovieResponse> getMovieShowToday(Long theaterId) {
         LocalDate now = LocalDate.now();
         LocalDateTime startOfDay = now.atStartOfDay(); // 00:00 today
         LocalDateTime endOfDay = now.atTime(LocalTime.MAX); // 23:59:59.999 today
-        return getMovieByRangeDate(startOfDay, endOfDay);
+        return getMovieByRangeDate(theaterId, startOfDay, endOfDay);
     }
 
     /**
@@ -76,18 +75,18 @@ public class MovieService {
      *
      * @return a list of upcoming movies in the next 7 days starting from tomorrow
      */
-    public List<MovieResponse> getMovieComingSoon() {
+    public List<MovieResponse> getMovieComingSoon(Long theaterId) {
         LocalDate tomorrow = LocalDate.now().plusDays(1); // Tomorrow's date
         LocalDateTime startOfDay = tomorrow.atStartOfDay(); // 00:00 tomorrow
         LocalDateTime endOfDay = tomorrow.plusDays(7).atTime(LocalTime.MAX); // 23:59:59.999 seven days later
-        return getMovieByRangeDate(startOfDay, endOfDay);
+        return getMovieByRangeDate(theaterId, startOfDay, endOfDay);
     }
 
-    public List<MovieResponse> getMovieScheduled() {
+    public List<MovieResponse> getMovieScheduled(Long theaterId) {
         LocalDate now = LocalDate.now();
         LocalDateTime startOfDay = now.atStartOfDay();
         LocalDateTime endOfDay = now.plusDays(7).atTime(LocalTime.MAX);
-        return getMovieByRangeDate(startOfDay, endOfDay);
+        return getMovieByRangeDate(theaterId, startOfDay, endOfDay);
     }
 
     /**
@@ -97,8 +96,8 @@ public class MovieService {
      * @param dateTo   the end datetime of the range
      * @return a list of movies that are scheduled between the given datetime range
      */
-    public List<MovieResponse> getMovieByRangeDate(LocalDateTime dateFrom, LocalDateTime dateTo) {
-        return movieRepository.findMoviesByShowtimeBetween(dateFrom, dateTo)
+    public List<MovieResponse> getMovieByRangeDate(Long theaterId, LocalDateTime dateFrom, LocalDateTime dateTo) {
+        return movieRepository.findMoviesByShowtimeBetween(theaterId, dateFrom, dateTo)
                 .stream()
                 .map(movie -> {
                     MovieResponse resp = modelMapper.map(movie, MovieResponse.class);

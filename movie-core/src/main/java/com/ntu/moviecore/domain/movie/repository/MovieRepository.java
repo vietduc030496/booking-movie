@@ -11,7 +11,9 @@ import java.util.List;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query("SELECT DISTINCT st.movie FROM Showtime st " +
-            "WHERE st.startTime BETWEEN :start AND :end")
-    List<Movie> findMoviesByShowtimeBetween(@Param("start") LocalDateTime start,
+            "WHERE st.room.theater.id = :theaterId " +
+            "AND st.startTime BETWEEN :start AND :end")
+    List<Movie> findMoviesByShowtimeBetween(@Param("theaterId") long theaterId,
+                                            @Param("start") LocalDateTime start,
                                             @Param("end") LocalDateTime end);
 }

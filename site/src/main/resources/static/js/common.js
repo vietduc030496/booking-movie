@@ -110,7 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('confirmTheaterBtn').addEventListener('click', function () {
             const selectedId = document.getElementById('theaterSelect').value;
             if (selectedId) {
-                document.cookie = "selectedTheaterId=" + selectedId + "; path=/"; // Lưu cookie session
+                document.cookie = "selectedTheaterId=" + selectedId + "; path=/";
+                document.cookie = "selectedTheaterName=" + selectedId + "; path=/";
                 modal.hide();
                 location.reload();
             }
@@ -159,3 +160,18 @@ document.addEventListener('DOMContentLoaded', function () {
         confirmBtn.disabled = !this.value;
     });
 });
+
+function viewsShowtimes(movieId, movieName) {
+    let theaterId = getCookie('selectedTheaterId');
+    fetch('/views/showtimes/movies/' + movieId + '/theaters/' + theaterId)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('showtimeModalContainer').innerHTML = html;
+            document.getElementById('showtimeModalLabel').innerText = movieName;
+            document.getElementById('theaterNameH1').textContent = getCookie('selectedTheaterName');
+            const modalEl = document.getElementById('showtimeModal');
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+    });
+
+}

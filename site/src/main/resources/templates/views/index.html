@@ -111,9 +111,10 @@
                                         </ul>
                                     </div>
                                     <div class="text-center" style="min-height: 80px;">
-                                        <a style="display: block;border: none" href="#showtimes-pop-up"
-                                           onclick="viewsShowtimes('dfd9306f-fbc8-4807-a8c6-5e6c3f7ad71c', '7f616c75-8be5-420e-bfc7-737cc1c1e0a9', 'Dan Ca Go', 'Beta Thai Nguyen')"
-                                           class="btn btn-2 btn-mua-ve2">
+                                        <a href="javascript:void(0)"
+                                           th:attr="onclick=|viewsShowtimes(${movie.id}, '${movie.title}')|"
+                                           class="btn btn-2 btn-mua-ve2"
+                                           style="display: block; border: none">
                                             <span><i class="fa fa-ticket mr3" style="font-size:40px"></i></span>
                                             <span style="color: white" th:text="#{text.booking}"></span>
                                         </a>
@@ -216,6 +217,9 @@
         </div>
     </div>
 </div>
+
+<div id="showtimeModalContainer"></div>
+
 <span style="display: none" id="trailer-notfound" th:text="#{trailer.notfound}"></span>
 </body>
 </html>
