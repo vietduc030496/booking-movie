@@ -3,14 +3,15 @@ package com.ntu.site.api.customer.view.customer.account;
 import com.ntu.common.util.CaptchaUtil;
 import com.ntu.common.util.I18n;
 import com.ntu.moviecore.domain.authentication.dto.request.LoginRequest;
+import com.ntu.moviecore.domain.authentication.dto.request.SignupRequest;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import static com.ntu.common.constant.UrlConstant.ACCOUNT_VIEW_URL;
 
@@ -45,6 +46,18 @@ public class AuthenticationViewController extends BaseViewController {
 
     @GetMapping("/signup")
     public String getSignupPage(Model model) {
+        model.addAttribute("signupRequest", new SignupRequest());
         return "account/signup";
+    }
+
+    @PostMapping("/signup")
+    public String signupNewUser(@Valid @ModelAttribute("signupRequest") SignupRequest signupRequest,
+                                BindingResult result,
+                                Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("signupRequest", signupRequest);
+            return "account/signup";
+        }
+        return redirect(ACCOUNT_VIEW_URL + "/login");
     }
 }
