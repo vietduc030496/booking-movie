@@ -1,5 +1,6 @@
 package com.ntu.site.api.admin.view;
 
+import com.ntu.adminservice.service.movie.MovieAdminService;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import static com.ntu.common.constant.UrlConstant.ADMIN_VIEW_URL;
 @AllArgsConstructor
 public class AdminViewController extends BaseViewController {
 
+    private final MovieAdminService movieAdminService;
+
     @GetMapping
     public String getAdminPage() {
         return "admin/index";
@@ -21,6 +24,7 @@ public class AdminViewController extends BaseViewController {
 
     @GetMapping("/movies")
     public String getMoviePage(Model model) {
+
         return "admin/movie/movies";
     }
 

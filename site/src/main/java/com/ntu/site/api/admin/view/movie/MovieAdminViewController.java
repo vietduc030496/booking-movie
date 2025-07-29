@@ -6,20 +6,18 @@ import com.ntu.moviecore.domain.movie.dto.request.MovieNewRequest;
 import com.ntu.moviecore.domain.movie.entity.AgeRating;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static com.ntu.common.constant.UrlConstant.ADMIN_MOVIE_VIEW_URL;
 
 @Controller
 @RequestMapping(ADMIN_MOVIE_VIEW_URL)
 @AllArgsConstructor
-public class AdminMovieViewController extends BaseViewController {
+public class MovieAdminViewController extends BaseViewController {
 
     private final MovieAdminService movieAdminService;
 
@@ -41,6 +39,13 @@ public class AdminMovieViewController extends BaseViewController {
         }
 
         movieAdminService.addNewMovie(newMovie);
-        return redirect(ADMIN_MOVIE_VIEW_URL + "/movies");
+        return redirect(ADMIN_MOVIE_VIEW_URL);
+    }
+
+    @GetMapping("/elasticsearch")
+    @ResponseBody
+    public ResponseEntity<String> syncAllMoviesToElasticsearch() {
+        movieAdminService.syncAllMoviesToElasticsearch();
+        return ResponseEntity.ok("Success");
     }
 }
