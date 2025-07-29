@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <title>Thêm mới movie</title>
     <th:block th:replace="~{fragments/general-admin :: admin-head-resources}"></th:block>
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body>
 <div class="admin-container">
@@ -33,8 +41,9 @@
                 </div>
                 <div class="col-md-6 col-12">
                     <label for="genre" class="form-label">Thể loại *</label>
-                    <input type="text" class="form-control" id="genre" placeholder="Nhập thể loại"
-                           th:field="*{genre}" required />
+                    <select id="genre" class="form-select select2" multiple="multiple" th:field="*{genre}">
+                        <option th:each="g : ${genres}" th:value="${g}" th:text="${g}"></option>
+                    </select>
                 </div>
             </div>
 
@@ -52,6 +61,17 @@
             </div>
 
             <div class="mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="ageRating" class="form-label">Độ tuổi phù hợp</label>
+                    <select class="form-select" id="ageRating" th:field="*{ageRating}" required>
+                        <option th:each="rating : ${ageRatingList}"
+                                th:value="${rating}"
+                                th:text="${rating.label}">Chọn độ tuổi</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
                 <label for="description" class="form-label">Mô tả *</label>
                 <textarea class="form-control" id="description" rows="5" placeholder="Nhập mô tả"
                           th:field="*{description}" required></textarea>
@@ -62,7 +82,16 @@
             </div>
         </form>
     </div>
-
 </div>
+<!-- Init Select2 -->
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Chọn thể loại",
+            allowClear: true,
+            width: '100%'
+        });
+    });
+</script>
 </body>
 </html>

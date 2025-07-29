@@ -19,4 +19,13 @@ public enum AgeRating {
         }
         throw new IllegalArgumentException("Invalid age rating code: " + code);
     }
+
+    public String getLabel() {
+        return switch (this) {
+            case P -> "P (Phù hợp với mọi độ tuổi)";
+            case T13 -> "T13 (Trên 13 tuổi)";
+            case T16 -> "T16 (Trên 16 tuổi)";
+            case T18 -> "T18 (Trên 18 tuổi)";
+        };
+    }
 }

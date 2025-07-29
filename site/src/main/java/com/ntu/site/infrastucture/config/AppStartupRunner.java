@@ -5,7 +5,6 @@ import com.ntu.customerservice.service.setting.BannerService;
 import com.ntu.customerservice.service.theater.TheaterService;
 import com.ntu.moviecore.domain.setting.dto.BannerResponse;
 import com.ntu.moviecore.domain.theater.dto.ProvinceResponse;
-import com.ntu.moviecore.domain.theater.entity.Theater;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -33,6 +32,9 @@ public class AppStartupRunner implements ApplicationRunner {
             if (!banners.isEmpty()) {
                 CaffeineCacheUtil.put("banners", banners);
             }
+
+            List<String> genres = List.of("Hài hước", "Kinh dị", "Hành động");
+            CaffeineCacheUtil.put("genres", genres);
         } catch (Exception e) {
             e.printStackTrace();
         }

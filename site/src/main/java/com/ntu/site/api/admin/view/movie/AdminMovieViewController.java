@@ -1,6 +1,9 @@
 package com.ntu.site.api.admin.view.movie;
 
+import com.ntu.adminservice.service.movie.MovieAdminService;
+import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.moviecore.domain.movie.dto.request.MovieNewRequest;
+import com.ntu.moviecore.domain.movie.entity.AgeRating;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,9 +21,13 @@ import static com.ntu.common.constant.UrlConstant.ADMIN_MOVIE_VIEW_URL;
 @AllArgsConstructor
 public class AdminMovieViewController extends BaseViewController {
 
+    private final MovieAdminService movieAdminService;
+
     @GetMapping("/add-new")
     public String getAddNewMoviePage(Model model) {
         model.addAttribute("newMovie", new MovieNewRequest());
+        model.addAttribute("ageRatingList", AgeRating.values());
+        model.addAttribute("genres", CaffeineCacheUtil.get("genres"));
         return "admin/movie/add-new";
     }
 
@@ -33,6 +40,7 @@ public class AdminMovieViewController extends BaseViewController {
             return "admin/movie/add-new";
         }
 
+        movieAdminService.addNewMovie(newMovie);
         return redirect(ADMIN_MOVIE_VIEW_URL + "/movies");
     }
 }

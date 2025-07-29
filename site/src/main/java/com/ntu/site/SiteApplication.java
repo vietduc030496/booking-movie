@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {"com.ntu.common",
                                 "com.ntu.moviecore",
                                 "com.ntu.customerservice",
+                                "com.ntu.adminservice",
                                 "com.ntu.site"})
 @EnableJpaRepositories(basePackages = "com.ntu.moviecore.domain")
 @EntityScan(basePackages = "com.ntu.moviecore.domain")
