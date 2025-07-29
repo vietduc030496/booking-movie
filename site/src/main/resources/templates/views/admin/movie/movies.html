@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Booking</title>
+    <th:block th:replace="~{fragments/general-admin :: admin-head-resources}"></th:block>
+</head>
+<body>
+<div class="admin-container">
+    <div th:replace="~{fragments/general-admin :: admin-menu}"></div>
+
+    <div class="container-fluid py-4">
+        <h4 class="mb-4">MOVIE STORE -&gt;</h4>
+
+        <!-- Search bar -->
+        <div class="mb-3">
+            <form class="row g-3 align-items-center mb-4" method="get" th:action="@{/movies}">
+                <div class="col-3">
+                    <input type="text" class="form-control" placeholder="Tìm phim">
+                </div>
+                <div class="col-auto">
+                    <label for="fromDate" class="form-label mb-0">From</label>
+                    <input type="date" class="form-control" id="fromDate" name="fromDate">
+                </div>
+                <div class="col-auto">
+                    <label for="toDate" class="form-label mb-0">To</label>
+                    <input type="date" class="form-control" id="toDate" name="toDate">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+
+                <div class="col-auto">
+                    <button class="btn text-white">
+                        <a th:href="@{/views/admin/movies/add-new}">Thêm phim mới</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive bg-dark text-white rounded shadow-sm">
+            <table class="table table-dark table-hover mb-0">
+                <thead class="thead-light">
+                <tr>
+                    <th>Tên phim</th>
+                    <th>Thể loại</th>
+                    <th>Mô tả</th>
+                    <th>Thời lượng</th>
+                    <th>Độ tuổi</th>
+                    <th>Ngày phát hành</th>
+                </tr>
+                </thead>
+                <tbody>
+<!--                <tr th:each="reservation : ${reservations}">-->
+<!--                    <td th:text="${reservation.userId}">19bce0034</td>-->
+<!--                    <td th:text="${reservation.phone}">6300302749</td>-->
+<!--                    <td th:text="${reservation.startAt}">19:00</td>-->
+<!--                    <td th:text="${reservation.movieTitle}">spider man-no way home</td>-->
+<!--                    <td th:text="${reservation.cinema}">Marvel Imax</td>-->
+<!--                    <td th:text="${reservation.ticketPrice}">20</td>-->
+<!--                    <td th:text="${reservation.total}">60</td>-->
+<!--                    <td th:text="${reservation.checkin ? 'yes' : 'no'}">no</td>-->
+<!--                </tr>-->
+                <td>19bce0034</td>
+                <td>6300302749</td>
+                <td>19:00</td>
+                <td>spider man-no way home</td>
+                <td>Marvel Imax</td>
+                <td>20</td>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination and Row Info -->
+        <div class="d-flex justify-content-between align-items-center mt-3 text-white-50">
+            <div>
+                Rows per page:
+                <select class="form-select d-inline-block w-auto ms-2">
+                    <option>10</option>
+                    <option>25</option>
+                    <option>50</option>
+                </select>
+            </div>
+            <div>
+<!--                <span th:text="'1-' + ${reservations.size()} + ' of ' + ${totalReservations}">1-10 of 12</span>-->
+                <button class="btn btn-sm btn-outline-light ms-2">&lt;</button>
+                <button class="btn btn-sm btn-outline-light ms-1">&gt;</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

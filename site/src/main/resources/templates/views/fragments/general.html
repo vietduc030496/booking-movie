@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
 <head th:fragment="head-resources">
+    <title></title>
     <script th:inline="javascript">
         /*<![CDATA[*/
         const provinces = [[${provinces}]];
@@ -15,12 +18,79 @@
     <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}">
 </head>
 <body>
-    <div th:fragment="pre-header" class="top-bar d-flex justify-content-end align-items-center">
+    <div th:fragment="pre-header" class="pre-header top-bar d-flex justify-content-end align-items-center">
         <div class="container d-flex justify-content-end align-items-center">
             <div class="ms-auto d-flex align-items-center">
-                <a th:href="@{'/views/account/login'}" th:text="#{login}"></a>
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                <a th:href="@{'/views/account/signup'}" th:text="#{register}"></a>
+                <div sec:authorize="isAuthenticated()">
+                    <ul class="nav navbar-nav pull-right padding-right-10">
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" style="padding: 2px;background-color: transparent; color: white"
+                               class="dropdown-toggle" data-toggle="dropdown"
+                               data-hover="dropdown"
+                               data-close-others="true">
+                                <span class="username username-hide-on-mobile">Nguyen viet duc</span>
+                                <!-- Kiểm tra loại object -->
+<!--                                <p th:text="${#authentication.principal.getClass().name}">Loại Principal</p>-->
+
+                                <!-- Xem toàn bộ object -->
+<!--                                <pre th:text="${#authentication.principal}">Object</pre>-->
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#thongtintaikhoan')" href="/thong-tin-tai-khoan.htm#thongtintaikhoan">
+                                        <i class="icon-user"></i> Thông tin tài khoản
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#thethanhvien')" href="/thong-tin-tai-khoan.htm#thethanhvien">
+                                        <i class="icon-diamond"></i> Thẻ thành viên
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#hanhtrinhdienanh')" href="/thong-tin-tai-khoan.htm#hanhtrinhdienanh">
+                                        <i class="icon-paper-plane"></i> Hành trình điện ảnh
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#betapoint')" href="/thong-tin-tai-khoan.htm#betapoint">
+                                        <i class="icon-pointer"></i> Điểm Beta
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#voucher')" href="/thong-tin-tai-khoan.htm#voucher">
+                                        <i class="icon-briefcase"></i> Voucher của tôi
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a onclick="logout();" href="javascript:void(0)">
+                                        <i class="icon-logout"></i> Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li class="dropdown dropdown-quick-sidebar-toggler">
+                            <a onclick="logout();" style="padding: 3px;background-color: transparent;" class="dropdown-toggle">
+                                <i class="icon-logout"></i>
+                            </a>
+                        </li>
+                        <!-- END QUICK SIDEBAR TOGGLER -->
+                    </ul>
+                </div>
+                <div sec:authorize="!isAuthenticated()">
+                    <a th:href="@{'/views/account/login'}" th:text="#{login}"></a>
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/views/account/signup'}" th:text="#{register}"></a>
+                </div>
                 <div class="dropdown ms-3">
                     <button class="btn btn-sm dropdown-toggle p-0 text-decoration-none" type="button"
                             data-bs-toggle="dropdown" aria-expanded="false">

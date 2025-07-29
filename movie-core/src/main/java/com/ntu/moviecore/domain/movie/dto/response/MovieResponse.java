@@ -1,4 +1,4 @@
-package com.ntu.moviecore.domain.movie.dto;
+package com.ntu.moviecore.domain.movie.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;

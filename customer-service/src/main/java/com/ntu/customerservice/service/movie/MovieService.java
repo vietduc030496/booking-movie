@@ -1,13 +1,11 @@
 package com.ntu.customerservice.service.movie;
 
-import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.common.util.DateUtil;
-import com.ntu.moviecore.domain.movie.dto.MovieResponse;
-import com.ntu.moviecore.domain.movie.dto.MovieShowtimeResponse;
+import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
+import com.ntu.moviecore.domain.movie.dto.response.MovieShowtimeResponse;
 import com.ntu.moviecore.domain.movie.entity.Showtime;
 import com.ntu.moviecore.domain.movie.repository.MovieRepository;
 import com.ntu.moviecore.domain.movie.repository.ShowtimeRepository;
-import com.ntu.moviecore.domain.theater.entity.Theater;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,8 +13,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor

@@ -1,19 +1,20 @@
 package com.ntu.customerservice.service.movie;
 
 import com.ntu.common.util.DateUtil;
-import com.ntu.moviecore.domain.movie.dto.ShowtimeResponse;
-import com.ntu.moviecore.domain.movie.dto.ShowtimeTheaterDbResponse;
-import com.ntu.moviecore.domain.movie.dto.ShowtimeTheaterResponse;
+import com.ntu.moviecore.domain.movie.dto.response.ShowtimeResponse;
+import com.ntu.moviecore.domain.movie.dto.response.ShowtimeTheaterDbResponse;
+import com.ntu.moviecore.domain.movie.dto.response.ShowtimeTheaterResponse;
 import com.ntu.moviecore.domain.movie.repository.ShowtimeRepository;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor

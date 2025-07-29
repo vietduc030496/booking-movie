@@ -1,6 +1,6 @@
 package com.ntu.moviecore.domain.movie.repository;
 
-import com.ntu.moviecore.domain.movie.dto.ShowtimeTheaterDbResponse;
+import com.ntu.moviecore.domain.movie.dto.response.ShowtimeTheaterDbResponse;
 import com.ntu.moviecore.domain.movie.entity.Showtime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -9,19 +9,7 @@
 </head>
 <body>
 <div class="admin-container">
-    <aside class="sidebar">
-        <h2>🎬 Admin Panel</h2>
-        <nav>
-            <ul>
-                <li><a href="#"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-film"></i> Movies</a></li>
-                <li><a href="#"><i class="fas fa-ticket-alt"></i> Showtimes</a></li>
-                <li><a href="#"><i class="fas fa-users"></i> Users</a></li>
-                <li><a href="#"><i class="fas fa-money-bill"></i> Payments</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-            </ul>
-        </nav>
-    </aside>
+    <div th:replace="~{fragments/general-admin :: admin-menu}"></div>
 
     <main class="main-content">
         <header>

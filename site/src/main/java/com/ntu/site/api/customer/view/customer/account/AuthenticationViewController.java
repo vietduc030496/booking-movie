@@ -2,11 +2,13 @@ package com.ntu.site.api.customer.view.customer.account;
 
 import com.ntu.common.util.CaptchaUtil;
 import com.ntu.common.util.I18n;
+import com.ntu.customerservice.service.auth.UserService;
 import com.ntu.moviecore.domain.authentication.dto.request.LoginRequest;
 import com.ntu.moviecore.domain.authentication.dto.request.SignupRequest;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,10 @@ import static com.ntu.common.constant.UrlConstant.ACCOUNT_VIEW_URL;
 
 @Controller
 @RequestMapping(ACCOUNT_VIEW_URL)
+@AllArgsConstructor
 public class AuthenticationViewController extends BaseViewController {
+
+    private final UserService userService;
 
     @GetMapping("/login")
     public String getLoginPage(@RequestParam(name = "captchaError", required = false) String captchaError,
@@ -58,6 +63,8 @@ public class AuthenticationViewController extends BaseViewController {
             model.addAttribute("signupRequest", signupRequest);
             return "account/signup";
         }
+
+        userService.addNewUser(signupRequest);
         return redirect(ACCOUNT_VIEW_URL + "/login");
     }
 }

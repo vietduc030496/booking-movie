@@ -1,7 +1,7 @@
 package com.ntu.site.api.customer.view.customer.showtime;
 
 import com.ntu.customerservice.service.movie.ShowtimeService;
-import com.ntu.moviecore.domain.movie.dto.ShowtimeTheaterResponse;
+import com.ntu.moviecore.domain.movie.dto.response.ShowtimeTheaterResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

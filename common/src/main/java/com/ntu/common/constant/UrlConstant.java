@@ -16,7 +16,9 @@ public class UrlConstant {
 
     public static final String MOVIE_VIEW_URL = VIEWS_URL + "/movies";
 
+    public static final String SHOWTIME_VIEW_URL = VIEWS_URL + "/showtimes";
+
     public static final String ADMIN_VIEW_URL = VIEWS_URL + "/admin";
 
-    public static final String SHOWTIME_VIEW_URL = VIEWS_URL + "/showtimes";
+    public static final String ADMIN_MOVIE_VIEW_URL = ADMIN_VIEW_URL + "/movies";
 }

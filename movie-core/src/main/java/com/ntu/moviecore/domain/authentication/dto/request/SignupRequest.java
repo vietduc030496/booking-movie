@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class SignupRequest {
 
-    private String fullname;
+    private String fullName;
 
     @NotBlank
     @Email

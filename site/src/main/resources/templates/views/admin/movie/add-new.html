@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm mới movie</title>
+    <th:block th:replace="~{fragments/general-admin :: admin-head-resources}"></th:block>
+</head>
+<body>
+<div class="admin-container">
+    <div th:replace="~{fragments/general-admin :: admin-menu}"></div>
+    <div class="container-fluid p-4">
+        <form th:object="${newMovie}" method="POST" th:action="@{/views/admin/movies/add-new}"
+              class="p-4 rounded shadow-sm w-100">
+
+            <div class="row mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="title" class="form-label">Tên phim *</label>
+                    <input type="text" class="form-control" id="title" placeholder="Nhập tên phim"
+                           th:field="*{title}" required />
+                </div>
+                <div class="col-md-6 col-12">
+                    <label for="posterUrl" class="form-label">URL poster *</label>
+                    <input type="text" class="form-control" id="posterUrl" placeholder="Nhập URL poster"
+                           th:field="*{posterUrl}" required />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="runningTime" class="form-label">Thời lượng (phút) *</label>
+                    <input type="number" class="form-control" id="runningTime" placeholder="Nhập thời lượng"
+                           th:field="*{runningTime}" required />
+                </div>
+                <div class="col-md-6 col-12">
+                    <label for="genre" class="form-label">Thể loại *</label>
+                    <input type="text" class="form-control" id="genre" placeholder="Nhập thể loại"
+                           th:field="*{genre}" required />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="releaseDate" class="form-label">Ngày khởi chiếu *</label>
+                    <input type="date" class="form-control" id="releaseDate"
+                           th:field="*{releaseDate}" required />
+                </div>
+                <div class="col-md-6 col-12">
+                    <label for="trailerUrl" class="form-label">URL trailer *</label>
+                    <input type="text" class="form-control" id="trailerUrl" placeholder="Nhập URL trailer"
+                           th:field="*{trailerUrl}" required />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Mô tả *</label>
+                <textarea class="form-control" id="description" rows="5" placeholder="Nhập mô tả"
+                          th:field="*{description}" required></textarea>
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Lưu phim</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

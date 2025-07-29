@@ -1,8 +1,8 @@
 package com.ntu.site.api.customer.view.customer.movie;
 
 import com.ntu.customerservice.service.movie.MovieService;
-import com.ntu.moviecore.domain.movie.dto.MovieResponse;
-import com.ntu.moviecore.domain.movie.dto.MovieShowtimeResponse;
+import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
+import com.ntu.moviecore.domain.movie.dto.response.MovieShowtimeResponse;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
