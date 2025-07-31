@@ -67,4 +67,9 @@ public class AuthenticationViewController extends BaseViewController {
         userService.addNewUser(signupRequest);
         return redirect(ACCOUNT_VIEW_URL + "/login");
     }
+
+    @GetMapping("/membership")
+    public String getMembershipPage(Model model) {
+        return "account/membership";
+    }
 }

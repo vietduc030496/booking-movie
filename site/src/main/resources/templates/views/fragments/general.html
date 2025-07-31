@@ -24,7 +24,7 @@
                 <div sec:authorize="isAuthenticated()">
                     <ul class="nav navbar-nav pull-right padding-right-10">
                         <li class="dropdown dropdown-user">
-                            <a href="javascript:;" style="padding: 2px;background-color: transparent; color: white"
+                            <a href="javascript:void(0)" style="padding: 2px;background-color: transparent; color: white"
                                class="dropdown-toggle" data-toggle="dropdown"
                                data-hover="dropdown"
                                data-close-others="true">
@@ -34,14 +34,14 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default" style="position: absolute;">
                                 <li>
-                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#thongtintaikhoan')" href="/thong-tin-tai-khoan.htm#thongtintaikhoan">
-                                        <i class="icon-user"></i> Thông tin tài khoản
+                                    <a th:href="@{/views/account/membership}">
+                                        <span th:text="#{text.account_information}"></span>
                                     </a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
                                     <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#thethanhvien')" href="/thong-tin-tai-khoan.htm#thethanhvien">
-                                        <i class="icon-diamond"></i> Thẻ thành viên
+                                        <span th:text="#{text.account_information}"></span> Thẻ thành viên
                                     </a>
                                 </li>
                                 <li class="divider"></li>
@@ -64,7 +64,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a onclick="logout();" href="javascript:void(0)">
+                                    <a th:href="@{/views/account/logout}">
                                         <i class="icon-logout"></i> Đăng xuất
                                     </a>
                                 </li>
@@ -127,7 +127,7 @@
                                             <a class="dropdown-toggle no-padding"
                                                data-toggle="dropdown"
                                                data-target="#"
-                                               href="javascript:;"
+                                               href="javascript:void(0)"
                                                aria-expanded="false">
                                                 <span class="me-1"
                                                       th:text="${not #lists.isEmpty(provinces) and not #lists.isEmpty(provinces[0].theaters) ? provinces[0].theaters[0].theaterName : ''}"> //TODO
