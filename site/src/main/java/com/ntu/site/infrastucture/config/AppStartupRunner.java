@@ -1,5 +1,6 @@
 package com.ntu.site.infrastucture.config;
 
+import com.mservice.shared.utils.LogUtils;
 import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.customerservice.service.setting.BannerService;
 import com.ntu.customerservice.service.theater.TheaterService;
@@ -23,6 +24,8 @@ public class AppStartupRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         try {
+            LogUtils.init();
+
             List<ProvinceResponse> theaters = theaterService.getTheaters();
             if (!theaters.isEmpty()) {
                 CaffeineCacheUtil.put("provinces", theaters);

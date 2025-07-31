@@ -74,3 +74,8 @@ logging:
   level:
     com.zaxxer.hikari: DEBUG
 
+payment:
+  momo:
+    environment: dev
+    return-url: http://localhost:8080/momo/momo-callback #callback user
+    notify-url: http://localhost:8080/momo/momo-callback/backend  #callback backend

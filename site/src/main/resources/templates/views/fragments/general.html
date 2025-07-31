@@ -28,8 +28,7 @@
                                class="dropdown-toggle" data-toggle="dropdown"
                                data-hover="dropdown"
                                data-close-others="true">
-                                <span class="username username-hide-on-mobile" th:text="|Hi ${#authentication.principal.fullName}|"></span>
-
+                                <span class="username username-hide-on-mobile" th:text="|#{text.hi} ${#authentication.principal.fullName}|"></span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default" style="position: absolute;">
@@ -39,47 +38,37 @@
                                     </a>
                                 </li>
                                 <li class="divider"></li>
-                                <li>
-                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#thethanhvien')" href="/thong-tin-tai-khoan.htm#thethanhvien">
-                                        <span th:text="#{text.account_information}"></span> Thẻ thành viên
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#hanhtrinhdienanh')" href="/thong-tin-tai-khoan.htm#hanhtrinhdienanh">
-                                        <i class="icon-paper-plane"></i> Hành trình điện ảnh
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#betapoint')" href="/thong-tin-tai-khoan.htm#betapoint">
-                                        <i class="icon-pointer"></i> Điểm Beta
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#voucher')" href="/thong-tin-tai-khoan.htm#voucher">
-                                        <i class="icon-briefcase"></i> Voucher của tôi
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
+<!--                                <li>-->
+<!--                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#thethanhvien')" href="/thong-tin-tai-khoan.htm#thethanhvien">-->
+<!--                                        <span th:text="#{text.account_information}"></span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="divider"></li>-->
+<!--                                <li>-->
+<!--                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#hanhtrinhdienanh')" href="/thong-tin-tai-khoan.htm#hanhtrinhdienanh">-->
+<!--                                        <i class="icon-paper-plane"></i> Hành trình điện ảnh-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="divider"></li>-->
+<!--                                <li>-->
+<!--                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#betapoint')" href="/thong-tin-tai-khoan.htm#betapoint">-->
+<!--                                        <i class="icon-pointer"></i> Điểm Beta-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="divider"></li>-->
+<!--                                <li>-->
+<!--                                    <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#voucher')" href="/thong-tin-tai-khoan.htm#voucher">-->
+<!--                                        <i class="icon-briefcase"></i> Voucher của tôi-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="divider"></li>-->
                                 <li>
                                     <a th:href="@{/views/account/logout}">
-                                        <i class="icon-logout"></i> Đăng xuất
+                                        <span th:text="#{text.logout}"></span>
                                     </a>
                                 </li>
                             </ul>
-
                         </li>
-                        <!-- END USER LOGIN DROPDOWN -->
-                        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                        <li class="dropdown dropdown-quick-sidebar-toggler">
-                            <a onclick="logout();" style="padding: 3px;background-color: transparent;" class="dropdown-toggle">
-                                <i class="icon-logout"></i>
-                            </a>
-                        </li>
-                        <!-- END QUICK SIDEBAR TOGGLER -->
                     </ul>
                 </div>
                 <div sec:authorize="!isAuthenticated()">
