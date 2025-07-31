@@ -1,5 +1,6 @@
 package com.ntu.customerservice.service.auth.detail;
 
+import com.ntu.moviecore.domain.authentication.entity.Gender;
 import com.ntu.moviecore.domain.authentication.entity.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +16,21 @@ public class CustomUserDetails implements UserDetails {
     private long id;
     private String username;
     private String fullName;
+    private String city;
+    private String district;
+    private String address;
+    private Gender gender;
+    private String avatarUrl;
 
     public CustomUserDetails(User user) {
         this.id = user.getId();
         this.username = user.getEmail();
-        this.fullName = user.getFullName();
+        this.fullName = user.getProfile().getFullName();
+        this.city = user.getProfile().getCity();
+        this.district = user.getProfile().getDistrict();
+        this.address = user.getProfile().getAddress();
+        this.gender = user.getProfile().getGender();
+        this.avatarUrl = user.getProfile().getAvatarUrl();
     }
 
     @Override

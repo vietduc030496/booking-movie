@@ -16,14 +16,15 @@
         <div class="mb-3">
             <form class="row g-3 align-items-center mb-4" method="get" th:action="@{/movies}">
                 <div class="col-3">
-                    <input type="text" class="form-control" placeholder="Tìm phim">
+                    <label for="keyword" class="form-label mb-0">Tìm kiếm</label>
+                    <input type="text" id="keyword" class="form-control" placeholder="Tìm phim">
                 </div>
                 <div class="col-auto">
-                    <label for="fromDate" class="form-label mb-0">From</label>
+                    <label for="fromDate" class="form-label mb-0">Phát hành từ</label>
                     <input type="date" class="form-control" id="fromDate" name="fromDate">
                 </div>
                 <div class="col-auto">
-                    <label for="toDate" class="form-label mb-0">To</label>
+                    <label for="toDate" class="form-label mb-0">Đến</label>
                     <input type="date" class="form-control" id="toDate" name="toDate">
                 </div>
                 <div class="col-auto">
