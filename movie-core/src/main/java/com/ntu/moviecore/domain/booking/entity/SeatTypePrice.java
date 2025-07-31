@@ -15,7 +15,7 @@ public class SeatTypePrice extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "seat_type_id")
     private SeatType seatType;
 

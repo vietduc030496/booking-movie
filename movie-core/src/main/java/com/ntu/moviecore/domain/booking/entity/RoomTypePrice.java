@@ -16,7 +16,7 @@ public class RoomTypePrice extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 
