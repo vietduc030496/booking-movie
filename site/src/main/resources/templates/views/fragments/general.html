@@ -28,15 +28,11 @@
                                class="dropdown-toggle" data-toggle="dropdown"
                                data-hover="dropdown"
                                data-close-others="true">
-<!--                                <span class="username username-hide-on-mobile">Nguyen viet duc</span>-->
-                                 Kiểm tra loại object
-                                <p th:text="${#authentication.principal.getClass().name}">Loại Principal</p>
+                                <span class="username username-hide-on-mobile" th:text="|Hi ${#authentication.principal.fullName}|"></span>
 
-                                 Xem toàn bộ object
-                                <pre th:text="${#authentication.principal}">Object</pre>
                                 <i class="fa fa-angle-down"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-default">
+                            <ul class="dropdown-menu dropdown-menu-default" style="position: absolute;">
                                 <li>
                                     <a onclick="RedirectUrl('/thong-tin-tai-khoan.htm#thongtintaikhoan')" href="/thong-tin-tai-khoan.htm#thongtintaikhoan">
                                         <i class="icon-user"></i> Thông tin tài khoản

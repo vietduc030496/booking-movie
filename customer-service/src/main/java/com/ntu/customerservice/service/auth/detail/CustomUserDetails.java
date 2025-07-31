@@ -21,6 +21,7 @@ public class CustomUserDetails implements UserDetails {
     private String address;
     private Gender gender;
     private String avatarUrl;
+    private String password;
 
     public CustomUserDetails(User user) {
         this.id = user.getId();
@@ -31,6 +32,7 @@ public class CustomUserDetails implements UserDetails {
         this.address = user.getProfile().getAddress();
         this.gender = user.getProfile().getGender();
         this.avatarUrl = user.getProfile().getAvatarUrl();
+        this.password = user.getPassword();
     }
 
     @Override
@@ -40,7 +42,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return this.password;
     }
 
     @Override
