@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Detail</title>
+    <th:block th:replace="~{fragments/general-admin :: admin-head-resources}"></th:block>
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+<body>
+<div class="admin-container">
+    <div th:replace="~{fragments/general-admin :: admin-menu}"></div>
+
+    <main class="main-content">
+        <form th:object="${movie}" method="POST" th:action="@{/views/admin/movies/{id}(id=${movie.id})}"
+              class="p-4 rounded shadow-sm w-100">
+
+            <div class="row mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="title" class="form-label">Tên phim *</label>
+                    <input type="text" class="form-control" id="title" placeholder="Nhập tên phim"
+                           th:field="*{title}" required />
+                </div>
+                <div class="col-md-6 col-12">
+                    <label for="posterUrl" class="form-label">URL poster *</label>
+                    <input type="text" class="form-control" id="posterUrl" placeholder="Nhập URL poster"
+                           th:field="*{posterUrl}" required />
+                    <div class="mt-2">
+                        <img id="posterPreview" src="" alt="Poster Preview" class="img-fluid rounded" style="max-height: 100px; display: none;" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="runningTime" class="form-label">Thời lượng (phút) *</label>
+                    <input type="number" class="form-control" id="runningTime" placeholder="Nhập thời lượng"
+                           th:field="*{runningTime}" required />
+                </div>
+                <div class="col-md-6 col-12">
+                    <label for="genre" class="form-label">Thể loại *</label>
+                    <select id="genre" class="form-select select2" multiple="multiple" th:field="*{genre}">
+                        <option th:each="g : ${genres}" th:value="${g}" th:text="${g}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="releaseDate" class="form-label">Ngày phát hành *</label>
+                    <input type="date" class="form-control" id="releaseDate"
+                           th:field="*{releaseDate}" required />
+                </div>
+                <div class="col-md-6 col-12">
+                    <label for="trailerUrl" class="form-label">URL trailer *</label>
+                    <input type="text" class="form-control" id="trailerUrl" placeholder="Nhập URL trailer"
+                           th:field="*{trailerUrl}" required />
+
+                    <div class="mt-2 ratio ratio-16x9" id="trailerContainer" style="display: none;">
+                        <iframe id="trailerPreview" src="" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="ageRating" class="form-label">Độ tuổi phù hợp</label>
+                    <select class="form-select" id="ageRating" th:field="*{ageRating}" required>
+                        <option th:each="rating : ${ageRatingList}"
+                                th:value="${rating}"
+                                th:text="${rating.label}">Chọn độ tuổi</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Mô tả *</label>
+                <textarea class="form-control" id="description" rows="5" placeholder="Nhập mô tả"
+                          th:field="*{description}" required></textarea>
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Lưu phim</button>
+            </div>
+        </form>
+    </main>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Chọn thể loại",
+            allowClear: true,
+            width: '100%'
+        });
+    });
+
+    function updatePosterPreview() {
+        const url = document.getElementById('posterUrl').value;
+        const img = document.getElementById('posterPreview');
+        if (url.trim()) {
+            img.src = url;
+            img.style.display = 'block';
+        } else {
+            img.style.display = 'none';
+        }
+    }
+
+    function updateTrailerPreview() {
+        const input = document.getElementById('trailerUrl');
+        const iframe = document.getElementById('trailerPreview');
+        const container = document.getElementById('trailerContainer');
+        const url = input.value.trim();
+        iframe.src = url;
+        container.style.display = 'block';
+
+        // if (url.includes('youtube.com/watch?v=')) {
+        //     const videoId = url.split('v=')[1]?.split('&')[0];
+        //     iframe.src = url;
+        //     container.style.display = 'block';
+        // } else {
+        //     iframe.src = '';
+        //     container.style.display = 'none';
+        // }
+    }
+
+    window.addEventListener('DOMContentLoaded', updatePosterPreview);
+    window.addEventListener('DOMContentLoaded', updateTrailerPreview);
+</script>
+</body>
+</html>

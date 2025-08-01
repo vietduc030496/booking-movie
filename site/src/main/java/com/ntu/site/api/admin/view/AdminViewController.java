@@ -1,12 +1,17 @@
 package com.ntu.site.api.admin.view;
 
 import com.ntu.adminservice.service.movie.MovieAdminService;
+import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
+import java.util.List;
 
 import static com.ntu.common.constant.UrlConstant.ADMIN_VIEW_URL;
 
@@ -23,8 +28,11 @@ public class AdminViewController extends BaseViewController {
     }
 
     @GetMapping("/movies")
-    public String getMoviePage(Model model) {
-
+    public String getMoviePage(@RequestParam(value = "start", required = false) LocalDate start,
+                               @RequestParam(value = "end", required = false)LocalDate end,
+                               Model model) {
+        List<MovieResponse> movieByRange = movieAdminService.getMovieByRange(start, end);
+        model.addAttribute("movies", movieByRange);
         return "admin/movie/movies";
     }
 

@@ -16,15 +16,15 @@
         <div class="mb-3">
             <form class="row g-3 align-items-center mb-4" method="get" th:action="@{/movies}">
                 <div class="col-3">
-                    <label for="keyword" class="form-label mb-0">Tìm kiếm</label>
+                    <span><label for="keyword" class="form-label mb-0">Tìm kiếm</label></span>
                     <input type="text" id="keyword" class="form-control" placeholder="Tìm phim">
                 </div>
                 <div class="col-auto">
-                    <label for="fromDate" class="form-label mb-0">Phát hành từ</label>
+                    <span><label for="fromDate" class="form-label mb-0">Phát hành từ</label></span>
                     <input type="date" class="form-control" id="fromDate" name="fromDate">
                 </div>
                 <div class="col-auto">
-                    <label for="toDate" class="form-label mb-0">Đến</label>
+                    <span><label for="toDate" class="form-label mb-0">Đến</label></span>
                     <input type="date" class="form-control" id="toDate" name="toDate">
                 </div>
                 <div class="col-auto">
@@ -44,31 +44,26 @@
             <table class="table table-dark table-hover mb-0">
                 <thead class="thead-light">
                 <tr>
-                    <th>Tên phim</th>
-                    <th>Thể loại</th>
-                    <th>Mô tả</th>
-                    <th>Thời lượng</th>
-                    <th>Độ tuổi</th>
-                    <th>Ngày phát hành</th>
+                    <th style="width: 20%;">Tên phim</th>
+                    <th style="width: 15%;">Thể loại</th>
+                    <th style="width: 25%;">Mô tả</th>
+                    <th style="width: 10%;">Thời lượng</th>
+                    <th style="width: 10%;">Độ tuổi</th>
+                    <th style="width: 20%;">Ngày phát hành</th>
                 </tr>
                 </thead>
                 <tbody>
-<!--                <tr th:each="reservation : ${reservations}">-->
-<!--                    <td th:text="${reservation.userId}">19bce0034</td>-->
-<!--                    <td th:text="${reservation.phone}">6300302749</td>-->
-<!--                    <td th:text="${reservation.startAt}">19:00</td>-->
-<!--                    <td th:text="${reservation.movieTitle}">spider man-no way home</td>-->
-<!--                    <td th:text="${reservation.cinema}">Marvel Imax</td>-->
-<!--                    <td th:text="${reservation.ticketPrice}">20</td>-->
-<!--                    <td th:text="${reservation.total}">60</td>-->
-<!--                    <td th:text="${reservation.checkin ? 'yes' : 'no'}">no</td>-->
-<!--                </tr>-->
-                <td>19bce0034</td>
-                <td>6300302749</td>
-                <td>19:00</td>
-                <td>spider man-no way home</td>
-                <td>Marvel Imax</td>
-                <td>20</td>
+                <tr th:each="movie : ${movies}"
+                    th:onclick="'window.location.href=\'' + @{/views/admin/movies/{id}(id=${movie.id})} + '\';'"
+                    style="cursor: pointer;">
+                    <input type="hidden" th:value="${movie.id}" />
+                    <td th:text="${movie.title}"></td>
+                    <td th:text="${movie.genre}"></td>
+                    <td th:text="${movie.description}"></td>
+                    <td th:text="${movie.runningTime}"></td>
+                    <td th:text="${movie.ageRating}"></td>
+                    <td th:text="${movie.releaseDate}"></td>
+                </tr>
                 </tbody>
             </table>
         </div>

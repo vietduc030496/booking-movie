@@ -3,6 +3,7 @@ package com.ntu.site.api.admin.view.movie;
 import com.ntu.adminservice.service.movie.MovieAdminService;
 import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.moviecore.domain.movie.dto.request.MovieNewRequest;
+import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
 import com.ntu.moviecore.domain.movie.entity.AgeRating;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,22 @@ import static com.ntu.common.constant.UrlConstant.ADMIN_MOVIE_VIEW_URL;
 public class MovieAdminViewController extends BaseViewController {
 
     private final MovieAdminService movieAdminService;
+
+    @GetMapping("{movieId}")
+    public String getMovieDetailPage(@PathVariable("movieId") Long movieId,
+                                     Model model) {
+        MovieResponse movie = movieAdminService.getMovieById(movieId);
+        model.addAttribute("movie", movie);
+        return "admin/movie/movie-detail";
+    }
+
+    @PostMapping("{movieId}")
+    public String updateMovie(@PathVariable("movieId") Long movieId,
+                                     Model model) {
+        MovieResponse movie = movieAdminService.getMovieById(movieId);
+        model.addAttribute("movie", movie);
+        return "admin/movie/movie-detail";
+    }
 
     @GetMapping("/add-new")
     public String getAddNewMoviePage(Model model) {
