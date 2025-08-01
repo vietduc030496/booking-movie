@@ -3,6 +3,7 @@ package com.ntu.site.api.admin.view.movie;
 import com.ntu.adminservice.service.movie.MovieAdminService;
 import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.moviecore.domain.movie.dto.request.MovieNewRequest;
+import com.ntu.moviecore.domain.movie.dto.request.MovieUpdateRequest;
 import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
 import com.ntu.moviecore.domain.movie.entity.AgeRating;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
@@ -22,20 +23,23 @@ public class MovieAdminViewController extends BaseViewController {
 
     private final MovieAdminService movieAdminService;
 
-    @GetMapping("{movieId}")
+    @GetMapping("/{movieId}")
     public String getMovieDetailPage(@PathVariable("movieId") Long movieId,
                                      Model model) {
         MovieResponse movie = movieAdminService.getMovieById(movieId);
         model.addAttribute("movie", movie);
+        model.addAttribute("ageRatingList", AgeRating.values());
+        model.addAttribute("genres", CaffeineCacheUtil.get("genres"));
+
         return "admin/movie/movie-detail";
     }
 
-    @PostMapping("{movieId}")
+    @PostMapping("/{movieId}")
     public String updateMovie(@PathVariable("movieId") Long movieId,
-                                     Model model) {
-        MovieResponse movie = movieAdminService.getMovieById(movieId);
-        model.addAttribute("movie", movie);
-        return "admin/movie/movie-detail";
+                              @ModelAttribute("movie") MovieUpdateRequest movieUpdateRequest,
+                              Model model) {
+        movieAdminService.updateMovie(movieId, movieUpdateRequest);
+        return redirect(ADMIN_MOVIE_VIEW_URL + "/" + movieId);
     }
 
     @GetMapping("/add-new")

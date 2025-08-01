@@ -4,6 +4,7 @@ import com.ntu.common.util.DateUtil;
 import com.ntu.moviecore.domain.elasticsearch.entity.MovieElasticSearch;
 import com.ntu.moviecore.domain.elasticsearch.repository.MovieElasticSearchRepository;
 import com.ntu.moviecore.domain.movie.dto.request.MovieNewRequest;
+import com.ntu.moviecore.domain.movie.dto.request.MovieUpdateRequest;
 import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
 import com.ntu.moviecore.domain.movie.entity.Movie;
 import com.ntu.moviecore.domain.movie.repository.MovieRepository;
@@ -18,6 +19,7 @@ import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -54,11 +56,25 @@ public class MovieAdminService {
     }
 
     @Transactional
+    public void updateMovie(Long movieId, MovieUpdateRequest movieNewRequest) {
+        Optional<Movie> optional = movieRepository.findById(movieId);
+        if (optional.isEmpty()) {
+            throw new RuntimeException("Movie not found");
+        }
+        Movie movie = optional.get();
+        modelMapper.map(movieNewRequest, movie);
+        movie.setGenre(String.join(",", movieNewRequest.getGenre()));
+        movieRepository.save(movie);
+
+        MovieElasticSearch movieSearch = modelMapper.map(movie, MovieElasticSearch.class);
+        movieSearchRepository.save(movieSearch);
+    }
+
+    @Transactional
     public void addNewMovie(MovieNewRequest movieNewRequest) {
         Movie newMovie = modelMapper.map(movieNewRequest, Movie.class);
         movieRepository.save(newMovie);
     }
-
 
     public void syncAllMoviesToElasticsearch() {
         List<Movie> movies = movieRepository.findAll();

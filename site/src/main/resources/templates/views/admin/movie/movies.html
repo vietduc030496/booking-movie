@@ -2,18 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Movie Booking</title>
+    <title>Danh sách phim</title>
     <th:block th:replace="~{fragments/general-admin :: admin-head-resources}"></th:block>
 </head>
 <body>
 <div class="admin-container">
     <div th:replace="~{fragments/general-admin :: admin-menu}"></div>
 
-    <div class="container-fluid py-4">
-        <h4 class="mb-4">MOVIE STORE -&gt;</h4>
-
+    <main class="main-content">
+        <header>
+            <h1>Danh sách phim</h1>
+        </header>
         <!-- Search bar -->
-        <div class="mb-3">
+        <div class="my-5">
             <form class="row g-3 align-items-center mb-4" method="get" th:action="@{/movies}">
                 <div class="col-3">
                     <span><label for="keyword" class="form-label mb-0">Tìm kiếm</label></span>
@@ -79,12 +80,12 @@
                 </select>
             </div>
             <div>
-<!--                <span th:text="'1-' + ${reservations.size()} + ' of ' + ${totalReservations}">1-10 of 12</span>-->
+                <!--                <span th:text="'1-' + ${reservations.size()} + ' of ' + ${totalReservations}">1-10 of 12</span>-->
                 <button class="btn btn-sm btn-outline-light ms-2">&lt;</button>
                 <button class="btn btn-sm btn-outline-light ms-1">&gt;</button>
             </div>
         </div>
-    </div>
+    </main>
 
 </div>
 </body>

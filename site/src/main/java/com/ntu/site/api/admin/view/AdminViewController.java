@@ -38,6 +38,6 @@ public class AdminViewController extends BaseViewController {
 
     @GetMapping("/showtimes")
     public String getShowTimesPage(Model model) {
-        return "admin/showwtime/showtimes";
+        return "admin/showtime/showtimes";
     }
 }
