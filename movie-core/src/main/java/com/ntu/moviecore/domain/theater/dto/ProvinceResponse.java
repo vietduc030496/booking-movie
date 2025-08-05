@@ -1,5 +1,6 @@
 package com.ntu.moviecore.domain.theater.dto;
 
+import com.ntu.moviecore.domain.material.dto.WardResponse;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +10,11 @@ import java.util.List;
 @Setter
 public class ProvinceResponse {
 
-    private String provinceCode;
+    private long provinceId;
 
     private String provinceName;
 
-    List<TheaterResponse> theaters;
+    private String provinceCode;
+
+    private List<WardResponse> wards;
 }

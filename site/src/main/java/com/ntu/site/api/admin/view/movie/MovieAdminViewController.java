@@ -1,7 +1,6 @@
 package com.ntu.site.api.admin.view.movie;
 
 import com.ntu.adminservice.service.movie.MovieAdminService;
-import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.moviecore.domain.movie.dto.request.MovieNewRequest;
 import com.ntu.moviecore.domain.movie.dto.request.MovieUpdateRequest;
 import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
@@ -29,7 +28,7 @@ public class MovieAdminViewController extends BaseViewController {
         MovieResponse movie = movieAdminService.getMovieById(movieId);
         model.addAttribute("movie", movie);
         model.addAttribute("ageRatingList", AgeRating.values());
-        model.addAttribute("genres", CaffeineCacheUtil.get("genres"));
+        model.addAttribute("genres", movieAdminService.getAllGenres());
         model.addAttribute("actionUrl", ADMIN_MOVIE_VIEW_URL + "/" +movieId);
         return fragment("general-admin", "movieModalFragment");
     }
@@ -46,7 +45,7 @@ public class MovieAdminViewController extends BaseViewController {
     public String getAddNewMoviePage(Model model) {
         model.addAttribute("movie", new MovieNewRequest());
         model.addAttribute("ageRatingList", AgeRating.values());
-        model.addAttribute("genres", CaffeineCacheUtil.get("genres"));
+        model.addAttribute("genres", movieAdminService.getAllGenres());
         model.addAttribute("actionUrl", ADMIN_MOVIE_VIEW_URL + "/add-new");
         return fragment("general-admin", "movieModalFragment");
     }

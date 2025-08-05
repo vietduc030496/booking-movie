@@ -1,7 +1,7 @@
 package com.ntu.customerservice.service.theater;
 
 import com.ntu.common.util.CaffeineCacheUtil;
-import com.ntu.moviecore.domain.theater.dto.ProvinceResponse;
+import com.ntu.moviecore.domain.theater.dto.ProvinceTheaterResponse;
 import com.ntu.moviecore.domain.theater.dto.TheaterDb;
 import com.ntu.moviecore.domain.theater.dto.TheaterResponse;
 import com.ntu.moviecore.domain.theater.repository.TheaterRepository;
@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.ntu.common.constant.CacheAttributeKeyConstant.PROVINCE_THEATER;
+
 @Service
 @AllArgsConstructor
 public class TheaterService {
@@ -22,18 +24,18 @@ public class TheaterService {
 
     private final ModelMapper modelMapper;
 
-    public List<ProvinceResponse> getTheaters() {
-        if (CaffeineCacheUtil.containsKey("provinces")) {
-            return (List<ProvinceResponse>) CaffeineCacheUtil.get("provinces");
+    public List<ProvinceTheaterResponse> getTheaters() {
+        if (CaffeineCacheUtil.containsKey(PROVINCE_THEATER)) {
+            return (List<ProvinceTheaterResponse>) CaffeineCacheUtil.get(PROVINCE_THEATER);
         }
 
         List<TheaterDb> theaters = theaterRepository.getTheaters();
 
-        Map<String, ProvinceResponse> provinceMap = new HashMap<>();
+        Map<String, ProvinceTheaterResponse> provinceMap = new HashMap<>();
         for (TheaterDb theaterDb : theaters) {
-            ProvinceResponse province = provinceMap.get(theaterDb.getProvinceCode());
+            ProvinceTheaterResponse province = provinceMap.get(theaterDb.getProvinceCode());
             if (province == null) {
-                province = new ProvinceResponse();
+                province = new ProvinceTheaterResponse();
                 province.setProvinceCode(theaterDb.getProvinceCode());
                 province.setProvinceName(theaterDb.getProvinceName());
 

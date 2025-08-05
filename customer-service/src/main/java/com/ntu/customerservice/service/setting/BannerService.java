@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.ntu.common.constant.CacheAttributeKeyConstant.BANNERS;
+
 @Service
 @AllArgsConstructor
 public class BannerService {
@@ -19,8 +21,8 @@ public class BannerService {
     private final ModelMapper modelMapper;
 
     public List<BannerResponse> getBanners(int page, int size) {
-        if (CaffeineCacheUtil.containsKey("banners")) {
-            return (List<BannerResponse>) CaffeineCacheUtil.get("banners");
+        if (CaffeineCacheUtil.containsKey(BANNERS)) {
+            return (List<BannerResponse>) CaffeineCacheUtil.get(BANNERS);
         }
 
         PageRequest pageRequest = PageRequest.of(page - 1, size);

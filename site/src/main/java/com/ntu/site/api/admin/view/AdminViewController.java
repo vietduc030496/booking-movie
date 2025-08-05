@@ -1,5 +1,7 @@
 package com.ntu.site.api.admin.view;
 
+import com.ntu.adminservice.service.material.ProvinceAdminService;
+import com.ntu.adminservice.service.material.WardAdminService;
 import com.ntu.adminservice.service.movie.MovieAdminService;
 import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
@@ -22,6 +24,10 @@ public class AdminViewController extends BaseViewController {
 
     private final MovieAdminService movieAdminService;
 
+    private final WardAdminService wardAdminService;
+
+    private final ProvinceAdminService provinceAdminService;
+
     @GetMapping
     public String getAdminPage() {
         return "admin/index";
@@ -39,5 +45,13 @@ public class AdminViewController extends BaseViewController {
     @GetMapping("/showtimes")
     public String getShowTimesPage(Model model) {
         return "admin/showtime/showtimes";
+    }
+
+    @GetMapping("/theaters")
+    public String getTheatersPage(Model model) {
+        model.addAttribute("wards", wardAdminService.getAllWard());
+        model.addAttribute("provinces", provinceAdminService.getAllProvince());
+
+        return "admin/theater/theaters";
     }
 }

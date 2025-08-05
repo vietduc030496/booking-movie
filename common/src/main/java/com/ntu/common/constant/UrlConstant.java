@@ -6,7 +6,13 @@ public class UrlConstant {
 
     public static final String API_VERSION = "/api/v1";
 
+    public static final String ADMIN_URL = API_VERSION + "/admin";
+
     public static final String CAPTCHA_URL = API_VERSION + "/captcha";
+
+    public static final String PROVINCE_ADMIN_URL = ADMIN_URL + "/provinces";
+
+    /// //////////////////////////////////////////////////////////////////////////////
 
     public static final String VIEWS_URL = "/views";
 

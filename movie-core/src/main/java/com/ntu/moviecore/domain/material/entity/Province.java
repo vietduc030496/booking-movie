@@ -1,11 +1,10 @@
 package com.ntu.moviecore.domain.material.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "mt_province")
@@ -24,4 +23,7 @@ public class Province {
 
     @Column(name = "place_type")
     private String placeType;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "province")
+    private List<Ward> wards;
 }

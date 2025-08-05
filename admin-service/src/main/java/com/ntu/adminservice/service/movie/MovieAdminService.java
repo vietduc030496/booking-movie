@@ -1,5 +1,6 @@
 package com.ntu.adminservice.service.movie;
 
+import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.common.util.DateUtil;
 import com.ntu.moviecore.domain.elasticsearch.entity.MovieElasticSearch;
 import com.ntu.moviecore.domain.elasticsearch.repository.MovieElasticSearchRepository;
@@ -20,6 +21,8 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.ntu.common.constant.CacheAttributeKeyConstant.GENRES;
 
 @Service
 @AllArgsConstructor
@@ -83,5 +86,15 @@ public class MovieAdminService {
                 .toList();
 
         movieSearchRepository.saveAll(docs);
+    }
+
+    public List<String> getAllGenres() {
+        if (CaffeineCacheUtil.containsKey(GENRES)) {
+            return (List<String>) CaffeineCacheUtil.get(GENRES);
+        }
+        List<String> genres = List.of("Hài hước", "Kinh dị", "Hành động");
+        CaffeineCacheUtil.put(GENRES, genres);
+
+        return genres;
     }
 }

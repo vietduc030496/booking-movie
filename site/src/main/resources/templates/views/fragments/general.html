@@ -6,7 +6,7 @@
     <title></title>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        const provinces = [[${provinces}]];
+        const provinceTheaters = [[${provinceTheaters}]];
         /*]]>*/
     </script>
     <meta charset="UTF-8">
@@ -119,13 +119,13 @@
                                                href="javascript:void(0)"
                                                aria-expanded="false">
                                                 <span class="me-1"
-                                                      th:text="${not #lists.isEmpty(provinces) and not #lists.isEmpty(provinces[0].theaters) ? provinces[0].theaters[0].theaterName : ''}"> //TODO
+                                                      th:text="${not #lists.isEmpty(provinceTheaters) and not #lists.isEmpty(provinceTheaters[0].theaters) ? provinceTheaters[0].theaters[0].theaterName : ''}"> //TODO
                                                 </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
                                             <ul class="dropdown-menu">
 
-                                                <li th:each="province, iterStat : ${provinces}" class="dropdown-submenu">
+                                                <li th:each="province, iterStat : ${provinceTheaters}" class="dropdown-submenu">
                                                     <a><span th:text="${province.provinceName}"></span>
                                                         <i class="fa fa-angle-right"></i>
                                                     </a>
@@ -186,7 +186,7 @@
                     <label for="provinceSelect" class="form-label">Chọn Tỉnh/Thành phố</label>
                     <select id="provinceSelect" class="form-select">
                         <option value="" disabled selected>-- Chọn tỉnh --</option>
-                        <option th:each="province : ${provinces}"
+                        <option th:each="province : ${provinceTheaters}"
                                 th:value="${province.provinceCode}"
                                 th:text="${province.provinceName}"></option>
                     </select>
