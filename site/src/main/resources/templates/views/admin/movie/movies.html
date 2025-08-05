@@ -15,28 +15,30 @@
         </header>
         <!-- Search bar -->
         <div class="my-5">
-            <form class="row g-3 align-items-center mb-4" method="get" th:action="@{/movies}">
-                <div class="col-3">
-                    <span><label for="keyword" class="form-label mb-0">Tìm kiếm</label></span>
-                    <input type="text" id="keyword" class="form-control" placeholder="Tìm phim">
-                </div>
-                <div class="col-auto">
-                    <span><label for="fromDate" class="form-label mb-0">Phát hành từ</label></span>
-                    <input type="date" class="form-control" id="fromDate" name="fromDate">
-                </div>
-                <div class="col-auto">
-                    <span><label for="toDate" class="form-label mb-0">Đến</label></span>
-                    <input type="date" class="form-control" id="toDate" name="toDate">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            <form class="row g-3 align-items-end" method="get" th:action="@{/movies}">
+
+                <div class="col-md-4 col-sm-12">
+                    <label for="keyword" class="form-label">Tìm kiếm phim</label>
+                    <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Nhập từ khóa tìm kiếm...">
                 </div>
 
-                <div class="col-auto">
-                    <button type="button" id="btn-open-add-movie" class="btn btn-success text-white">
+                <div class="col-md-3 col-sm-6">
+                    <label for="fromDate" class="form-label">Phát hành từ</label>
+                    <input type="date" id="fromDate" name="fromDate" class="form-control">
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <label for="toDate" class="form-label">Đến</label>
+                    <input type="date" id="toDate" name="toDate" class="form-control">
+                </div>
+
+                <div class="col-md-2 col-sm-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary flex-grow-1">Tìm kiếm</button>
+                    <button type="button" id="btn-open-add-movie" class="btn btn-success flex-grow-1">
                         Thêm phim mới
                     </button>
                 </div>
+
             </form>
         </div>
 
@@ -55,7 +57,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="movie : ${movies}"
-                    th:onclick="'window.location.href=\'' + @{/views/admin/movies/{id}(id=${movie.id})} + '\';'"
+                    th:data-movie-id="${movie.id}"
                     style="cursor: pointer;">
                     <input type="hidden" th:value="${movie.id}" />
                     <td th:text="${movie.title}"></td>
@@ -88,55 +90,49 @@
     </main>
 
 </div>
-<div id="modal-add-new"></div>
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Select2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<div id="modal-movie"></div>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const openButton = document.getElementById("btn-open-add-movie");
-
-        if (openButton) {
-            openButton.addEventListener("click", function () {
-                fetch("/views/admin/movies/add-new")
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Network response was not ok");
-                        }
-                        return response.text();
-                    })
-                    .then(html => {
-                        const modalContainer = document.getElementById("modal-add-new");
-                        modalContainer.innerHTML = html;
-
-                        const modalElement = document.getElementById("addMovieModal");
-                        const modal = new bootstrap.Modal(modalElement);
-
-                        // Lắng nghe sự kiện modal đã hiện mới khởi tạo select2
-                        modalElement.addEventListener('shown.bs.modal', function () {
-                            if (window.jQuery && window.jQuery.fn.select2) {
-                                const genreSelect = modalElement.querySelector('.select2');
-                                if (genreSelect) {
-                                    $(genreSelect).select2({
-                                        placeholder: "Chọn thể loại",
-                                        allowClear: true,
-                                        width: '100%'
-                                    });
-                                }
-                            }
-                        }, { once: true }); // once:true để chỉ gọi 1 lần thôi
-
-                        modal.show();
-                    })
-                    .catch(error => {
-                        console.error("Error loading modal:", error);
-                    });
-            });
-        }
+    document.getElementById("btn-open-add-movie")?.addEventListener("click", function() {
+        openMovieModal("/views/admin/movies/add-new");
     });
 
+    document.querySelectorAll('tr[data-movie-id]').forEach(function(tr) {
+        tr.addEventListener('click', function() {
+            const id = this.getAttribute('data-movie-id');
+            openMovieModal('/views/admin/movies/' + id);
+        });
+    });
+
+    function openMovieModal(url) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.text();
+            })
+            .then(html => {
+                const modalContainer = document.getElementById("modal-movie");
+                modalContainer.innerHTML = html;
+
+                const modalElement = document.getElementById('addMovieModal');
+                const bsModal = new bootstrap.Modal(modalElement);
+                bsModal.show();
+
+                // Khởi tạo Choices cho select thể loại nếu có
+                const genreSelect = document.getElementById('genre');
+                if (genreSelect) {
+                    new Choices(genreSelect, {
+                        removeItemButton: true,
+                        placeholderValue: 'Chọn thể loại',
+                        searchEnabled: true
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error loading modal:", error);
+            });
+    }
 </script>
 </body>
 </html>

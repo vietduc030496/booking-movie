@@ -30,8 +30,8 @@ public class MovieAdminViewController extends BaseViewController {
         model.addAttribute("movie", movie);
         model.addAttribute("ageRatingList", AgeRating.values());
         model.addAttribute("genres", CaffeineCacheUtil.get("genres"));
-
-        return "admin/movie/movie-detail";
+        model.addAttribute("actionUrl", ADMIN_MOVIE_VIEW_URL + movieId);
+        return fragment("general-admin", "movieModalFragment");
     }
 
     @PostMapping("/{movieId}")
@@ -44,10 +44,11 @@ public class MovieAdminViewController extends BaseViewController {
 
     @GetMapping("/add-new")
     public String getAddNewMoviePage(Model model) {
-        model.addAttribute("newMovie", new MovieNewRequest());
+        model.addAttribute("movie", new MovieNewRequest());
         model.addAttribute("ageRatingList", AgeRating.values());
         model.addAttribute("genres", CaffeineCacheUtil.get("genres"));
-        return "fragments/general-admin :: addMovieModalFragment";
+        model.addAttribute("actionUrl", ADMIN_MOVIE_VIEW_URL + "/add-new");
+        return fragment("general-admin", "movieModalFragment");
     }
 
     @PostMapping("/add-new")
