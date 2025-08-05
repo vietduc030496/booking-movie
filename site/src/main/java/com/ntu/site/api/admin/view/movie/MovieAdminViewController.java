@@ -30,7 +30,7 @@ public class MovieAdminViewController extends BaseViewController {
         model.addAttribute("movie", movie);
         model.addAttribute("ageRatingList", AgeRating.values());
         model.addAttribute("genres", CaffeineCacheUtil.get("genres"));
-        model.addAttribute("actionUrl", ADMIN_MOVIE_VIEW_URL + movieId);
+        model.addAttribute("actionUrl", ADMIN_MOVIE_VIEW_URL + "/" +movieId);
         return fragment("general-admin", "movieModalFragment");
     }
 
@@ -39,7 +39,7 @@ public class MovieAdminViewController extends BaseViewController {
                               @ModelAttribute("movie") MovieUpdateRequest movieUpdateRequest,
                               Model model) {
         movieAdminService.updateMovie(movieId, movieUpdateRequest);
-        return redirect(ADMIN_MOVIE_VIEW_URL + "/" + movieId);
+        return redirect(ADMIN_MOVIE_VIEW_URL);
     }
 
     @GetMapping("/add-new")

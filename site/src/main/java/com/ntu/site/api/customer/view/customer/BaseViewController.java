@@ -1,8 +1,6 @@
 package com.ntu.site.api.customer.view.customer;
 
 public abstract class BaseViewController {
-    private BaseViewController() {
-    }
 
     private static final String FRAGMENT_COMPONENT = "fragments/%s :: %s";
 

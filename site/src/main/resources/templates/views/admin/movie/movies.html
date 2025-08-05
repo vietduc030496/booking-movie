@@ -119,14 +119,28 @@
                 const bsModal = new bootstrap.Modal(modalElement);
                 bsModal.show();
 
-                // Khởi tạo Choices cho select thể loại nếu có
-                const genreSelect = document.getElementById('genre');
+                const genreSelect = document.getElementById("genre");
                 if (genreSelect) {
-                    new Choices(genreSelect, {
+                    const selectedGenresString = genreSelect.getAttribute("data-selected");
+                    const selectedGenres = selectedGenresString
+                        ? selectedGenresString.split(',').map(item => item.trim())
+                        : [];
+
+                    // Initialize Choices
+                    const choices = new Choices(genreSelect, {
                         removeItemButton: true,
                         placeholderValue: 'Chọn thể loại',
                         searchEnabled: true
                     });
+
+                    // Set selected values (only if values are valid options)
+                    selectedGenres.forEach(value => {
+                        const option = Array.from(genreSelect.options).find(opt => opt.value === value);
+                        if (option) option.selected = true;
+                    });
+
+                    // Notify Choices to update
+                    choices.setChoiceByValue(selectedGenres);
                 }
             })
             .catch(error => {

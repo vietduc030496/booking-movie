@@ -63,7 +63,8 @@
                   </div>
                   <div class="col-md-6 col-12">
                     <label for="genre" class="form-label">Thể loại *</label>
-                    <select id="genre" class="form-select select2" multiple="multiple" th:field="*{genre}">
+                    <select id="genre" class="form-select select2" multiple="multiple" th:data-selected="*{genre}"
+                            th:field="*{genre}">
                       <option th:each="g : ${genres}"
                               th:value="${g}"
                               th:text="${g}"></option>
