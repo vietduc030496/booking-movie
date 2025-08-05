@@ -47,7 +47,7 @@ public class MovieAdminViewController extends BaseViewController {
         model.addAttribute("newMovie", new MovieNewRequest());
         model.addAttribute("ageRatingList", AgeRating.values());
         model.addAttribute("genres", CaffeineCacheUtil.get("genres"));
-        return "admin/movie/add-new";
+        return "fragments/general-admin :: addMovieModalFragment";
     }
 
     @PostMapping("/add-new")

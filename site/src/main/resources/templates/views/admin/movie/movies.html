@@ -33,8 +33,8 @@
                 </div>
 
                 <div class="col-auto">
-                    <button class="btn text-white">
-                        <a th:href="@{/views/admin/movies/add-new}">Thêm phim mới</a>
+                    <button type="button" id="btn-open-add-movie" class="btn btn-success text-white">
+                        Thêm phim mới
                     </button>
                 </div>
             </form>
@@ -88,5 +88,55 @@
     </main>
 
 </div>
+<div id="modal-add-new"></div>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const openButton = document.getElementById("btn-open-add-movie");
+
+        if (openButton) {
+            openButton.addEventListener("click", function () {
+                fetch("/views/admin/movies/add-new")
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        const modalContainer = document.getElementById("modal-add-new");
+                        modalContainer.innerHTML = html;
+
+                        const modalElement = document.getElementById("addMovieModal");
+                        const modal = new bootstrap.Modal(modalElement);
+
+                        // Lắng nghe sự kiện modal đã hiện mới khởi tạo select2
+                        modalElement.addEventListener('shown.bs.modal', function () {
+                            if (window.jQuery && window.jQuery.fn.select2) {
+                                const genreSelect = modalElement.querySelector('.select2');
+                                if (genreSelect) {
+                                    $(genreSelect).select2({
+                                        placeholder: "Chọn thể loại",
+                                        allowClear: true,
+                                        width: '100%'
+                                    });
+                                }
+                            }
+                        }, { once: true }); // once:true để chỉ gọi 1 lần thôi
+
+                        modal.show();
+                    })
+                    .catch(error => {
+                        console.error("Error loading modal:", error);
+                    });
+            });
+        }
+    });
+
+</script>
 </body>
 </html>
