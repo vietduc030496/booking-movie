@@ -49,8 +49,8 @@ public class AdminViewController extends BaseViewController {
 
     @GetMapping("/theaters")
     public String getTheatersPage(Model model) {
-        model.addAttribute("wards", wardAdminService.getAllWard());
         model.addAttribute("provinces", provinceAdminService.getAllProvince());
+        model.addAttribute("wards", wardAdminService.getAllWard());
 
         return "admin/theater/theaters";
     }

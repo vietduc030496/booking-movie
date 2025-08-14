@@ -51,12 +51,12 @@ public class MovieAdminViewController extends BaseViewController {
     }
 
     @PostMapping("/add-new")
-    public String addNewMovie(@ModelAttribute("newMovie") MovieNewRequest newMovie,
+    public String addNewMovie(@ModelAttribute("movie") MovieNewRequest newMovie,
                               BindingResult result,
                               Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("newMovie", new MovieNewRequest());
-            return "admin/movie/add-new";
+            model.addAttribute("movie", new MovieNewRequest());
+            return fragment("general-admin", "movieModalFragment");
         }
 
         movieAdminService.addNewMovie(newMovie);

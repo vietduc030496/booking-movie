@@ -23,7 +23,7 @@
         </div>
 
         <div class="col-md-3 col-sm-6">
-          <label for="provinces" class="form-label">Huyện</label>
+          <label for="provinces" class="form-label">Tỉnh</label>
           <select id="provinces" class="form-select" th:field="*{provinces}">
             <option value="">-- Chọn Tỉnh --</option>
             <option th:each="province : ${provinces}"
@@ -46,8 +46,8 @@
 
         <div class="col-md-2 col-sm-12 d-flex gap-2">
           <button type="submit" class="btn btn-primary flex-grow-1">Tìm kiếm</button>
-          <button type="button" id="btn-open-add-movie" class="btn btn-success flex-grow-1">
-            Thêm phim mới
+          <button type="button" id="btn-open-add-theater" class="btn btn-success flex-grow-1">
+            Thêm rạp mới
           </button>
         </div>
 
@@ -102,8 +102,16 @@
   </main>
 
 </div>
-<div id="modal-movie"></div>
+<div id="modal-theater"></div>
 <script>
+  function initChoices(pulldownId, placeholderValue) {
+    return new Choices(pulldownId, {
+      searchEnabled: true,
+      itemSelectText: '',
+      placeholder: true,
+      searchPlaceholderValue: placeholderValue,
+    });
+  }
   let provinceChoices;
   let wardChoices;
   document.addEventListener("DOMContentLoaded", function () {
@@ -111,26 +119,8 @@
     const wardsSelect = document.getElementById("wards");
 
     // Init Choices
-    initProvinceChoices();
-    initWardChoices()
-
-    function initProvinceChoices() {
-      provinceChoices = new Choices(provinceSelect, {
-        searchEnabled: true,
-        itemSelectText: '',
-        placeholder: true,
-        searchPlaceholderValue: 'Tìm tỉnh...',
-      });
-    }
-
-    function initWardChoices() {
-      wardChoices = new Choices(wardsSelect, {
-        searchEnabled: true,
-        itemSelectText: '',
-        placeholder: true,
-        searchPlaceholderValue: 'Tìm xã...',
-      });
-    }
+    provinceChoices = initChoices(provinceSelect, 'Tìm tỉnh...')
+    wardChoices = initChoices(wardsSelect, 'Tìm xã...')
 
     provinceSelect.addEventListener("change", function () {
       const selectedProvinceId = this.value;
@@ -151,7 +141,7 @@
                     wardsSelect.appendChild(option);
                   });
 
-                  initWardChoices();
+                  initChoices(wardsSelect, 'Tìm xã...')
                 })
                 .catch(error => {
                   console.error('Error has occurred:', error);
@@ -159,6 +149,44 @@
       }
     });
   });
+
+  document.getElementById("btn-open-add-theater")?.addEventListener("click", function() {
+    openTheaterModal("/views/admin/theaters/add-new");
+  });
+
+  document.querySelectorAll('tr[data-movie-id]').forEach(function(tr) {
+    tr.addEventListener('click', function() {
+      const id = this.getAttribute('data-movie-id');
+      openTheaterModal('/views/admin/movies/' + id);
+    });
+  });
+
+  function openTheaterModal(url) {
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.text();
+      })
+      .then(html => {
+        const modalContainer = document.getElementById("modal-theater");
+        modalContainer.innerHTML = html;
+
+        const modalElement = document.getElementById('addTheaterModal');
+        const bsModal = new bootstrap.Modal(modalElement);
+        bsModal.show();
+
+        const provinceSelectForAdd = document.getElementById("provincesForAdd");
+        const wardsSelectForAdd = document.getElementById("wardsForAdd");
+        initChoices(provinceSelectForAdd, 'Tìm tỉnh...')
+        initChoices(wardsSelectForAdd, 'Tìm xã...')
+
+      })
+      .catch(error => {
+        console.error("Error loading modal:", error);
+      });
+  }
 </script>
 </body>
 </html>
