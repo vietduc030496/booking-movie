@@ -23,7 +23,7 @@ public class Theater extends BaseEntity {
     @JoinColumn(name = "ward_id")
     private Ward ward;
 
-    private String phone;
+    private String hotline;
 
     @Column(name = "is_default", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
     private boolean isDefault;

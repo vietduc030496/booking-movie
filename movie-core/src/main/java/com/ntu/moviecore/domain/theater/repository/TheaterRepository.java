@@ -13,7 +13,8 @@ public interface TheaterRepository extends JpaRepository<Theater, Long> {
     @Query(value = """
             SELECT mp.code AS provinceCode, mp.name AS provinceName,
                    mw.id AS wardId, mw.name AS wardName,
-                   tt.id AS theaterId, tt.name AS theaterName, tt.is_default AS isDefault
+                   tt.id AS theaterId, tt.name AS theaterName, tt.is_default AS isDefault,
+                   tt.address AS theaterAddress
             FROM mt_province mp
             JOIN mt_ward mw
             ON mp.province_code = mw.province_code

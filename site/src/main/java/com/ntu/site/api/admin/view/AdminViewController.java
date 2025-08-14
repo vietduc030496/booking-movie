@@ -3,6 +3,7 @@ package com.ntu.site.api.admin.view;
 import com.ntu.adminservice.service.material.ProvinceAdminService;
 import com.ntu.adminservice.service.material.WardAdminService;
 import com.ntu.adminservice.service.movie.MovieAdminService;
+import com.ntu.adminservice.service.theater.TheaterAdminService;
 import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
 import com.ntu.site.api.customer.view.customer.BaseViewController;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,8 @@ public class AdminViewController extends BaseViewController {
 
     private final ProvinceAdminService provinceAdminService;
 
+    private final TheaterAdminService theaterAdminService;
+
     @GetMapping
     public String getAdminPage() {
         return "admin/index";
@@ -51,6 +54,7 @@ public class AdminViewController extends BaseViewController {
     public String getTheatersPage(Model model) {
         model.addAttribute("provinces", provinceAdminService.getAllProvince());
         model.addAttribute("wards", wardAdminService.getAllWard());
+        model.addAttribute("theaters", theaterAdminService.getTheaters());
 
         return "admin/theater/theaters";
     }

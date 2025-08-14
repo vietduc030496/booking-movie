@@ -15,5 +15,7 @@ public class TheaterResponse {
 
     private String theaterName;
 
+    private String theaterAddress;
+
     private boolean isDefault;
 }

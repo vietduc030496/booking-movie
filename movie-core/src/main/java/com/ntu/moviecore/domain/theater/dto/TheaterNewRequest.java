@@ -10,5 +10,7 @@ public class TheaterNewRequest {
 
     private Long wardId;
 
+    private String hotline;
+
     private boolean defaultFlag;
 }
