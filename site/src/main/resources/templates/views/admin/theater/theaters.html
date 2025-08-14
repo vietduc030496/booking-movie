@@ -71,10 +71,11 @@
             th:data-theater-id="${theater.theaterId}"
             style="cursor: pointer;">
           <input type="hidden" th:value="${theater.theaterId}" />
-          <td th:text="${theater.theaterName}"></td>
-          <td th:text="${theater.theaterAddress}"></td>
+          <td th:text="${theater.name}"></td>
+          <td th:text="${theater.address}"></td>
           <td th:text="${theater.wardName}"></td>
-          <td><input type="checkbox" th:checked="${theater.isDefault}" disabled /></td>
+          <td th:text="${theater.provinceName}"></td>
+          <td><input type="checkbox" th:checked="${theater.defaultFlag}" disabled /></td>
 
         </tr>
         </tbody>
@@ -152,10 +153,10 @@
     openTheaterModal("/views/admin/theaters/add-new");
   });
 
-  document.querySelectorAll('tr[data-movie-id]').forEach(function(tr) {
+  document.querySelectorAll('tr[data-theater-id]').forEach(function(tr) {
     tr.addEventListener('click', function() {
-      const id = this.getAttribute('data-movie-id');
-      openTheaterModal('/views/admin/movies/' + id);
+      const id = this.getAttribute('data-theater-id');
+      openTheaterModal('/views/admin/theaters/' + id);
     });
   });
 

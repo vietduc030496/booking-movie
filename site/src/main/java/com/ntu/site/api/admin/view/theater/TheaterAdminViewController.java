@@ -12,10 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static com.ntu.common.constant.UrlConstant.ADMIN_MOVIE_VIEW_URL;
 import static com.ntu.common.constant.UrlConstant.ADMIN_THEATER_ADMIN_URL;
@@ -30,6 +27,25 @@ public class TheaterAdminViewController extends BaseViewController {
     private final ProvinceAdminService provinceAdminService;
 
     private final WardAdminService wardAdminService;
+
+    @GetMapping("/{theaterId}")
+    public String getTheaterDetailPage(@PathVariable("theaterId") Long theaterId,
+                                       Model model) {
+        model.addAttribute("theater", theaterAdminService.getTheaterById(theaterId));
+        model.addAttribute("provinces", provinceAdminService.getAllProvince());
+        model.addAttribute("wards", wardAdminService.getAllWard());
+        model.addAttribute("actionUrl", ADMIN_THEATER_ADMIN_URL + "/" + theaterId);
+        return fragment("general-admin", "theaterModalFragment");
+    }
+
+    @PostMapping("/{theaterId}")
+    public String updateTheater(@PathVariable("theaterId") Long theaterId,
+                                @ModelAttribute("theater") TheaterNewRequest theaterNewRequest,
+                                BindingResult result,
+                                Model model) {
+        theaterAdminService.updateTheater(theaterId, theaterNewRequest);
+        return redirect(ADMIN_THEATER_ADMIN_URL);
+    }
 
     @GetMapping("/add-new")
     public String getAddNewTheaterPage(Model model) {

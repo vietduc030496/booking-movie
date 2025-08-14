@@ -133,7 +133,8 @@
                     <option value="">-- Chọn Tỉnh --</option>
                     <option th:each="province : ${provinces}"
                             th:value="${province.provinceId}"
-                            th:text="${province.provinceName}">
+                            th:text="${province.provinceName}"
+                            th:selected="${theater.provinceCode == province.provinceCode}">>
                     </option>
                   </select>
                 </div>

@@ -16,5 +16,7 @@ public interface TheaterDb {
 
     String getTheaterAddress();
 
+    String getTheaterHotline();
+
     boolean getIsDefault();
 }
