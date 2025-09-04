@@ -20,10 +20,11 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void addNewUser(SignupRequest signupRequest) {
+    public boolean addNewUser(SignupRequest signupRequest) {
         User newUser = modelMapper.map(signupRequest, User.class);
         newUser.setEmail(signupRequest.getUsername());
         newUser.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
         userRepository.save(newUser);
+        return true;
     }
 }
