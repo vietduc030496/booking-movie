@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
@@ -45,8 +46,8 @@ public class MovieAdminService {
      */
     @Transactional(readOnly = true)
     public List<MovieResponse> getMovieByRange(LocalDate start, LocalDate end, String keyword) {
-        LocalDate from = start == null ? LocalDate.now().withDayOfMonth(1) : start;
-        LocalDate to = end == null ? LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()) : end;
+        LocalDate from = start == null ? LocalDate.now(Clock.systemDefaultZone()).withDayOfMonth(1) : start;
+        LocalDate to = end == null ? LocalDate.now(Clock.systemDefaultZone()).with(TemporalAdjusters.lastDayOfMonth()) : end;
 
         String normalizedKeyword = StringUtils.isBlank(keyword) ? null : keyword.trim().toLowerCase(Locale.ROOT);
 

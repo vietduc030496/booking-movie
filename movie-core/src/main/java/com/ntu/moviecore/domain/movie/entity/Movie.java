@@ -2,7 +2,13 @@ package com.ntu.moviecore.domain.movie.entity;
 
 import com.ntu.moviecore.domain.base.entity.BaseEntity;
 import com.ntu.moviecore.domain.movie.entity.converter.AgeRatingConverter;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 

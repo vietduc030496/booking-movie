@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -43,7 +44,7 @@ public class ShowtimeAdminService {
      */
     @Transactional(readOnly = true)
     public List<ShowtimeAdminResponse> getShowtimes(Long theaterId, LocalDate date) {
-        LocalDate day = date == null ? LocalDate.now() : date;
+        LocalDate day = date == null ? LocalDate.now(Clock.systemDefaultZone()) : date;
         return showtimeRepository.findAdminShowtimes(theaterId, day.atStartOfDay(), day.plusDays(1).atStartOfDay())
                 .stream()
                 .map(ShowtimeAdminService::toResponse)

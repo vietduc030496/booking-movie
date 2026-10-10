@@ -1,8 +1,5 @@
 package com.ntu.customerservice.service.movie;
 
-import com.ntu.common.util.DateUtil;
-import com.ntu.moviecore.domain.authentication.entity.User;
-import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
 import com.ntu.moviecore.domain.movie.dto.response.MovieShowtimeResponse;
 import com.ntu.moviecore.domain.movie.entity.AgeRating;
 import com.ntu.moviecore.domain.movie.entity.Movie;

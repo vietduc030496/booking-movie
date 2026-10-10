@@ -15,7 +15,9 @@ public enum AgeRating {
 
     public static AgeRating fromCode(int code) {
         for (AgeRating type : values()) {
-            if (type.code == code) return type;
+            if (type.code == code) {
+                return type;
+            }
         }
         throw new IllegalArgumentException("Invalid age rating code: " + code);
     }

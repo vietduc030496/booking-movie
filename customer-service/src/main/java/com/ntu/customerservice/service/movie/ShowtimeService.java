@@ -8,6 +8,7 @@ import com.ntu.moviecore.domain.movie.repository.ShowtimeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -23,7 +24,7 @@ public class ShowtimeService {
     private final ShowtimeRepository showtimeRepository;
 
     public List<ShowtimeTheaterResponse> getShowtimeMovieByTheater(Long movieId, Long theaterId) {
-        LocalDate now = LocalDate.now();
+        LocalDate now = LocalDate.now(Clock.systemDefaultZone());
         LocalDateTime startOfDay = now.atStartOfDay();
         LocalDateTime endOfDay = now.plusDays(7).atTime(LocalTime.MAX);
 
@@ -41,13 +42,7 @@ public class ShowtimeService {
             showtime.setRoomName(dbResponse.getRoomName());
             showtime.setStartHour(DateUtil.localDateTimeToString(dbResponse.getStartTime(), "HH:mm"));
 
-            if (mapDayToShowtime.containsKey(dayTime)) {
-                mapDayToShowtime.get(dayTime).add(showtime);
-            } else {
-                List<ShowtimeResponse> showtimes = new ArrayList<>();
-                showtimes.add(showtime);
-                mapDayToShowtime.put(dayTime, showtimes);
-            }
+            mapDayToShowtime.computeIfAbsent(dayTime, key -> new ArrayList<>()).add(showtime);
         }
 
         List<ShowtimeTheaterResponse> responses = new ArrayList<>();

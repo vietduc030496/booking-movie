@@ -13,7 +13,9 @@ public class GenderConverter implements AttributeConverter<Gender, Integer> {
 
     @Override
     public Gender convertToEntityAttribute(Integer dbData) {
-        if (dbData == null) return null;
+        if (dbData == null) {
+            return null;
+        }
         for (Gender type : Gender.values()) {
             if (type.getCode() == dbData) {
                 return type;

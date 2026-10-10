@@ -12,7 +12,7 @@ public class UrlConstant {
 
     public static final String PROVINCE_ADMIN_URL = ADMIN_URL + "/provinces";
 
-    /// //////////////////////////////////////////////////////////////////////////////
+    //-------------------------------------------------------------------------
 
     public static final String VIEWS_URL = "/views";
 

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.Clock;
 import java.time.LocalDate;
 
 import static com.ntu.common.constant.AdminMessageKeyConstant.DELETE_SUCCESS;
@@ -46,7 +47,7 @@ public class ShowtimeAdminViewController extends BaseAdminViewController {
                                    @RequestParam(value = "date", required = false)
                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                    Model model) {
-        LocalDate day = date == null ? LocalDate.now() : date;
+        LocalDate day = date == null ? LocalDate.now(Clock.systemDefaultZone()) : date;
         model.addAttribute("showtimes", showtimeAdminService.getShowtimes(theaterId, day));
         model.addAttribute("theaters", theaterAdminService.getTheaters());
         model.addAttribute("selectedTheaterId", theaterId);

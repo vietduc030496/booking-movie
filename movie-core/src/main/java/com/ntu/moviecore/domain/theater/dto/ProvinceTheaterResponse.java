@@ -13,5 +13,5 @@ public class ProvinceTheaterResponse {
 
     private String provinceName;
 
-    List<TheaterResponse> theaters;
+    private List<TheaterResponse> theaters;
 }

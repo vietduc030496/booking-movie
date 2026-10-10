@@ -33,22 +33,15 @@ public class TheaterService {
 
         Map<String, ProvinceTheaterResponse> provinceMap = new HashMap<>();
         for (TheaterDb theaterDb : theaters) {
-            ProvinceTheaterResponse province = provinceMap.get(theaterDb.getProvinceCode());
-            if (province == null) {
-                province = new ProvinceTheaterResponse();
-                province.setProvinceCode(theaterDb.getProvinceCode());
-                province.setProvinceName(theaterDb.getProvinceName());
-
-                List<TheaterResponse> theatersResponse = new ArrayList<>();
-                TheaterResponse theater = modelMapper.map(theaterDb, TheaterResponse.class);
-                theatersResponse.add(theater);
-                province.setTheaters(theatersResponse);
-
-                provinceMap.put(theaterDb.getProvinceCode(), province);
-            } else {
-                TheaterResponse theater = modelMapper.map(theaterDb, TheaterResponse.class);
-                province.getTheaters().add(theater);
-            }
+            ProvinceTheaterResponse province = provinceMap.computeIfAbsent(theaterDb.getProvinceCode(), code -> {
+                ProvinceTheaterResponse newProvince = new ProvinceTheaterResponse();
+                newProvince.setProvinceCode(code);
+                newProvince.setProvinceName(theaterDb.getProvinceName());
+                newProvince.setTheaters(new ArrayList<>());
+                return newProvince;
+            });
+            TheaterResponse theater = modelMapper.map(theaterDb, TheaterResponse.class);
+            province.getTheaters().add(theater);
         }
 
         return provinceMap.values().stream().toList();

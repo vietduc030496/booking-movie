@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -26,12 +27,10 @@ public class MovieService {
 
     private final ShowtimeRepository showtimeRepository;
 
-//    private final MovieElasticSearchRepository movieEsRepository;
-
     private final ModelMapper modelMapper;
 
     public List<MovieShowtimeResponse> getScheduledMovies(Long theaterId) {
-        LocalDate now = LocalDate.now();
+        LocalDate now = LocalDate.now(Clock.systemDefaultZone());
         LocalDateTime startOfDay = now.atStartOfDay();
         LocalDateTime endOfDay = now.plusDays(7).atTime(LocalTime.MAX);
 
@@ -41,18 +40,13 @@ public class MovieService {
         for (Showtime showtime : moviesShowtime) {
             String dateTime = DateUtil.formatVNFull(showtime.getStartTime());
             MovieResponse movie = modelMapper.map(showtime.getMovie(), MovieResponse.class);
-            MovieShowtimeResponse exit = dateShowtimeToMovies.get(dateTime);
-            if (exit != null) {
-                exit.getMovies().add(movie);
-            } else {
-                List<MovieResponse> movies = new ArrayList<>();
-                movies.add(movie);
+            dateShowtimeToMovies.computeIfAbsent(dateTime, key -> {
                 MovieShowtimeResponse showtimeResponse = new MovieShowtimeResponse();
-                showtimeResponse.setDateShowing(dateTime);
+                showtimeResponse.setDateShowing(key);
                 showtimeResponse.setShowtimeId(showtime.getId());
-                showtimeResponse.setMovies(movies);
-                dateShowtimeToMovies.put(dateTime, showtimeResponse);
-            }
+                showtimeResponse.setMovies(new ArrayList<>());
+                return showtimeResponse;
+            }).getMovies().add(movie);
         }
 
         return dateShowtimeToMovies.values().stream().toList();
@@ -65,7 +59,7 @@ public class MovieService {
      * @return a list of movies showing today
      */
     public List<MovieResponse> getMovieShowToday(Long theaterId) {
-        LocalDate now = LocalDate.now();
+        LocalDate now = LocalDate.now(Clock.systemDefaultZone());
         LocalDateTime startOfDay = now.atStartOfDay(); // 00:00 today
         LocalDateTime endOfDay = now.atTime(LocalTime.MAX); // 23:59:59.999 today
         return getMovieByRangeDate(theaterId, startOfDay, endOfDay);
@@ -78,14 +72,14 @@ public class MovieService {
      * @return a list of upcoming movies in the next 7 days starting from tomorrow
      */
     public List<MovieResponse> getMovieComingSoon(Long theaterId) {
-        LocalDate tomorrow = LocalDate.now().plusDays(1); // Tomorrow's date
+        LocalDate tomorrow = LocalDate.now(Clock.systemDefaultZone()).plusDays(1); // Tomorrow's date
         LocalDateTime startOfDay = tomorrow.atStartOfDay(); // 00:00 tomorrow
         LocalDateTime endOfDay = tomorrow.plusDays(7).atTime(LocalTime.MAX); // 23:59:59.999 seven days later
         return getMovieByRangeDate(theaterId, startOfDay, endOfDay);
     }
 
     public List<MovieResponse> getMovieScheduled(Long theaterId) {
-        LocalDate now = LocalDate.now();
+        LocalDate now = LocalDate.now(Clock.systemDefaultZone());
         LocalDateTime startOfDay = now.atStartOfDay();
         LocalDateTime endOfDay = now.plusDays(7).atTime(LocalTime.MAX);
         return getMovieByRangeDate(theaterId, startOfDay, endOfDay);
