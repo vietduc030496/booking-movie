@@ -1,6 +1,6 @@
 package com.ntu.site.infrastructure.config.security;
 
-import com.ntu.moviecore.domain.authentication.entity.Role;
+import com.ntu.moviecore.domain.authentication.model.Role;
 import com.ntu.site.infrastructure.config.filter.CaptchaValidationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

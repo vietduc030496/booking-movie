@@ -1,0 +1,52 @@
+package com.ntu.adminservice.application.material.service;
+
+import com.ntu.common.util.CaffeineCacheUtil;
+import com.ntu.moviecore.application.material.dto.WardResponse;
+import com.ntu.persistence.material.repository.WardJpaRepository;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static com.ntu.common.constant.CacheAttributeKeyConstant.PROVINCE_WARDS_MAP;
+import static com.ntu.common.constant.CacheAttributeKeyConstant.WARDS;
+
+@Service
+@AllArgsConstructor
+public class WardAdminService {
+
+    private final WardRepository wardRepository;
+
+    private final ModelMapper modelMapper;
+
+    public List<WardResponse> getAllWard() {
+        if (CaffeineCacheUtil.containsKey(WARDS)) {
+            return (List<WardResponse>) CaffeineCacheUtil.get(WARDS);
+        }
+        List<WardResponse> wards = new ArrayList<>();
+        wardRepository.findAll().forEach(w -> {
+            WardResponse ward = modelMapper.map(w, WardResponse.class);
+            ward.setProvinceCode(w.getProvince().getProvinceCode());
+            wards.add(ward);
+        });
+        return wards;
+    }
+
+    public List<WardResponse> findAllWardsByProvinceId(long provinceId) {
+        if (CaffeineCacheUtil.containsKey(PROVINCE_WARDS_MAP)) {
+            Map<Long, List<WardResponse>> provinceWardsMap = (Map<Long, List<WardResponse>>) CaffeineCacheUtil.get(PROVINCE_WARDS_MAP);
+            return provinceWardsMap.get(provinceId);
+        }
+
+        List<WardResponse> wards = new ArrayList<>();
+        wardRepository.findByProvinceId(provinceId).forEach(w -> {
+            WardResponse ward = modelMapper.map(w, WardResponse.class);
+            ward.setProvinceCode(w.getProvince().getProvinceCode());
+            wards.add(ward);
+        });
+        return wards;
+    }
+}

@@ -1,16 +1,16 @@
 package com.ntu.site.infrastructure.config;
 
 import com.mservice.shared.utils.LogUtils;
-import com.ntu.adminservice.service.material.ProvinceAdminService;
-import com.ntu.adminservice.service.material.WardAdminService;
-import com.ntu.adminservice.service.movie.MovieAdminService;
+import com.ntu.adminservice.application.material.service.ProvinceAdminService;
+import com.ntu.adminservice.application.material.service.WardAdminService;
+import com.ntu.adminservice.application.movie.service.MovieAdminService;
 import com.ntu.common.util.CaffeineCacheUtil;
-import com.ntu.customerservice.service.setting.BannerService;
-import com.ntu.customerservice.service.theater.TheaterService;
-import com.ntu.moviecore.domain.material.dto.WardResponse;
-import com.ntu.moviecore.domain.setting.dto.BannerResponse;
-import com.ntu.moviecore.domain.theater.dto.ProvinceResponse;
-import com.ntu.moviecore.domain.theater.dto.ProvinceTheaterResponse;
+import com.ntu.customerservice.application.setting.service.BannerService;
+import com.ntu.customerservice.application.theater.service.TheaterService;
+import com.ntu.moviecore.application.material.dto.WardResponse;
+import com.ntu.moviecore.application.setting.dto.BannerResponse;
+import com.ntu.moviecore.application.theater.dto.ProvinceResponse;
+import com.ntu.moviecore.application.theater.dto.ProvinceTheaterResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
