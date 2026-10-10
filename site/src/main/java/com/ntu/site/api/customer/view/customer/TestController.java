@@ -1,6 +1,6 @@
 package com.ntu.site.api.customer.view.customer;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.concurrent.TimeUnit;
 
 @Controller
+@RequiredArgsConstructor
 public class TestController {
 
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @GetMapping("/test")
     public String test(Model model) {
@@ -25,7 +25,7 @@ public class TestController {
     @ResponseBody
     public String test() {
         Boolean b = redisTemplate.opsForValue().setIfAbsent("test", "hello", 10, TimeUnit.MINUTES);
-        if (b) {
+        if (Boolean.TRUE.equals(b)) {
             return "set success";
         }
         return "set fail";

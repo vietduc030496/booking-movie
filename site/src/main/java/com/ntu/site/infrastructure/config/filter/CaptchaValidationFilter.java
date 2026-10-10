@@ -1,4 +1,4 @@
-package com.ntu.site.infrastucture.config.filter;
+package com.ntu.site.infrastructure.config.filter;
 
 import com.ntu.common.util.CaptchaUtil;
 import jakarta.servlet.FilterChain;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import static com.ntu.common.constant.UrlConstant.ACCOUNT_VIEW_URL;
 
@@ -29,7 +31,8 @@ public class CaptchaValidationFilter extends OncePerRequestFilter {
             String captchaUserInput = request.getParameter("captcha");
             String username = request.getParameter("username");
             if (captchaSession == null || !captchaSession.equalsIgnoreCase(captchaUserInput)) {
-                response.sendRedirect(url + "?captchaError=true&username=" + username);
+                String encodedUsername = username == null ? "" : URLEncoder.encode(username, StandardCharsets.UTF_8);
+                response.sendRedirect(url + "?captchaError=true&username=" + encodedUsername);
                 return;
             }
         }

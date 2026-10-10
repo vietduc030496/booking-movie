@@ -113,3 +113,16 @@ th {
 tr:hover {
     background-color: #f9f9f9;
 }
+.sidebar-logout {
+    color: #dcdde1;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-logout i {
+    margin-right: 10px;
+}
+
+.sidebar-logout:hover {
+    color: #00a8ff;
+}

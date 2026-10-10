@@ -1,4 +1,4 @@
-package com.ntu.site.infrastucture.config;
+package com.ntu.site.infrastructure.config;
 
 import com.mservice.shared.utils.LogUtils;
 import com.ntu.adminservice.service.material.ProvinceAdminService;
@@ -12,6 +12,7 @@ import com.ntu.moviecore.domain.setting.dto.BannerResponse;
 import com.ntu.moviecore.domain.theater.dto.ProvinceResponse;
 import com.ntu.moviecore.domain.theater.dto.ProvinceTheaterResponse;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 import static com.ntu.common.constant.CacheAttributeKeyConstant.*;
 
+@Slf4j
 @Component
 @AllArgsConstructor
 public class AppStartupRunner implements ApplicationRunner {
@@ -68,7 +70,7 @@ public class AppStartupRunner implements ApplicationRunner {
 
             CaffeineCacheUtil.put(GENRES, movieAdminService.getAllGenres());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Failed to warm up application caches on startup", e);
         }
     }
 }

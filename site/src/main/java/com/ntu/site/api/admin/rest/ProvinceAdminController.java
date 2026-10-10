@@ -4,7 +4,6 @@ import com.ntu.adminservice.service.material.WardAdminService;
 import com.ntu.moviecore.domain.material.dto.WardResponse;
 import com.ntu.site.application.dto.response.CollectionDataResponse;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

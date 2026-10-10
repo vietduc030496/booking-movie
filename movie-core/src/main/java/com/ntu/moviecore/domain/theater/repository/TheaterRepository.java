@@ -3,6 +3,7 @@ package com.ntu.moviecore.domain.theater.repository;
 import com.ntu.moviecore.domain.theater.dto.TheaterDb;
 import com.ntu.moviecore.domain.theater.entity.Theater;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -38,4 +39,8 @@ public interface TheaterRepository extends JpaRepository<Theater, Long> {
             WHERE tt.id = :theaterId""",
             nativeQuery = true)
     Optional<TheaterDb> getTheaterById(@Param("theaterId") long theaterId);
+
+    @Modifying
+    @Query("UPDATE Theater t SET t.isDefault = false WHERE t.isDefault = true AND t.id <> :theaterId")
+    void clearDefaultExcept(@Param("theaterId") long theaterId);
 }

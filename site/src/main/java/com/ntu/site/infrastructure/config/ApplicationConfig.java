@@ -1,17 +1,17 @@
-package com.ntu.site.infrastucture.config;
+package com.ntu.site.infrastructure.config;
 
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
+@RequiredArgsConstructor
 public class ApplicationConfig {
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
     @Bean
     public LocalValidatorFactoryBean getValidator() {

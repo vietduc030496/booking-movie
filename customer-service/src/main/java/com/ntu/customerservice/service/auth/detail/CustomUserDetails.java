@@ -1,10 +1,12 @@
 package com.ntu.customerservice.service.auth.detail;
 
 import com.ntu.moviecore.domain.authentication.entity.Gender;
+import com.ntu.moviecore.domain.authentication.entity.Role;
 import com.ntu.moviecore.domain.authentication.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -22,6 +24,7 @@ public class CustomUserDetails implements UserDetails {
     private Gender gender;
     private String avatarUrl;
     private String password;
+    private Role role;
 
     public CustomUserDetails(User user) {
         this.id = user.getId();
@@ -33,11 +36,15 @@ public class CustomUserDetails implements UserDetails {
         this.gender = user.getProfile().getGender();
         this.avatarUrl = user.getProfile().getAvatarUrl();
         this.password = user.getPassword();
+        this.role = user.getRole();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        if (role == null) {
+            return List.of();
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
     @Override
@@ -50,23 +57,6 @@ public class CustomUserDetails implements UserDetails {
         return this.username;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
+    // isAccountNonExpired/isAccountNonLocked/isCredentialsNonExpired/isEnabled are not overridden:
+    // the UserDetails defaults (all true) already give the desired behavior.
 }

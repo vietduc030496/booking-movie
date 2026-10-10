@@ -1,4 +1,4 @@
-package com.ntu.site.infrastucture.config;
+package com.ntu.site.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

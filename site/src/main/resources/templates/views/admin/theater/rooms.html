@@ -6,5 +6,96 @@
     <th:block th:replace="~{fragments/general-admin :: admin-head-resources}"></th:block>
 </head>
 <body>
+<div class="admin-container">
+    <div th:replace="~{fragments/general-admin :: admin-menu}"></div>
+
+    <main class="main-content">
+        <header>
+            <h1>Danh sách phòng chiếu</h1>
+        </header>
+        <div th:replace="~{fragments/general-admin :: admin-alerts}"></div>
+
+        <!-- Filter -->
+        <div class="my-5">
+            <form class="row g-3 align-items-end" method="get" th:action="@{/views/admin/rooms}">
+                <div class="col-md-4 col-sm-12">
+                    <label for="filterTheater" class="form-label">Rạp</label>
+                    <select id="filterTheater" name="theaterId" class="form-select">
+                        <option value="">-- Tất cả rạp --</option>
+                        <option th:each="t : ${theaters}"
+                                th:value="${t.theaterId}"
+                                th:text="${t.name}"
+                                th:selected="${t.theaterId == selectedTheaterId}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 col-sm-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary flex-grow-1">Lọc</button>
+                    <button type="button" id="btn-open-add-room" class="btn btn-success flex-grow-1"
+                            th:data-theater-id="${selectedTheaterId}">
+                        Thêm phòng mới
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive bg-dark text-white rounded shadow-sm">
+            <table class="table table-dark table-hover mb-0">
+                <thead class="thead-light">
+                <tr>
+                    <th style="width: 30%;">Rạp</th>
+                    <th style="width: 30%;">Tên phòng</th>
+                    <th style="width: 20%;">Loại phòng</th>
+                    <th style="width: 20%;">Sức chứa</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(rooms)}">
+                    <td colspan="4" class="text-center text-white-50">Chưa có phòng chiếu</td>
+                </tr>
+                <tr th:each="room : ${rooms}"
+                    th:data-room-id="${room.roomId}"
+                    style="cursor: pointer;">
+                    <td th:text="${room.theaterName}"></td>
+                    <td th:text="${room.name}"></td>
+                    <td th:text="${room.roomTypeName}"></td>
+                    <td th:text="${room.capacity}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+<div id="modal-room"></div>
+<script>
+    document.getElementById("btn-open-add-room")?.addEventListener("click", function () {
+        const theaterId = this.getAttribute("data-theater-id");
+        openRoomModal("/views/admin/rooms/add-new" + (theaterId ? "?theaterId=" + encodeURIComponent(theaterId) : ""));
+    });
+
+    document.querySelectorAll('tr[data-room-id]').forEach(function (tr) {
+        tr.addEventListener('click', function () {
+            openRoomModal('/views/admin/rooms/' + this.getAttribute('data-room-id'));
+        });
+    });
+
+    function openRoomModal(url) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.text();
+            })
+            .then(html => {
+                document.getElementById("modal-room").innerHTML = html;
+                new bootstrap.Modal(document.getElementById('roomModal')).show();
+            })
+            .catch(error => {
+                console.error("Error loading modal:", error);
+            });
+    }
+</script>
 </body>
 </html>

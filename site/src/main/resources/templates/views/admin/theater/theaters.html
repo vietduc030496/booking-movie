@@ -13,33 +13,37 @@
     <header>
       <h1>Danh sách rạp</h1>
     </header>
+    <div th:replace="~{fragments/general-admin :: admin-alerts}"></div>
     <!-- Search bar -->
     <div class="my-5">
-      <form class="row g-3 align-items-end" method="get" th:action="@{/theaters}">
+      <form class="row g-3 align-items-end" method="get" th:action="@{/views/admin/theaters}">
 
         <div class="col-md-4 col-sm-12">
           <label for="keyword" class="form-label">Tìm kiếm rạp</label>
-          <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Nhập từ khóa tìm kiếm...">
+          <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Nhập từ khóa tìm kiếm..."
+                 th:value="${keyword}">
         </div>
 
         <div class="col-md-3 col-sm-6">
           <label for="provinces" class="form-label">Tỉnh</label>
-          <select id="provinces" class="form-select" th:field="*{provinces}">
+          <select id="provinces" name="provinceId" class="form-select">
             <option value="">-- Chọn Tỉnh --</option>
             <option th:each="province : ${provinces}"
                     th:value="${province.provinceId}"
-                    th:text="${province.provinceName}">
+                    th:text="${province.provinceName}"
+                    th:selected="${province.provinceId == selectedProvinceId}">
             </option>
           </select>
         </div>
 
         <div class="col-md-3 col-sm-6">
           <label for="wards" class="form-label">Xã</label>
-          <select id="wards" class="form-select" th:field="*{wards}">
+          <select id="wards" name="wardId" class="form-select">
             <option value="">-- Chọn xã --</option>
             <option th:each="ward : ${wards}"
                     th:value="${ward.id}"
-                    th:text="${ward.wardName}">
+                    th:text="${ward.wardName}"
+                    th:selected="${ward.id == selectedWardId}">
             </option>
           </select>
         </div>

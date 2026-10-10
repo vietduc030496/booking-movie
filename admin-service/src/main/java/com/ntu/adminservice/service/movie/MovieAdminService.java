@@ -1,5 +1,6 @@
 package com.ntu.adminservice.service.movie;
 
+import com.ntu.common.exception.ResourceNotFoundException;
 import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.common.util.DateUtil;
 import com.ntu.moviecore.domain.elasticsearch.entity.MovieElasticSearch;
@@ -9,79 +10,96 @@ import com.ntu.moviecore.domain.movie.dto.request.MovieUpdateRequest;
 import com.ntu.moviecore.domain.movie.dto.response.MovieResponse;
 import com.ntu.moviecore.domain.movie.entity.Movie;
 import com.ntu.moviecore.domain.movie.repository.MovieRepository;
-import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 import static com.ntu.common.constant.CacheAttributeKeyConstant.GENRES;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MovieAdminService {
+
+    private static final String GENRE_SEPARATOR = ",";
+
+    private static final List<String> DEFAULT_GENRES = List.of("Hài hước", "Kinh dị", "Hành động");
+
     private final MovieRepository movieRepository;
 
     private final MovieElasticSearchRepository movieSearchRepository;
 
     private final ModelMapper modelMapper;
 
-    public List<MovieResponse> getMovieByRange(LocalDate start, LocalDate end) {
-        start = start == null ? LocalDate.now().withDayOfMonth(1) : start;
-        end = end == null ? LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()) : end;
+    /**
+     * @param start   first release date, {@code null} for the first day of the current month
+     * @param end     last release date, {@code null} for the last day of the current month
+     * @param keyword part of the title (case-insensitive), blank for every movie
+     */
+    @Transactional(readOnly = true)
+    public List<MovieResponse> getMovieByRange(LocalDate start, LocalDate end, String keyword) {
+        LocalDate from = start == null ? LocalDate.now().withDayOfMonth(1) : start;
+        LocalDate to = end == null ? LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()) : end;
 
-        return movieRepository.findMoviesByReleaseDateBetween(start, end)
+        String normalizedKeyword = StringUtils.isBlank(keyword) ? null : keyword.trim().toLowerCase(Locale.ROOT);
+
+        return movieRepository.findMoviesByReleaseDateBetween(from, to)
                 .stream()
-                .map(movie -> {
-                    MovieResponse resp = modelMapper.map(movie, MovieResponse.class);
-                    resp.setReleaseDate(DateUtil.localDateToString(movie.getReleaseDate()));
-                    return resp;
-                })
+                .filter(movie -> normalizedKeyword == null || titleContains(movie, normalizedKeyword))
+                .map(this::toResponse)
                 .toList();
     }
 
-    public MovieResponse getMovieById(Long movieId) {
-        Optional<Movie> optional = movieRepository.findById(movieId);
-        if (optional.isEmpty()) {
-            return null;
-        }
-        Movie movie = optional.get();
-        MovieResponse resp = modelMapper.map(movie, MovieResponse.class);
-        resp.setReleaseDate(DateUtil.localDateToString(movie.getReleaseDate()));
-        return resp;
+    private static boolean titleContains(Movie movie, String lowerCaseKeyword) {
+        return movie.getTitle() != null && movie.getTitle().toLowerCase(Locale.ROOT).contains(lowerCaseKeyword);
+    }
+
+    /**
+     * All movies, newest release first. Used to fill the movie selection of the admin forms.
+     */
+    @Transactional(readOnly = true)
+    public List<MovieResponse> getAllMovies() {
+        return movieRepository.findAll(Sort.by(Sort.Direction.DESC, "releaseDate"))
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    /**
+     * @throws ResourceNotFoundException when the movie does not exist
+     */
+    @Transactional(readOnly = true)
+    public MovieResponse getMovieById(long movieId) {
+        return movieRepository.findById(movieId)
+                .map(this::toResponse)
+                .orElseThrow(() -> new ResourceNotFoundException("Movie", movieId));
+    }
+
+    /**
+     * @throws ResourceNotFoundException when the movie does not exist
+     */
+    @Transactional
+    public void updateMovie(long movieId, MovieUpdateRequest request) {
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(() -> new ResourceNotFoundException("Movie", movieId));
+        saveMovie(movie, request);
     }
 
     @Transactional
-    public void updateMovie(Long movieId, MovieUpdateRequest movieNewRequest) {
-        Optional<Movie> optional = movieRepository.findById(movieId);
-        if (optional.isEmpty()) {
-            throw new RuntimeException("Movie not found");
-        }
-        Movie movie = optional.get();
-        modelMapper.map(movieNewRequest, movie);
-        movie.setGenre(String.join(",", movieNewRequest.getGenre()));
-        movieRepository.save(movie);
-
-        MovieElasticSearch movieSearch = modelMapper.map(movie, MovieElasticSearch.class);
-        movieSearchRepository.save(movieSearch);
-    }
-
-    @Transactional
-    public void addNewMovie(MovieNewRequest movieNewRequest) {
-        Movie newMovie = modelMapper.map(movieNewRequest, Movie.class);
-        movieRepository.save(newMovie);
+    public void addNewMovie(MovieNewRequest request) {
+        saveMovie(new Movie(), request);
     }
 
     public void syncAllMoviesToElasticsearch() {
-        List<Movie> movies = movieRepository.findAll();
-        List<MovieElasticSearch> docs = movies.stream()
+        List<MovieElasticSearch> docs = movieRepository.findAll()
+                .stream()
                 .map(m -> modelMapper.map(m, MovieElasticSearch.class))
                 .toList();
 
@@ -89,12 +107,31 @@ public class MovieAdminService {
     }
 
     public List<String> getAllGenres() {
-        if (CaffeineCacheUtil.containsKey(GENRES)) {
-            return (List<String>) CaffeineCacheUtil.get(GENRES);
+        List<?> cached = CaffeineCacheUtil.get(GENRES, List.class);
+        if (cached != null) {
+            return cached.stream().map(String::valueOf).toList();
         }
-        List<String> genres = List.of("Hài hước", "Kinh dị", "Hành động");
-        CaffeineCacheUtil.put(GENRES, genres);
+        CaffeineCacheUtil.put(GENRES, DEFAULT_GENRES);
+        return DEFAULT_GENRES;
+    }
 
-        return genres;
+    private void saveMovie(Movie movie, MovieNewRequest request) {
+        movie.setTitle(request.getTitle().trim());
+        movie.setPosterUrl(request.getPosterUrl());
+        movie.setTrailerUrl(request.getTrailerUrl());
+        movie.setRunningTime(request.getRunningTime());
+        movie.setGenre(String.join(GENRE_SEPARATOR, request.getGenre()));
+        movie.setReleaseDate(request.getReleaseDate());
+        movie.setAgeRating(request.getAgeRating());
+        movie.setDescription(request.getDescription());
+        Movie saved = movieRepository.save(movie);
+
+        movieSearchRepository.save(modelMapper.map(saved, MovieElasticSearch.class));
+    }
+
+    private MovieResponse toResponse(Movie movie) {
+        MovieResponse response = modelMapper.map(movie, MovieResponse.class);
+        response.setReleaseDate(DateUtil.localDateToString(movie.getReleaseDate()));
+        return response;
     }
 }

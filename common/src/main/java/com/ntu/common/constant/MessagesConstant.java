@@ -1,16 +1,19 @@
 package com.ntu.common.constant;
 
-public interface MessagesConstant {
+public final class MessagesConstant {
+
+    private MessagesConstant() {
+    }
 
     /**
      * Thành công
      */
-    String SUCCESS_MSG = "success.msg";
+    public static final String SUCCESS_MSG = "success.msg";
 
     /**
      * Thất bại
      */
-    String FAIL_MSG = "fail.msg";
+    public static final String FAIL_MSG = "fail.msg";
 
-    String DATE_FORMAT_ERROR = "date.format.error";
+    public static final String DATE_FORMAT_ERROR = "date.format.error";
 }

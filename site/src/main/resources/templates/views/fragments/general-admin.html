@@ -22,13 +22,32 @@
           <li><a th:href="@{/views/admin/dashboard}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
           <li><a th:href="@{/views/admin/movies}"><i class="fas fa-film"></i> Movies</a></li>
           <li><a th:href="@{/views/admin/showtimes}"><i class="fas fa-ticket-alt"></i> Showtimes</a></li>
-          <li><a th:href="@{/views/admin/theaters}"><i class="fas fa-ticket-alt"></i> Theaters</a></li>
+          <li><a th:href="@{/views/admin/theaters}"><i class="fas fa-building"></i> Theaters</a></li>
+          <li><a th:href="@{/views/admin/rooms}"><i class="fas fa-door-open"></i> Rooms</a></li>
           <li><a href="#"><i class="fas fa-users"></i> Users</a></li>
           <li><a href="#"><i class="fas fa-money-bill"></i> Payments</a></li>
-          <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+          <li>
+            <form th:action="@{/views/account/logout}" method="post" class="m-0">
+              <button type="submit" class="btn btn-link p-0 text-decoration-none sidebar-logout">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </button>
+            </form>
+          </li>
         </ul>
       </nav>
     </aside>
+
+    <!--  admin-alerts: flash messages (i18n keys) set after a form submit  -->
+    <div th:fragment="admin-alerts">
+      <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        <span th:text="#{${successMessage}}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+      </div>
+      <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        <span th:text="#{${errorMessage}}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+      </div>
+    </div>
     <!--  movieModalFragment  -->
     <div th:fragment="movieModalFragment">
       <!-- Modal -->
@@ -128,13 +147,19 @@
                     class="p-4 rounded shadow-sm w-100">
 
                 <div class="row mb-3">
+                  <label for="theaterName" class="form-label">Tên rạp *</label>
+                  <input type="text" class="form-control" id="theaterName"
+                         th:field="*{name}" required />
+                </div>
+
+                <div class="row mb-3">
                   <label for="provincesForAdd" class="form-label">Tỉnh</label>
                   <select id="provincesForAdd" class="form-select">
                     <option value="">-- Chọn Tỉnh --</option>
                     <option th:each="province : ${provinces}"
                             th:value="${province.provinceId}"
                             th:text="${province.provinceName}"
-                            th:selected="${theater.provinceCode == province.provinceCode}">>
+                            th:selected="${selectedProvinceCode == province.provinceCode}">
                     </option>
                   </select>
                 </div>
@@ -170,6 +195,114 @@
                   <label class="form-check-label" for="isDefaultTheater">
                     Rạp chiếu mặc định
                   </label>
+                </div>
+
+                <div class="text-end">
+                  <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  roomModalFragment  -->
+    <div th:fragment="roomModalFragment">
+      <div class="modal fade" id="roomModal" tabindex="-1" aria-labelledby="roomModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="roomModalLabel">Phòng chiếu</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+              <form th:object="${room}" method="POST" th:action="@{${actionUrl}}" class="p-2 w-100">
+                <div class="mb-3">
+                  <label for="roomTheater" class="form-label">Rạp *</label>
+                  <select id="roomTheater" class="form-select" th:field="*{theaterId}" required>
+                    <option value="">-- Chọn rạp --</option>
+                    <option th:each="t : ${theaters}"
+                            th:value="${t.theaterId}"
+                            th:text="${t.name}"></option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="roomName" class="form-label">Tên phòng *</label>
+                  <input type="text" class="form-control" id="roomName" th:field="*{name}" required />
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6 col-12">
+                    <label for="roomType" class="form-label">Loại phòng</label>
+                    <select id="roomType" class="form-select" th:field="*{roomTypeId}">
+                      <option value="">-- Không chọn --</option>
+                      <option th:each="type : ${roomTypes}"
+                              th:value="${type.id}"
+                              th:text="${type.name}"></option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <label for="roomCapacity" class="form-label">Sức chứa (ghế) *</label>
+                    <input type="number" min="1" class="form-control" id="roomCapacity"
+                           th:field="*{capacity}" required />
+                  </div>
+                </div>
+
+                <div class="text-end">
+                  <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  showtimeModalFragment  -->
+    <div th:fragment="showtimeModalFragment">
+      <div class="modal fade" id="showtimeModal" tabindex="-1" aria-labelledby="showtimeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="showtimeModalLabel">Thêm suất chiếu</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+              <form th:object="${showtime}" method="POST" th:action="@{${actionUrl}}" class="p-2 w-100">
+                <div class="mb-3">
+                  <label for="showtimeMovie" class="form-label">Phim *</label>
+                  <select id="showtimeMovie" class="form-select" th:field="*{movieId}" required>
+                    <option value="">-- Chọn phim --</option>
+                    <option th:each="m : ${movies}"
+                            th:value="${m.id}"
+                            th:text="|${m.title} (${m.runningTime} phút)|"></option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="showtimeRoom" class="form-label">Phòng chiếu *</label>
+                  <select id="showtimeRoom" class="form-select" th:field="*{roomId}" required>
+                    <option value="">-- Chọn phòng --</option>
+                    <option th:each="r : ${rooms}"
+                            th:value="${r.roomId}"
+                            th:text="|${r.theaterName} - ${r.name}|"></option>
+                  </select>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6 col-12">
+                    <label for="showtimeStart" class="form-label">Bắt đầu *</label>
+                    <input type="datetime-local" class="form-control" id="showtimeStart"
+                           th:field="*{startTime}" required />
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <label for="showtimeEnd" class="form-label">Kết thúc</label>
+                    <input type="datetime-local" class="form-control" id="showtimeEnd"
+                           th:field="*{endTime}" />
+                    <div class="form-text">Để trống để tính theo thời lượng phim.</div>
+                  </div>
                 </div>
 
                 <div class="text-end">

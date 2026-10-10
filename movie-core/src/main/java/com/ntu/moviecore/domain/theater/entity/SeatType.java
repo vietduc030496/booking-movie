@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tbl_seat")
+@Table(name = "tbl_seat_type")
 @Getter
 @Setter
 public class SeatType extends BaseEntity {

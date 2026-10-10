@@ -1,8 +1,7 @@
-package com.ntu.site.infrastucture.config.security;
+package com.ntu.site.infrastructure.config.security;
 
-import com.ntu.customerservice.service.security.CustomUserDetailsService;
-import com.ntu.site.infrastucture.config.filter.CaptchaValidationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ntu.moviecore.domain.authentication.entity.Role;
+import com.ntu.site.infrastructure.config.filter.CaptchaValidationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,9 +19,6 @@ import static com.ntu.common.constant.UrlConstant.*;
 
 @Configuration
 public class SecurityConfig {
-
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
 
     private static final String[] AUTH_WHITELIST = {
             "/css/**",
@@ -51,10 +47,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
+                                .requestMatchers(ADMIN_VIEW_URL + "/**", ADMIN_URL + "/**")
+                                .hasRole(Role.ADMIN.name())
                                 .requestMatchers(AUTH_WHITELIST)
                                 .permitAll()
                                 .anyRequest()
-//                                .authenticated()
                                 .permitAll()
                 )
                 .formLogin(form -> form

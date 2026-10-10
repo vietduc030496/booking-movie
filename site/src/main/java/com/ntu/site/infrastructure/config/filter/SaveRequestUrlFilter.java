@@ -1,4 +1,4 @@
-package com.ntu.site.infrastucture.config.filter;
+package com.ntu.site.infrastructure.config.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -17,7 +17,6 @@ public class SaveRequestUrlFilter extends OncePerRequestFilter {
         HttpSession session = request.getSession();
 
         String uri = request.getRequestURI();
-//        boolean isLoginPage = uri.startsWith("/login") || uri.startsWith("/css") || uri.startsWith("/js");
 
         if (request.getUserPrincipal() == null) {
             session.setAttribute("REDIRECT_AFTER_LOGIN", uri);

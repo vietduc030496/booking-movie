@@ -20,7 +20,6 @@ public abstract class BaseEntity {
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-//    @LastModifiedDate
     private LocalDateTime updatedAt;
 
     @CreatedBy

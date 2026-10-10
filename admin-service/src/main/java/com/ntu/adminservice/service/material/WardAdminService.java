@@ -2,14 +2,12 @@ package com.ntu.adminservice.service.material;
 
 import com.ntu.common.util.CaffeineCacheUtil;
 import com.ntu.moviecore.domain.material.dto.WardResponse;
-import com.ntu.moviecore.domain.material.entity.Ward;
 import com.ntu.moviecore.domain.material.repository.WardRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 

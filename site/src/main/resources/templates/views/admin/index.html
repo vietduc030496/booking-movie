@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Admin Dashboard - Movie Booking</title>
     <th:block th:replace="~{fragments/general-admin :: admin-head-resources}"></th:block>
-    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
 </head>
 <body>
 <div class="admin-container">
@@ -18,15 +17,15 @@
         <section class="stats">
             <div class="card">
                 <h3>Total Users</h3>
-                <p>1,205</p>
+                <p th:text="${#numbers.formatInteger(dashboard.totalUsers, 1, 'POINT')}">0</p>
             </div>
             <div class="card">
                 <h3>Total Bookings</h3>
-                <p>3,458</p>
+                <p th:text="${#numbers.formatInteger(dashboard.totalBookings, 1, 'POINT')}">0</p>
             </div>
             <div class="card">
                 <h3>Revenue</h3>
-                <p>$45,000</p>
+                <p th:text="|${#numbers.formatInteger(dashboard.revenue, 1, 'POINT')} ₫|">0 ₫</p>
             </div>
         </section>
 
@@ -39,23 +38,21 @@
                     <th>User</th>
                     <th>Movie</th>
                     <th>Date</th>
+                    <th>Total</th>
                     <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>BK001</td>
-                    <td>John Doe</td>
-                    <td>Avengers: Endgame</td>
-                    <td>2025-07-21</td>
-                    <td>Confirmed</td>
+                <tr th:if="${#lists.isEmpty(dashboard.latestBookings)}">
+                    <td colspan="6" class="text-center text-muted">No bookings yet</td>
                 </tr>
-                <tr>
-                    <td>BK002</td>
-                    <td>Jane Smith</td>
-                    <td>Inception</td>
-                    <td>2025-07-20</td>
-                    <td>Pending</td>
+                <tr th:each="booking : ${dashboard.latestBookings}">
+                    <td th:text="${booking.bookingId}"></td>
+                    <td th:text="${booking.userEmail}"></td>
+                    <td th:text="${booking.movieTitle}"></td>
+                    <td th:text="${#temporals.format(booking.bookedAt, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="|${#numbers.formatInteger(booking.totalPrice, 1, 'POINT')} ₫|"></td>
+                    <td th:text="${booking.status}"></td>
                 </tr>
                 </tbody>
             </table>

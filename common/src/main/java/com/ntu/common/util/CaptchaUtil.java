@@ -1,6 +1,6 @@
 package com.ntu.common.util;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class CaptchaUtil {
 
@@ -9,7 +9,7 @@ public class CaptchaUtil {
 
     public static final String CAPTCHA_KEY = "captcha";
 
-    private static final Random RANDOM = new Random();
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     public static String generateCaptcha() {
         int length = 5;

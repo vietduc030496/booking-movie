@@ -35,4 +35,26 @@ public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
                                                                       @Param("theaterId") long theaterId,
                                                                       @Param("start") LocalDateTime start,
                                                                       @Param("end") LocalDateTime end);
+
+    @Query("SELECT st FROM Showtime st " +
+            "JOIN FETCH st.movie " +
+            "JOIN FETCH st.room r " +
+            "JOIN FETCH r.theater t " +
+            "WHERE (:theaterId IS NULL OR t.id = :theaterId) " +
+            "AND st.startTime >= :start AND st.startTime < :end " +
+            "ORDER BY st.startTime, r.name")
+    List<Showtime> findAdminShowtimes(@Param("theaterId") Long theaterId,
+                                      @Param("start") LocalDateTime start,
+                                      @Param("end") LocalDateTime end);
+
+    /**
+     * Two showtimes in the same room overlap when each one starts before the other one ends.
+     */
+    @Query("SELECT COUNT(st) > 0 FROM Showtime st " +
+            "WHERE st.room.id = :roomId " +
+            "AND st.startTime < :end " +
+            "AND st.endTime > :start")
+    boolean existsOverlappingShowtime(@Param("roomId") long roomId,
+                                      @Param("start") LocalDateTime start,
+                                      @Param("end") LocalDateTime end);
 }

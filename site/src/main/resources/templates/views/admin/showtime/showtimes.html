@@ -6,5 +6,106 @@
     <th:block th:replace="~{fragments/general-admin :: admin-head-resources}"></th:block>
 </head>
 <body>
+<div class="admin-container">
+    <div th:replace="~{fragments/general-admin :: admin-menu}"></div>
+
+    <main class="main-content">
+        <header>
+            <h1>Danh sách lịch chiếu</h1>
+        </header>
+        <div th:replace="~{fragments/general-admin :: admin-alerts}"></div>
+
+        <!-- Filter -->
+        <div class="my-5">
+            <form class="row g-3 align-items-end" method="get" th:action="@{/views/admin/showtimes}">
+                <div class="col-md-4 col-sm-12">
+                    <label for="filterTheater" class="form-label">Rạp</label>
+                    <select id="filterTheater" name="theaterId" class="form-select">
+                        <option value="">-- Tất cả rạp --</option>
+                        <option th:each="t : ${theaters}"
+                                th:value="${t.theaterId}"
+                                th:text="${t.name}"
+                                th:selected="${t.theaterId == selectedTheaterId}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <label for="filterDate" class="form-label">Ngày chiếu</label>
+                    <input type="date" id="filterDate" name="date" class="form-control" th:value="${selectedDate}">
+                </div>
+
+                <div class="col-md-3 col-sm-6 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary flex-grow-1">Lọc</button>
+                    <button type="button" id="btn-open-add-showtime" class="btn btn-success flex-grow-1">
+                        Thêm suất chiếu
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive bg-dark text-white rounded shadow-sm">
+            <table class="table table-dark table-hover mb-0 align-middle">
+                <thead class="thead-light">
+                <tr>
+                    <th style="width: 30%;">Phim</th>
+                    <th style="width: 20%;">Rạp</th>
+                    <th style="width: 15%;">Phòng</th>
+                    <th style="width: 15%;">Bắt đầu</th>
+                    <th style="width: 15%;">Kết thúc</th>
+                    <th style="width: 5%;"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(showtimes)}">
+                    <td colspan="6" class="text-center text-white-50">Không có suất chiếu trong ngày này</td>
+                </tr>
+                <tr th:each="showtime : ${showtimes}">
+                    <td th:text="${showtime.movieTitle}"></td>
+                    <td th:text="${showtime.theaterName}"></td>
+                    <td th:text="${showtime.roomName}"></td>
+                    <td th:text="${showtime.startTime}"></td>
+                    <td th:text="${showtime.endTime}"></td>
+                    <td>
+                        <form method="post" class="m-0 js-delete-showtime"
+                              th:action="@{/views/admin/showtimes/{id}/delete(id=${showtime.showtimeId})}">
+                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Xoá">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+<div id="modal-showtime"></div>
+<script>
+    document.querySelectorAll('form.js-delete-showtime').forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!confirm('Xoá suất chiếu này?')) {
+                event.preventDefault();
+            }
+        });
+    });
+
+    document.getElementById("btn-open-add-showtime")?.addEventListener("click", function () {
+        fetch("/views/admin/showtimes/add-new")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.text();
+            })
+            .then(html => {
+                document.getElementById("modal-showtime").innerHTML = html;
+                new bootstrap.Modal(document.getElementById('showtimeModal')).show();
+            })
+            .catch(error => {
+                console.error("Error loading modal:", error);
+            });
+    });
+</script>
 </body>
 </html>
